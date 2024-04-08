@@ -1,11 +1,11 @@
 # <span style="color:Blue">__Data Analysis for Physics__</span>
 
-<font size="6"> __Physics 398 DAP__ &nbsp; *Fall 2023* </font>
+<font size="6"> __Physics 398 DAP__ &nbsp; *Fall 2024* </font>
 * *Instructors:* 
   * Professor [Anne Sickles](http://heavyions.physics.illinois.edu)
-  * Professor [Mark Neubauer](https://marksneubauer.com)
+  * Professor [Ben Hooberman](http://research.physics.illinois.edu/hooberman/people/)
 * *Class Meetings*: 
-  * Tuesdays and Thursdays from 10:30 am to 11:50 am
+  * Monday and Wednesday from 10:30 am to 11:50 am
   * *Room*: 276 Loomis Laboratory
 * 3 credit hours
 
@@ -14,22 +14,22 @@ __Note__: *This schedule will evolve throughout the semseter*
 
 | Week          | Topic                 | Homework                               | Projects                   |
 |---------------|-----------------------|----------------------------------------|----------------------------|
-| Aug 21	| {doc}`_sources/Week_01`     | [HW 01](_sources/homework/Homework_01) |                            |
-| Aug 28  | {doc}`_sources/Week_02`     | [HW 02](_sources/homework/Homework_02) |                            |
-| Sep 04	| {doc}`_sources/Week_03`     | [HW 03](_sources/homework/Homework_03) |                            |
-| Sep 11	| {doc}`_sources/Week_04`     | [HW 04](_sources/homework/Homework_04) |                            |
-| Sep 18	| {doc}`_sources/Week_05`     | [HW 05](_sources/homework/Homework_05) |                            |
-| Sep 25  | {doc}`_sources/Week_06`     | [HW 06](_sources/homework/Homework_06) |                            |
-| Oct 02  | {doc}`_sources/Week_07`     | [HW 07](_sources/homework/Homework_07) | {doc}`_sources/Project_01` |
-| Oct 09	| {doc}`_sources/Week_08`     | [HW 08](_sources/homework/Homework_08) |                            |
-| Oct 16  | {doc}`_sources/Week_09`     | [HW 09](_sources/homework/Homework_09) |                            |
-| Oct 23  | {doc}`_sources/Week_10`     | [HW 10](_sources/homework/Homework_10) |                            |
-| Oct 30  | {doc}`_sources/Week_11`     | [HW 11](_sources/homework/Homework_11) |                            |
-| Nov 06	| {doc}`_sources/Week_12`     | [HW 12](_sources/homework/Homework_12) | {doc}`_sources/Project_02` |
-| Nov 13	| {doc}`_sources/Week_13`     | [HW 13](_sources/homework/Homework_13) |                            |
-| Nov 20  | __FALL BREAK - NO CLASSES__ |                                        |                            |
-| Nov 27  | {doc}`_sources/Week_14`     |                                        |                            |
-| Dec 04  | {doc}`_sources/Week_15`     |                                        |                            |
+| Aug 26	| {doc}`_sources/Week_01`     | [HW 01](_sources/homework/Homework_01) |                            |
+| Sep 02  | {doc}`_sources/Week_02`     | [HW 02](_sources/homework/Homework_02) |                            |
+| Sep 09	| {doc}`_sources/Week_03`     | [HW 03](_sources/homework/Homework_03) |                            |
+| Sep 16	| {doc}`_sources/Week_04`     | [HW 04](_sources/homework/Homework_04) |                            |
+| Sep 23	| {doc}`_sources/Week_05`     | [HW 05](_sources/homework/Homework_05) |                            |
+| Sep 30  | {doc}`_sources/Week_06`     | [HW 06](_sources/homework/Homework_06) |                            |
+| Oct 07  | {doc}`_sources/Week_07`     | [HW 07](_sources/homework/Homework_07) | {doc}`_sources/Project_01` |
+| Oct 14	| {doc}`_sources/Week_08`     | [HW 08](_sources/homework/Homework_08) |                            |
+| Oct 21  | {doc}`_sources/Week_09`     | [HW 09](_sources/homework/Homework_09) |                            |
+| Oct 28  | {doc}`_sources/Week_10`     | [HW 10](_sources/homework/Homework_10) |                            |
+| Nov 04  | {doc}`_sources/Week_11`     | [HW 11](_sources/homework/Homework_11) |                            |
+| Nov 11	| {doc}`_sources/Week_12`     | [HW 12](_sources/homework/Homework_12) | {doc}`_sources/Project_02` |
+| Nov 18	| {doc}`_sources/Week_13`     | [HW 13](_sources/homework/Homework_13) |                            |
+| Nov 25  | __FALL BREAK - NO CLASSES__ |                                        |                            |
+| Dec 02  | {doc}`_sources/Week_14`     |                                        |                            |
+| Dec 09  | {doc}`_sources/Week_15`     |                                        |                            |
 
 ## <span style="color:Red">Overview</span>
 
