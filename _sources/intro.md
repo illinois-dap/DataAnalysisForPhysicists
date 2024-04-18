@@ -42,23 +42,24 @@ This course is designed to provide students with an introduction to data analysi
 2. Identify sources of statistical & systematic uncertainties and bias, and properly handle them to interpret scientific data
 3. Implement key analysis tasks such as parameter estimation, unfolding, auto/cross-correlation, confidence intervals, hypothesis testing, Monte Carlo simulation, and much more!
 
+This course material is largely independent of material in other physics classes.  You should have taken Phys 211 and have taken or be concurrently taking Phys 212.  There is no programming experience required.
+
 You can find more detail in the [Calendar](#calendar) section on the specific topics that will be covered in this course. 
 
 ## <span style="color:Red">Course Logistics</span>
 ### Format
 * This course will consist of two meetings per week: one lecture period and one in-class practical session.
-* Lecture: Tuesday from 10:30 am - 11:50 am in 276 Loomis
-* Practical Session: Thursday from 10:30 am - 11:50 am in 276 Loomis
+* Lecture: Monday from 10:30 am - 11:50 am in 276 Loomis
+* Practical Session: Wednesday from 10:30 am - 11:50 am in 276 Loomis
 
 ### Instructors
 * Professor [Anne Sickles](http://heavyions.physics.illinois.edu)
   * email: sickles@illinois.edu
-  * Office Hour: Wednesday from 3-4 pm, Loomis 403
+  * Office Hour: TBD, Loomis 403
 
-* Professor [Mark Neubauer](https://marksneubauer.com)
-  * email: msn@illinois.edu
-  * Office Hour: Wednesday from 5:30 - 6:30 pm
-  * [Zoom](https://illinois.zoom.us/j/85255234488?pwd=eTF3NDVtU1FSZXNpK3BFck9vKzNZdz09)
+* Professor [Ben Hooberman](https://physics.illinois.edu/people/directory/profile/benhoob)
+  * email: benhoob@illinois.edu
+  * Office Hour: TBD
 
 ## <span style="color:Red">Online Tools</span>
 
