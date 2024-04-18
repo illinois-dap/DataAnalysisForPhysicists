@@ -42,7 +42,7 @@ This course is designed to provide students with an introduction to data analysi
 2. Identify sources of statistical & systematic uncertainties and bias, and properly handle them to interpret scientific data
 3. Implement key analysis tasks such as parameter estimation, unfolding, auto/cross-correlation, confidence intervals, hypothesis testing, Monte Carlo simulation, and much more!
 
-This course material is largely independent of material in other physics classes.  You should have taken Phys 211, 212 and 213.  There is no programming experience required.
+This course material is largely independent of material in other physics classes.  Students should have taken Phys 211, 212 and 213.  There is no programming experience required.
 
 You can find more detail in the [Calendar](#calendar) section on the specific topics that will be covered in this course. 
 
