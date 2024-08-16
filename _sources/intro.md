@@ -66,7 +66,7 @@ You can find more detail in the [Calendar](#calendar) section on the specific to
 There are several online tools you will need to use as part of this course. 
 
 ### Campuswire
-We will use [Campuswire](https://campuswire.com) as a class forum, a way to message the course staff and each other, and a means to submit your attendance question.
+We will use [Campuswire](https://campuswire.com) as a class forum, a way to message the course staff and each other, and a means to submit your attendance question.  We will allow three missed lectures to be dropped over the course of the semester without impacting your grade.
 ### Google Colab
 Using [Google Colab](https://colab.research.google.com), you will be able to program your code in a Jupyter notebook and submit it for us to grade. Please sign in to your Illinois account.  While working on the assignment, you will share each of your colab assignments with the professor and the TA (but no one else).
 ### Gradescope
@@ -81,7 +81,7 @@ You will be assigned weekly homework assignments that will put into practice wha
 * Each assignment is due at the beginning of the next class unless otherwise noted. You may turn assignment in up to one week late for 50% credit (except that all assignments are strictly due the day before Reading Day).
 * Solutions to the homeworks will not be given.
 * You may collaborate on assignments but must submit your own work.
-* Graded homework will be available through [Gradescope](https://www.gradescope.com).
+* Graded homework will be available through [Gradescope](https://www.gradescope.com).  One homework grade will be dropped at the end of the semester from the grade computation.
 
 ### Projects
 At appropriate times throughout the course, you will select from a list of projects that involve demonstrating and extending your work in class by doing something cool and interesting in data analysys. You must work alone on this (i.e. without collaboration). 
@@ -91,8 +91,8 @@ For projects you will put together a Jupyter notebook that demonstrates your pro
 Each project notebook must be submitted via Gradescope for grading.
 
 ## <span style="color:Red">Grading</span>
-* Class attendence and participation: 5%
-* Homework: 70%
+* Class attendence and participation: 10%
+* Homework: 65%
 * Projects: 25%
 
 Letter grades will be assigned as follows:
@@ -119,7 +119,7 @@ Letter grades will be assigned as follows:
 * If you feel ill or are unable to come to class or complete class assignments due to issues related to COVID-19, including but not limited to testing positive yourself, feeling ill, caring for a family member with COVID-19, or having unexpected child-care obligations, you should contact your instructor immediately, and you are encouraged to copy your academic advisor. 
   
 ### About using code you find on the web or generative AI for homework and projects
-The quickest way to deal with the arcana of programing is to ask Google or ChatGPT for examples of what you are seeking to accomplish. But you will need to use your own judgment in terms of value added for your learning in using these techologies Your generation will need to how learn to work productively in-concert with AI. That - that's a technological genie out of the bottle. Finding its way back into the bottle is as a likely as a broken glass spontaeously reassembling. As with any external resource, you must always credit the original source of code and other information that you paste into your own programs, notebooks, projects, etc in a comment that includes the original source. If an author says that his/her code is not to be copied or incorporated into your programs, then DON’T. 
+In this course, you are fully responsible for all the code, solutions, and analyses that you submit. While tools like ChatGPT can be useful for brainstorming ideas or getting unstuck, they are not foolproof. If you rely on them to generate code or answers without fully understanding the underlying concepts, you're likely to encounter errors, produce incorrect results, or answer the wrong question. Submitting work that you don’t fully understand or have not verified yourself will not limit the benefit you get from the class. It’s essential to critically evaluate and thoroughly test any code or solutions you create, ensuring you grasp the underlying principles and techniques. This approach will help you develop the skills necessary for effective data analysis. 
 
 Students must cite all references, including any code they have used that they did not write themselves. Failure to cite references will be considered an academic integrity violation and be pursued according to University policy, which may include receiving a failing grade on an assignment or in the entire course. Citations do not need to follow any specific format (such as ACM style, etc.) but should mention the author's name and where the cited work can be found (including a URL, if applicable). In code, a citation can be left in a comment.
 
