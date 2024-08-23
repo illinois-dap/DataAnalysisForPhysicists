@@ -55,11 +55,15 @@ You can find more detail in the [Calendar](#calendar) section on the specific to
 ### Instructors
 * Professor [Anne Sickles](http://heavyions.physics.illinois.edu)
   * email: sickles@illinois.edu
-  * Office Hour: TBD, Loomis 403
+  * Office Hour: Mondays 4pm, Loomis 403
 
 * Professor [Ben Hooberman](https://physics.illinois.edu/people/directory/profile/benhoob)
   * email: benhoob@illinois.edu
   * Office Hour: TBD
+
+* Grader Mayisha Nakib
+    * email: mnakib2@illinois.edu
+    * Office Hour: Tuesday 4pm, via zoom link TBD
 
 ## <span style="color:Red">Online Tools</span>
 
