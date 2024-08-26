@@ -15,21 +15,21 @@ __Note__: *This schedule will evolve throughout the semseter*
 | Week          | Topic                 | Homework                               | Projects                   |
 |---------------|-----------------------|----------------------------------------|----------------------------|
 | Aug 26	| {doc}`_sources/Week_01`     | [HW 01]() |                            |
-| Sep 02  | {doc}`_sources/Week_02a`     | [HW 02]() |                            |
-| Sep 09	| {doc}`_sources/Week_03a`     | [HW 03]() |                            |
-| Sep 16	| {doc}`_sources/Week_04a`     | [HW 04]() |                            |
-| Sep 23	| {doc}`_sources/Week_05a`     | [HW 05]() |                            |
-| Sep 30  | {doc}`_sources/Week_06a`     | [HW 06]() |                            |
-| Oct 07  | {doc}`_sources/Week_07a`     | [HW 07]() | {doc}`_sources/Project_01` |
-| Oct 14	| {doc}`_sources/Week_08a`     | [HW 08]() |                            |
-| Oct 21  | {doc}`_sources/Week_09a`     | [HW 09]() |                            |
-| Oct 28  | {doc}`_sources/Week_10a`     | [HW 10]() |                            |
-| Nov 04  | {doc}`_sources/Week_11a`     | [HW 11]() |                            |
-| Nov 11	| {doc}`_sources/Week_12a`     | [HW 12]() | {doc}`_sources/Project_02` |
-| Nov 18	| {doc}`_sources/Week_13a`     | [HW 13]() |                            |
+| Sep 02  | {doc}``     | [HW 02]() |                            |
+| Sep 09	| {doc}``     | [HW 03]() |                            |
+| Sep 16	| {doc}``     | [HW 04]() |                            |
+| Sep 23	| {doc}``     | [HW 05]() |                            |
+| Sep 30  | {doc}``     | [HW 06]() |                            |
+| Oct 07  | {doc}``     | [HW 07]() | {doc}`_sources/Project_01` |
+| Oct 14	| {doc}``     | [HW 08]() |                            |
+| Oct 21  | {doc}``     | [HW 09]() |                            |
+| Oct 28  | {doc}``     | [HW 10]() |                            |
+| Nov 04  | {doc}``     | [HW 11]() |                            |
+| Nov 11	| {doc}``     | [HW 12]() | {doc}`_sources/Project_02` |
+| Nov 18	| {doc}``     | [HW 13]() |                            |
 | Nov 25  | __FALL BREAK - NO CLASSES__ |                                        |                            |
-| Dec 02  | {doc}`_sources/Week_14a`     |                                        |                            |
-| Dec 09  | {doc}`_sources/Week_15a`     |                                        |                            |
+| Dec 02  | {doc}``     |                                        |                            |
+| Dec 09  | {doc}``     |                                        |                            |
 
 ## <span style="color:Red">Overview</span>
 
