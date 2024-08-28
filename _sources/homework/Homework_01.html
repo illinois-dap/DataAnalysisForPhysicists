@@ -533,53 +533,33 @@ document.write(`
 </div>
 <section id="problem-1">
 <h2>Problem 1<a class="headerlink" href="#problem-1" title="Permalink to this heading">#</a></h2>
-<p>Use <code class="docutils literal notranslate"><span class="pre">np.einsum</span></code> to evaluate the tensor expression <span class="math notranslate nohighlight">\(g^{il} \Gamma^m_{ki} x^k\)</span> which arises in <a class="reference external" href="https://en.wikipedia.org/wiki/Christoffel_symbols#Covariant_derivatives_of_tensors">contravariant derivatives in General Relativity</a>.  Note we are using the GR convention that repeated indices (k,l) are summed over.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tensor_expr</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">Gamma</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluate the tensor expression above.</span>
-<span class="sd">    </span>
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    g : array</span>
-<span class="sd">        Numpy array of shape (D, D)</span>
-<span class="sd">    Gamma : array</span>
-<span class="sd">        Numpy array of shape (D, D, D)</span>
-<span class="sd">    x : array</span>
-<span class="sd">        Numpy array of shape (D,)</span>
-<span class="sd">    D : int</span>
-<span class="sd">        Dimension of input tensors.</span>
-<span class="sd">        </span>
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    array</span>
-<span class="sd">        Numpy array of shape (D, D) that evaluates the tensor expression.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">assert</span> <span class="n">g</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">Gamma</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">D</span><span class="p">,)</span>
-    
-    <span class="c1"># YOUR CODE HERE</span>
-    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p><em>Part a:</em></p>
+<p>Use matrix multiplication in numpy to multiply x times y and y times x (recalling that matrix multiplication is not commutative).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A correct solution should pass these tests.</span>
-<span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="n">Gamma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">tensor_expr</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">Gamma</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># x times y</span>
+
+
 <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span>
-    <span class="n">y</span><span class="p">,</span>
-    <span class="p">[[</span> <span class="mi">1680</span><span class="p">,</span>  <span class="mi">3984</span><span class="p">,</span>  <span class="mi">6288</span><span class="p">,</span>  <span class="mi">8592</span><span class="p">],</span> <span class="p">[</span> <span class="mi">1940</span><span class="p">,</span>  <span class="mi">4628</span><span class="p">,</span>  <span class="mi">7316</span><span class="p">,</span> <span class="mi">10004</span><span class="p">],</span>
-     <span class="p">[</span> <span class="mi">2200</span><span class="p">,</span>  <span class="mi">5272</span><span class="p">,</span>  <span class="mi">8344</span><span class="p">,</span> <span class="mi">11416</span><span class="p">],</span> <span class="p">[</span> <span class="mi">2460</span><span class="p">,</span>  <span class="mi">5916</span><span class="p">,</span>  <span class="mi">9372</span><span class="p">,</span> <span class="mi">12828</span><span class="p">]])</span>
+    <span class="n">xy</span><span class="p">,</span>
+    <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+ <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+ <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+ <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+
+<span class="c1"># y times x</span>
+
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span> <span class="n">yx</span><span class="p">,</span> <span class="p">[[</span><span class="mi">14</span><span class="p">]])</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p><em>Part b</em></p>
+<p>Calculate the cross product of vector <span class="math notranslate nohighlight">\(\vec{x}\)</span> with vector <span class="math notranslate nohighlight">\(\vec{y}\)</span>.  Show, using the dot product that the resulting vector is perpendicular to both vectors.  Let <span class="math notranslate nohighlight">\(\vec{x}\)</span>  = [3, 5, 3]  and  <span class="math notranslate nohighlight">\(\vec{y}\)</span> = [4, 7, 9].</p>
 </section>
 <section id="problem-2">
 <h2>Problem 2<a class="headerlink" href="#problem-2" title="Permalink to this heading">#</a></h2>
@@ -588,7 +568,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">estimate_probability_density</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bins</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Estimate the probability density of arbitrary data.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    data : array</span>
@@ -634,7 +614,7 @@ where \)</span>\rho_i<span class="math notranslate nohighlight">\( is the binned
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">binned_entropy</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">bins</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the binned entropy.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    rho : array</span>
@@ -648,7 +628,7 @@ where \)</span>\rho_i<span class="math notranslate nohighlight">\( is the binned
 <span class="sd">        Value of the binned entropy.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-    
+
     <span class="c1"># YOUR CODE HERE</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 </pre></div>
@@ -707,6 +687,19 @@ where \)</span>\rho_i<span class="math notranslate nohighlight">\( is the binned
 </div>
 </div>
 </div>
+<p>##Problem 5</p>
+<p><em>Part a</em></p>
+<p>Write a function which uses np.random to make a data frame with N rows and two columns, “index” which is just the row number and “y” which is a random value. Find all ordered pairs of y (i.e. 3,4 and 4,3 would be distinct pairs) and put them in a list.  Do this two ways:</p>
+<ul class="simple">
+<li><p>Method 1: using nested for loops to go through each element in the list</p></li>
+<li><p>Method 2: using the itertools package (<a class="reference external" href="https://docs.python.org/3/library/itertools.html">https://docs.python.org/3/library/itertools.html</a>).</p></li>
+</ul>
+<p><em>Part b</em></p>
+<p>Run the function for N = 50. Show that the lists for the two methods are the same length and contain the same pairs.</p>
+<p><em>Part c</em></p>
+<p>Use the time package to measure the time for each method of generating permuations for N = 2, 5, 10, 100, 500, 1000, 5000.</p>
+<p><em>Part d</em></p>
+<p>Make a plot showing the run time (on the y-axis) for each method as a function of N (on the x-axis).  Make sure to label the plot.  What do you see?</p>
 </section>
 </section>
 
