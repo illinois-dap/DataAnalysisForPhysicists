@@ -63,7 +63,7 @@ You can find more detail in the [Calendar](#calendar) section on the specific to
 
 * Grader Mayisha Nakib
     * email: mnakib2@illinois.edu
-    * Office Hour: Tuesday 4pm, via zoom link TBD
+    * Office Hour: Tuesday 4pm, via [zoom](https://illinois.zoom.us/j/82102324374?pwd=8txHg1rUvNjUXXgJDmD3NkBxTaCjZV.1)
 
 ## <span style="color:Red">Online Tools</span>
 
