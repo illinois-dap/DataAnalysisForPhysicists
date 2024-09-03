@@ -59,7 +59,7 @@ You can find more detail in the [Calendar](#calendar) section on the specific to
 
 * Professor [Ben Hooberman](https://physics.illinois.edu/people/directory/profile/benhoob)
   * email: benhoob@illinois.edu
-  * Office Hour: TBD
+  * Office Hour: Tuesday 3pm, Loomis 413
 
 * Grader Mayisha Nakib
     * email: mnakib2@illinois.edu
