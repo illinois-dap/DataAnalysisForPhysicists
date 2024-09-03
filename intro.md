@@ -15,7 +15,7 @@ __Note__: *This schedule will evolve throughout the semseter*
 | Week          | Topic                 | Homework                               | Projects                   |
 |---------------|-----------------------|----------------------------------------|----------------------------|
 | Aug 26	| {doc}`_sources/Week_01`     | [HW 01](_sources/homework/Homework_01.ipynb) |                            |
-| Sep 02  | {doc}`_sources/Week_02`     | [HW 02]() |                            |
+| Sep 02  | {doc}`_sources/Week_02`     | [HW 02](_sources/homework/Homework_02.ipynb) |                            |
 | Sep 09	| {doc}`_sources/Week_03`     | [HW 03]() |                            |
 | Sep 16	| {doc}`_sources/Week_04`     | [HW 04]() |                            |
 | Sep 23	| {doc}`_sources/Week_05`     | [HW 05]() |                            |
@@ -63,7 +63,7 @@ You can find more detail in the [Calendar](#calendar) section on the specific to
 
 * Grader Mayisha Nakib
     * email: mnakib2@illinois.edu
-    * Office Hour: Tuesday 4pm, via [zoom](https://illinois.zoom.us/j/82102324374?pwd=8txHg1rUvNjUXXgJDmD3NkBxTaCjZV.1)
+    * Office Hour: Tuesday 4pm, via [zoom](https://illinois.zoom.us/j/82102324374?pwd=8txHg1rUvNjUXXgJDmD3NkBxTaCjZV.1) or via appointment
 
 ## <span style="color:Red">Online Tools</span>
 
