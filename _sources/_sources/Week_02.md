@@ -7,7 +7,7 @@ You will learn the basics of probability theory
 * Learn about Probability Theory
 
 ## *Lecture Materials*
-* [Slides](https://docs.google.com/presentation/d/1fxUZ9nOM9RtQYOGHNl7qQPq2yX_YYokqfyaQvOMRIHY/edit?usp=sharing)
+* [Slides](https://docs.google.com/presentation/d/1mdxMZRLoWlwGcOytur0HKF3Ax_FhL6tKu7Q_vKIrsw8/edit#slide=id.p)
 * {doc}`lectures/Visualization`
 * {doc}`lectures/ProbabilityTheory`
 * {doc}`lectures/ProbabilityTheory2`
