@@ -1,4 +1,4 @@
-# Data Analysis for Physics (PHYS 398DAP)
+# Data Analysis for Physics (PHYS 398 DAP)
 
 This is the course repository for PHYS 398DAP offered by the University of Illinois Physics Department.
 
