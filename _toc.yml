@@ -24,6 +24,7 @@ chapters:
   - url: https://docs.google.com/presentation/d/162LeNpOREjgB2dSaUUs369-KLCTafVjscWL6jGIEQ94/edit?usp=sharing
     title: Slides
   - file: _sources/lectures/ProbabilityDistributions
+  - file: _sources/lectures/CentralLimitTheorem
   - file: _sources/homework/Homework_03
 - file: _sources/Week_04 # Theory of Estimators
   sections:
