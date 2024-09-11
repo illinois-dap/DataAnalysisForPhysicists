@@ -518,12 +518,12 @@ document.write(`
 
 <span class="k">def</span> <span class="nf">count_runs</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Count number of success runs of length k.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    xs : array of shape (1, nx)</span>
 <span class="sd">        Vector of Bernoulli trials</span>
-<span class="sd">        </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    dict</span>
@@ -556,7 +556,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_prob</span><span class="p">(</span><span class="n">expts</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1234</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the probability of observing at least one run of length `k` or more from `n` trials with success probabilty `p` per trial. This probability is estimated from `expts` simulated experinents.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    expts : int</span>
@@ -568,8 +568,8 @@ document.write(`
 <span class="sd">    p: float</span>
 <span class="sd">        Success probability per trial</span>
 <span class="sd">    seed : int</span>
-<span class="sd">        Random number seed to use.    </span>
-<span class="sd">        </span>
+<span class="sd">        Random number seed to use.</span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
@@ -614,7 +614,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate random samples from a normal distribution.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    mu : array</span>
@@ -625,7 +625,7 @@ document.write(`
 <span class="sd">        Number of random samples to generate.</span>
 <span class="sd">    seed : int</span>
 <span class="sd">        Random number seed to use.</span>
-<span class="sd">        </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    array</span>
@@ -715,7 +715,7 @@ document.write(`
         <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">+</span><span class="mi">4</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">+</span><span class="mi">2</span><span class="p">)</span>
-        
+
 <span class="n">compare_rhos</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -750,13 +750,14 @@ and covariance
 C_{X|Y} \equiv \langle \left( \vec{x} - \vec{\mu}_{X|Y}\right)
 \left( \vec{x} - \vec{\mu}_{X|Y}\right)^T \rangle_{X|Y} = C_{XX} - C_{XY} C_{YY}^{-1} C_{XY}^T \; .
 \)</span>$</p>
+<p>(see this worked out in detail <a class="reference external" href="https://stats.stackexchange.com/questions/30588/deriving-the-conditional-distributions-of-a-multivariate-normal-distribution">here</a>)</p>
 <p>Note that <span class="math notranslate nohighlight">\(\vec{\mu}_{X|Y}\)</span> depends on the conditioned feature values <span class="math notranslate nohighlight">\(\vec{y}\)</span>, but <span class="math notranslate nohighlight">\(C_{X|Y}\)</span> does not. These Gaussian conditional probability densities are central to the Factor Analysis (FA) and Gaussian Process (GP) methods.</p>
 <p>Implement the function below to calculate these expressions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gauss_conditional_predicted</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">muX</span><span class="p">,</span> <span class="n">muY</span><span class="p">,</span> <span class="n">CXX</span><span class="p">,</span> <span class="n">CXY</span><span class="p">,</span> <span class="n">CYY</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Predicted conditional Gaussian means and covariances.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    y0 : array of shape (ny,)</span>
@@ -771,7 +772,7 @@ C_{X|Y} \equiv \langle \left( \vec{x} - \vec{\mu}_{X|Y}\right)
 <span class="sd">        Covariances between X and Y features.</span>
 <span class="sd">    CYY : array of shape (ny, ny)</span>
 <span class="sd">        Covariances between Y features.</span>
-<span class="sd">        </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    tuple</span>
@@ -819,7 +820,7 @@ C_{X|Y} \equiv \langle \left( \vec{x} - \vec{\mu}_{X|Y}\right)
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gauss_conditional_measured</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1.5</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Measured conditional Gaussian means and covariances.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    X : array of shape (N, nx)</span>
@@ -830,7 +831,7 @@ C_{X|Y} \equiv \langle \left( \vec{x} - \vec{\mu}_{X|Y}\right)
 <span class="sd">        Fixed y values used for conditioning.</span>
 <span class="sd">    eps : float</span>
 <span class="sd">        Tolerance for selecting samples with Y ~ y0.</span>
-<span class="sd">        </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    tuple</span>
