@@ -485,8 +485,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-get-data-span"><span style="color:Orange">Get Data</span></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-load-data-span"><span style="color:Orange">Load Data</span></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-statistical-methods-span"><span style="color:Orange">Statistical Methods</span></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-expectation-span"><span style="color:LightGreen">Expectation</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-covariance-span"><span style="color:LightGreen">Covariance</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-expectation-values-span"><span style="color:LightGreen">Expectation Values</span></a></li>
 </ul>
 </li>
 </ul>
@@ -513,6 +512,9 @@ document.write(`
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">gauss</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">moment</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">poisson</span>
 </pre></div>
 </div>
 </div>
@@ -558,7 +560,6 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">blobs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_hdf</span><span class="p">(</span><span class="n">locate_data</span><span class="p">(</span><span class="s1">&#39;blobs_data.hf5&#39;</span><span class="p">))</span>
-<span class="n">blobs</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -568,33 +569,156 @@ document.write(`
 <h1><span style="color:Orange">Statistical Methods</span><a class="headerlink" href="#span-style-color-orange-statistical-methods-span" title="Permalink to this heading">#</a></h1>
 <p>The boundary between probability and statistics is somewhat gray (similar to astronomy and astrophysics).  However, you can roughly think of statistics as the applied cousin of probability theory.</p>
 <p>Today we’re going to discuss the basics of characterizing a dataset in one or more dimensions using moments.  These include things that you are probably reasonably familiar with, like the standard deviation and the mean and others that are probably farther from your experience.</p>
-<p>In many areas of science these are important.</p>
-<p>-Sometimes you just don’t have a model for what a distribution should be and so you just start characterizing it using moments (often starting with the mean and standard deviation).</p>
-<p>-Other times you have a model, but the data isn’t perfect…maybe you’ve got a lot of background or other noise</p>
-<p>-in the case of multiple variables, perhaps you want to understand how two (or more) quantities are correlated</p>
-<section id="span-style-color-lightgreen-expectation-span">
-<h2><span style="color:LightGreen">Expectation</span><a class="headerlink" href="#span-style-color-lightgreen-expectation-span" title="Permalink to this heading">#</a></h2>
-<p>Given a probability density <span class="math notranslate nohighlight">\(P(x,y)\)</span>, and an arbitrary function <span class="math notranslate nohighlight">\(g(x,y)\)</span> of the same random variables, the <strong>expectation value</strong> of <span class="math notranslate nohighlight">\(g\)</span> is defined as:</p>
+<p>In many areas of science these are important.  For example:</p>
+<ul class="simple">
+<li><p>Sometimes you just don’t have a model for what a distribution should be and so you just start characterizing it using moments (often starting with the mean and standard deviation).</p></li>
+<li><p>Other times you have a model, but the data aren’t perfect…maybe you’ve got a lot of background or other noise</p></li>
+<li><p>in the case of multiple variables, perhaps you want to understand how two (or more) quantities are correlated</p></li>
+</ul>
+<section id="span-style-color-lightgreen-expectation-values-span">
+<h2><span style="color:LightGreen">Expectation Values</span><a class="headerlink" href="#span-style-color-lightgreen-expectation-values-span" title="Permalink to this heading">#</a></h2>
+<p>Given a probability density <span class="math notranslate nohighlight">\(P(x)\)</span>, and an arbitrary function <span class="math notranslate nohighlight">\(g(x)\)</span> of the same random variables, the <strong>expectation value</strong> of <span class="math notranslate nohighlight">\(g\)</span> is defined as:</p>
 <div class="math notranslate nohighlight">
 \[ \Large
-\langle g\rangle \equiv \iint dx dy\, g(x,y) P(x,y) \; .
+\langle g\rangle \equiv \int_{-\infty}^{\infty} dx g(x) P(x) \; .
 \]</div>
-<p>Note that the result is just a number, and not a function of either <span class="math notranslate nohighlight">\(x\)</span> or <span class="math notranslate nohighlight">\(y\)</span>. Also, <span class="math notranslate nohighlight">\(g\)</span> might have dimensions, which do not need to match those of the probability density <span class="math notranslate nohighlight">\(P\)</span>, so <span class="math notranslate nohighlight">\(\langle g\rangle\)</span> generally has dimensions.</p>
+<p>Note that the result is just a number. Also, <span class="math notranslate nohighlight">\(g\)</span> might have dimensions, which do not need to match those of the probability density <span class="math notranslate nohighlight">\(P\)</span>, so <span class="math notranslate nohighlight">\(\langle g\rangle\)</span> generally has dimensions.  All of the integrals here are over the entire range that <span class="math notranslate nohighlight">\(P(x)\)</span> is defined, in general that is
+<span class="math notranslate nohighlight">\(-\infty &lt; x &lt; \infty\)</span>, but of course some distributions are defined over a more restrictive range of <span class="math notranslate nohighlight">\(x\)</span>; the
+integration ranges will be left off from here on out  just to simplify the equations.</p>
 <p>Sometimes the assumed PDF is indicated with a subscript, <span class="math notranslate nohighlight">\(\langle g\rangle_P\)</span>, which is helpful, but more often not shown.</p>
-<p>When <span class="math notranslate nohighlight">\(g(x,y) = x^n\)</span>, the resulting expectation value is called a <strong>raw moment of x</strong>. (The same definitions apply to <span class="math notranslate nohighlight">\(y\)</span>, via <span class="math notranslate nohighlight">\(g(x,y) = y^n\)</span>.) The case <span class="math notranslate nohighlight">\(n=0\)</span> is just the normalization integral <span class="math notranslate nohighlight">\(\langle \mathbb{1}\rangle = 1\)</span>.  Low-order moments have familiar names:</p>
+<p><strong>Raw Moments</strong></p>
+<p>When <span class="math notranslate nohighlight">\(g(x) = x^n\)</span>, the resulting expectation value is called a <strong>raw moment of x</strong> and low order values have names:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(n=1\)</span> yields the <strong>mean of x</strong>, <span class="math notranslate nohighlight">\(\overline{x} \equiv \langle x\rangle\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(n=2\)</span> yields the <strong>root-mean square (RMS) of x</strong>, <span class="math notranslate nohighlight">\(\langle x^2\rangle\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(n=0\)</span>, <span class="math notranslate nohighlight">\(\langle g\rangle \equiv \int x^0 dx P(x) \;\)</span> is just unity</p></li>
+<li><p><span class="math notranslate nohighlight">\(n=1\)</span> <strong>mean of x</strong>, <span class="math notranslate nohighlight">\(\overline{x} \equiv \langle x\rangle  \equiv \int x dx P(x) \;\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(n=2\)</span> <strong>root-mean square (RMS) of x</strong>, <span class="math notranslate nohighlight">\(\langle x^2\rangle \equiv \int x^2 dx P(x) \;\)</span>.</p></li>
 </ul>
-<p>The raw moments can be defined in a similar way for any positive integer power of x.</p>
+<p>The raw moments can be defined in a similar way for any positive integer power of <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p><strong>Central Moments</strong></p>
 <p>Additionally, it is useful to define moments centered about the mean
-of the distribution.  These <strong>central moments</strong> of order <span class="math notranslate nohighlight">\(n\)</span> are defined as <span class="math notranslate nohighlight">\(\langle (x - \overline{x})^n \rangle\)</span>.  The <span class="math notranslate nohighlight">\(n=1\)</span> central moment is always 0. The
+of the distribution.  These <strong>central moments</strong> of order <span class="math notranslate nohighlight">\(n\)</span> are defined as above with <span class="math notranslate nohighlight">\(g(x) = \langle (x - \overline{x})^n \rangle\)</span>.  The <span class="math notranslate nohighlight">\(n=1\)</span> central moment is always 0.</p>
+<p>The
 <span class="math notranslate nohighlight">\(n=2\)</span> central moment is the <strong>variance of x</strong>, which combines the mean and RMS,</p>
 <div class="math notranslate nohighlight">
 \[ \Large
 \sigma_x^2 \equiv \langle\left( x - \overline{x} \right)^2\rangle \; ,
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\sigma_x\)</span> is called the <strong>standard deviation of x</strong>.</p>
+<p>where <span class="math notranslate nohighlight">\(\sigma_x\)</span> is called the <strong>standard deviation of x</strong> or the width (as we will see the standard deviation of a Gaussian is the width parameter).</p>
+<p><strong>Characterization of Measurements</strong></p>
+<p>The mean and standard deviations are among the most used quantities in physics.  If you know these quantities about a single dimensional dataset, then you actually know quite a lot, regardless of the details of the distribution itself.</p>
+<p>The standard deviation divided by the mean is a usual way of quantifying the precision of a measurement.  For example, in high-energy physics, a calorimeter is a device for measuring
+particle energy.</p>
+<ul class="simple">
+<li><p>Here is a paper about a calorimeter built at Illinois showing the mean energy measured as a function of the particle energy and showing the
+standard deviation of the measured energy distribution divided by the mean: <a class="reference external" href="https://arxiv.org/pdf/2003.13685.pdf">https://arxiv.org/pdf/2003.13685.pdf</a> (Fig. 8).</p></li>
+<li><p>To go back to the QCD jets from a couple weeks ago, here is a paper showing the mean energy response of the ATLAS calorimeters to jets (the “JES”) and the standard deviation divided by the mean (the “JER”) <a class="reference external" href="https://arxiv.org/pdf/2205.00682.pdf">https://arxiv.org/pdf/2205.00682.pdf</a> (Fig. 1).</p></li>
+</ul>
+<p><strong>Standardized Moments</strong></p>
+<p>Finally, standardized moments can be defined.  These are central moments normalized by powers of the standard deviation:
+$<span class="math notranslate nohighlight">\( \Large
+ \tilde{x}_N \equiv \langle\left( x - \overline{x} \right)^n\rangle / \sigma_{x}^n \; ,
+\)</span>$
+This makes them scale-invarient and unitless.  Thus they provide some information about the shape of the distribution:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(n = 1\)</span>: The first standard moment, <span class="math notranslate nohighlight">\(\tilde{x}_1\)</span> is 0 (just like the <span class="math notranslate nohighlight">\(n=1\)</span> central moment).</p></li>
+<li><p><span class="math notranslate nohighlight">\(n = 2\)</span>: The second standard moment is 1.</p></li>
+<li><p><span class="math notranslate nohighlight">\(n = 3\)</span>: <em>skewness</em> The skewness of a distribution can be positive, negative or zero.  A distribution that is symmetric about the mean will have zero skewness.</p></li>
+<li><p><span class="math notranslate nohighlight">\(n = 4\)</span>: <em>kurtosis</em>  The kurtosis measures the contributions from the tails of the distribution.</p></li>
+</ul>
+<p>The standard deviation, skewness and kurtosis are useful in that they enable characterization of a distribution without having a specific functional form.  In many real life cases this is very useful because there isn’t a clear cut choice for the functional form, because it is useful to not have to resort to fitting to describe a distribution, or because there are various types of background in a distribution.</p>
+<p>However, in the majority of cases the standard deviation is <em>far</em> more useful than any of the standarized moments.</p>
+<p><strong>Warning</strong>: there are a few different definitions of some of these observables running around.  Always check before blindly using a piece of code or a formula.  scipy.stats moments (<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.moment.html">https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.moment.html</a>) calculates <strong>central moments</strong> not the standard moments.  You should check that you get the answer you expect for a known test case too.</p>
+<p><strong>Some Important Moments of Common Distributions</strong></p>
+<p>These are some important moments; this is clearly not a complete list, it’s just ones that are particularily useful to be aware of.  For all the distributions, the means and variances are listed and for the Gaussian, a couple more are of interest.  The integrals have been written out but not worked through.</p>
+<p><em>Gaussian</em></p>
+<p>Because of its ubiquity, the moments of a Gaussian turn up a lot and are worth keeping on hand.</p>
+<div class="math notranslate nohighlight">
+\[\Large P(x; \mu, \sigma) = \frac{1}{{\sigma \sqrt{2\pi}}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right)\]</div>
+<p>so the mean is:</p>
+<div class="math notranslate nohighlight">
+\[\Large \langle x\rangle  = \int  dx \frac{x}{{\sigma \sqrt{2\pi}}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right) \;\]</div>
+<div class="math notranslate nohighlight">
+\[\Large \langle x\rangle  = \mu\]</div>
+<p>obviously.</p>
+<p>The second central moment, the variance, is also significant in the Gaussian:</p>
+<div class="math notranslate nohighlight">
+\[\Large \langle \left(x-\langle x \rangle \right)^2\rangle  = \int  dx \frac{\left(x-\langle x \rangle\right)^2}{{\sigma \sqrt{2\pi}}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right) \;\]</div>
+<div class="math notranslate nohighlight">
+\[\Large \langle \left(x-\langle x \rangle \right)^2\rangle  = \sigma^2\]</div>
+<p>The skewness of a Gaussian should be zero because it
+is symmetric about the mean:
+$<span class="math notranslate nohighlight">\( \Large
+ \langle\left( x - \overline{x} \right)^3\rangle / \sigma^3 \; =  \frac{1}{\sigma^3}\int  dx \frac{\left(x-\mu\right)^3}{{\sigma \sqrt{2\pi}}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right) \;
+\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[\Large \langle\left( x - \overline{x} \right)^3\rangle / \sigma^3 \; = 0\]</div>
+<p>The kurtosis of a Gaussian:
+$<span class="math notranslate nohighlight">\( \Large
+ \langle\left( x - \overline{x} \right)^4\rangle / \sigma^4 \; =  \frac{1}{\sigma^4}\int  dx \frac{\left(x-\mu\right)^4}{{\sigma \sqrt{2\pi}}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right) \;
+\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[\Large \langle\left( x - \overline{x} \right)^4\rangle / \sigma^4 \; = 3\]</div>
+<p>Often a quantity <em>excess kurtosis</em> which is <span class="math notranslate nohighlight">\(\langle\left( x - \overline{x} \right)^4\rangle / \sigma^4 - 3\)</span> is
+defined.  This provides a simple measure of how the tails of the distribution compare to that of a Gaussian, positive values of the excess kurtosis mean the tails
+are heavier than a Gaussian, whereas negative values mean
+the tails are weaker than a Gaussian.</p>
+<p><em>Poisson Distribution</em></p>
+<p>The moments can be defined for discrete distributions like the Poisson distribution.  Recall the discrete PDF for a Poisson is this:
+$<span class="math notranslate nohighlight">\(\Large P(k; \lambda) = \frac{e^{-\lambda} \lambda^k}{k!}\)</span><span class="math notranslate nohighlight">\( and it has a single parameter \)</span>\lambda$.</p>
+<p>Since the distribution is discrete, the integral becomes a sum:</p>
+<div class="math notranslate nohighlight">
+\[\Large \langle x \rangle = \sum_{k = 0}^{\infty} k \frac{e^{-\lambda} \lambda^k}{k!} = \lambda\]</div>
+<p>The variance is:
+$<span class="math notranslate nohighlight">\(\Large \langle \left( x - \langle x \rangle \right)^2  \rangle = \sum_{k = 0}^{\infty} \left( k - \lambda\right)^2 \frac{e^{-\lambda} \lambda^k}{k!} = \lambda\)</span>$</p>
+<p>Unlike the Gaussian where the mean and variance are independent, in the Poisson they are the same. Often
+it is interesting to characterize the <em>relative width</em>
+of a distribution, <span class="math notranslate nohighlight">\(\sigma / \mu\)</span>.  For a Gaussian,
+this quantity can be anything because <span class="math notranslate nohighlight">\(\sigma\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span>
+are independent, but for a Poisson, this quantity is a function of <span class="math notranslate nohighlight">\(\lambda\)</span> only and is always <span class="math notranslate nohighlight">\(1/\sqrt{\lambda}\)</span>.  The relative width of a Poisson decreases
+with increasing <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<p><em>Uniform Distribution</em></p>
+<p>For the uniform distribution:
+$<span class="math notranslate nohighlight">\(\Large
+f(x;a) =
+\begin{cases}
+\frac{1}{a} &amp; 0 \leq x \leq a \\
+0 &amp; otherwise
+\end{cases}
+\)</span><span class="math notranslate nohighlight">\(
+the mean is trivial: \)</span>\langle x \rangle = a / 2$.</p>
+<p>The variance is a little more interesting:
+$<span class="math notranslate nohighlight">\(\Large \langle \left(x- a/2 \right)^2\rangle  = \int_{0}^{a} \left(x- a/2 \right)^2 \frac{dx}{a} \;\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\Large \langle \left(x- a/2 \right)^2\rangle  = \frac{a^2}{12}.\)</span>$</p>
+<p><em><span class="math notranslate nohighlight">\(\chi^2\)</span> Distribution</em></p>
+<p>Recall the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution:
+$<span class="math notranslate nohighlight">\(\Large f(x;n) = \frac{1}{{2^{n/2}\Gamma(n/2)}} x^{(n/2)-1} e^{-x/2}\)</span>$</p>
+<p>This distribution shows up in fitting distributions (which we’ll see in Week 6), and it’s worth understanding
+the mean and variance of this distribution.  Here the mean:
+$<span class="math notranslate nohighlight">\(\Large \langle x\rangle  = \int  dx \frac{x}{{2^{n/2}\Gamma(n/2)}} x^{(n/2)-1} e^{-x/2}\;\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[\Large \langle x \rangle = n\]</div>
+<div class="math notranslate nohighlight">
+\[\Large \langle \left( x - \langle x \rangle \right)^2\rangle  = \int  dx \frac{x^{(n/2)-1}}{{2^{n/2}\Gamma(n/2)}} \left( x - n\right)^2  e^{-x/2}\;\]</div>
+<div class="math notranslate nohighlight">
+\[\Large \langle \left( x - \langle x \rangle \right)^2\rangle  = 2n\]</div>
+<p>The <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution has the same qualitative feature as the Poisson distribution in that the
+relative width is proportional to <span class="math notranslate nohighlight">\(1/\sqrt{\mu}\)</span> (though in this case there is a factor of <span class="math notranslate nohighlight">\(1/\sqrt{2}\)</span> as well.  We’ll see this has consequences in fitting….</p>
+<p><em>Briet-Wigner Distribution</em></p>
+<p>And finally the Breit-Wigner distribution.  Recall the PDF is:
+$<span class="math notranslate nohighlight">\(\Large P(x; \Gamma, x_0) = \frac{1}{\pi}\frac{\Gamma}{(x - x_0)^2 + \Gamma^2}.\)</span>$</p>
+<p>The mean would be:
+$<span class="math notranslate nohighlight">\(\Large \Large \langle x\rangle  = \int  dx \frac{x}{\pi}\frac{\Gamma}{(x - x_0)^2 + \Gamma^2}.\)</span>$</p>
+<p>However, this integral is divergent over the range <span class="math notranslate nohighlight">\(-\infty \to 0\)</span> and the range <span class="math notranslate nohighlight">\(0 \to \infty\)</span> so the mean is not defined.  The same is true for the variance and other higher moments.</p>
+<p><strong>Moments from a Dataset</strong></p>
+<p>The moments discussed above are properties of analytic probability distributions.  That’s good to know but a finite dataset is never as well known as the analytic distributions.  Of course a dataset might not obey any of the probability distributions discussed here anyway.</p>
+<p>Here we’ll go over how to get at the moments of some datasets and discuss a bit about how they are actually used in real situations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">blobs</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">blobs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -616,6 +740,7 @@ of the distribution.  These <strong>central moments</strong> of order <span clas
 </div>
 </div>
 </div>
+<p>Just a little be of cross checking to make sure everything is doing what we expect.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">blobs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">blobs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
@@ -632,13 +757,6 @@ of the distribution.  These <strong>central moments</strong> of order <span clas
 </div>
 </div>
 </div>
-<p><strong>Characterization of Measurements</strong></p>
-<p>The mean and standard deviations are among the most used quantities in physics.  If you know these quantities about a single dimensional dataset, then you actually know quite a lot, regardless of the details of the distribution itself.</p>
-<p>The standard deviation divided by the mean is a usual way of quantifying the precision of a measurement.  For example, in high-energy physics, a calorimeter is a device for measuring
-particle energy.<br />
--Here is a paper about a calorimeter built at Illinois showing the mean energy measured as a function of the particle energy and showing the
-standard deviation of the measured energy distribution divided by the mean: <a class="reference external" href="https://arxiv.org/pdf/2003.13685.pdf">https://arxiv.org/pdf/2003.13685.pdf</a> (Fig. 8).<br />
--To go back to the QCD jets from a couple weeks ago, here is a paper showing the mean energy response of the ATLAS calorimeters to jets (the “JES”) and the standard deviation divided by the mean (the “JER”) <a class="reference external" href="https://arxiv.org/pdf/2205.00682.pdf">https://arxiv.org/pdf/2205.00682.pdf</a> (Fig. 1).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ntries</span> <span class="o">=</span> <span class="mi">1000</span>
@@ -646,71 +764,88 @@ standard deviation of the measured energy distribution divided by the mean: <a c
 <span class="n">gaussarray_narrow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
 
 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntries</span><span class="p">):</span>
-	<span class="n">value</span> <span class="o">=</span> <span class="n">gauss</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+	<span class="n">value</span> <span class="o">=</span> <span class="n">gauss</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
 	<span class="n">gaussarray_narrow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gaussarray_narrow</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntries</span><span class="p">):</span>
-	<span class="n">value</span> <span class="o">=</span> <span class="n">gauss</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+	<span class="n">value</span> <span class="o">=</span> <span class="n">gauss</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 	<span class="n">gaussarray_wide</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gaussarray_wide</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
-
 <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;wide and narrow gaussians&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">gaussarray_wide</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">gaussarray_narrow</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hi!&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Finally, standardized moments can be defined.  These are central moments normalized by the standard deviation:
-$<span class="math notranslate nohighlight">\( \Large
- \tilde{x}_N \equiv \langle\left( x - \overline{x} \right)^n\rangle / \sigma_{x}^n \; ,
-\)</span>$</p>
-<p>This makes them scale-invarient and provide some information about the shape of the distribution.  The first standard moment, <span class="math notranslate nohighlight">\(\tilde{x}_1\)</span> is 0 (just like the <span class="math notranslate nohighlight">\(n=1\)</span> central moment).  The second standard moment is 1.</p>
-<p>The skewness of a distribution can be positive, negative or zero.  A distribution that is symmetric about the mean will have zero skewness.</p>
-<p>The kurtosis measures the contributions from the tails of the distribution.  A Gaussian has a kurtosis of 3.</p>
-<p>The standard deviation, skewness and kurtosis are useful in that they enable characterization of a distribution without having a specific functional form.  In many real life cases this is very useful because there isn’t a clear cut choice for the functional form, because it is useful to not have to resort to fitting to describe a distribution, or because there are various types of background in a distribution.</p>
-<p>Warning: there are a few different definitions of some of these observables running around.  Always check before blindly using a piece of code or a formula.  scipy.stats moments (<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.moment.html">https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.moment.html</a>) calculates <strong>central moments</strong> not the standard moments.  You should check that you get the answer you expect for a known test case too.</p>
-<p>For example, here is some code that calculates the first four central moments of a Gaussian and log-normal distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ntries</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">gaussarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
-<span class="n">lognormarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
-<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntries</span><span class="p">):</span>
-	<span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-	<span class="n">lognormarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lognormarray</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntries</span><span class="p">):</span>
 	<span class="n">value</span> <span class="o">=</span> <span class="n">gauss</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 	<span class="n">gaussarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Gauss and Lognormal&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">lognormarray</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gaussian&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;first central moment&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;second central moment&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;third central moment&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;fourth central moment&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Log-normal&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;first central moment&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">lognormarray</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;second central moment&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">lognormarray</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;third central moment&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">lognormarray</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;fourth central moment&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">lognormarray</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;variance&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;skewness&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">moment</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span><span class="n">moment</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span><span class="o">**</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;kurtosis&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">moment</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span><span class="n">moment</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now that we think we understand what the code is doing, we can look at the moments of the “blobs” dataset….</p>
+<p>When calculating selected moments for random numbers generated for a from a given distribution, the numbers we get are <em>close</em> but not identical to the theoretical values calculated above.  We’ll discuss how close these should be to the ideal case further down.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ntries</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">bwarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntries</span><span class="p">):</span>
+	<span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_cauchy</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+	<span class="n">bwarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bwarray</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bwarray</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Breit-Wigner (Cauchy)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;first central moment&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">bwarray</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;variance&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">bwarray</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;skewness&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">bwarray</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">moment</span><span class="p">(</span><span class="n">bwarray</span><span class="p">,</span><span class="n">moment</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span><span class="o">**</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;kurtosis&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">bwarray</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">moment</span><span class="p">(</span><span class="n">bwarray</span><span class="p">,</span><span class="n">moment</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ntries</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">uarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntries</span><span class="p">):</span>
+	<span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">()</span>
+	<span class="n">uarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">uarray</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">uarray</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Uniform&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;first central moment&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">uarray</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;variance&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">uarray</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Back to an Arbitrary Dataset</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#always check the documentation to make sure the definitions are the same</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;the first central moment ought to be 0:&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">blobs</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;the second central moment ought to match with the variances we calculated with np.var()&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">blobs</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;the second central moment&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">blobs</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;third central moment&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">blobs</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;fourth central moment&quot;</span><span class="p">,</span> <span class="n">moment</span><span class="p">(</span><span class="n">blobs</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 
@@ -719,51 +854,47 @@ $<span class="math notranslate nohighlight">\( \Large
 </div>
 </div>
 </div>
-<p>For the blobs dataset, the results might not be particularly illuminating, but the higher order moments can be particularly useful when you are trying to compare datasets for which you don’t have a model (e.g. you don’t know the dataset should be Gaussian or Poisson or …) or you would just like to make a statement independent of models.  Here is an example from my past: <a class="reference external" href="https://arxiv.org/pdf/nucl-ex/0611019.pdf">https://arxiv.org/pdf/nucl-ex/0611019.pdf</a>  In this case we measured a bunch of particle distributions and we wanted to compare their model independent way.</p>
-<p>More recently, here is a paper by our own Prof. Noronha-Hostler and collaborators proposing looking at the skewness of a distribution as a physics observable: <a class="reference external" href="https://inspirehep.net/literature/1791971">https://inspirehep.net/literature/1791971</a>.  This inspired the measurement of these moments by the ALICE Collaboration at the Large Hadron Collider here (<a class="reference external" href="https://arxiv.org/pdf/2308.16217.pdf">https://arxiv.org/pdf/2308.16217.pdf</a>).</p>
+<p><strong>Moments for a Dataset with Unknown Shape</strong></p>
+<p>For the blobs dataset, the results might not be particularly illuminating, but the higher order moments can be particularly useful when you are trying to compare datasets for which you don’t have a model (e.g. you don’t know the dataset should be Gaussian or Poisson or …) or you would just like to make a statement independent of models.</p>
+<p>Here is an example from the LHC.  In this case the ALICE collaobration measured the
+average momentum of all the particles produced in a single collision between two lead nuclei.  They then plotted the distribution of this average from a large collection of collisions (plot on the left, where the different sets of points are different classes of events) <a class="reference external" href="https://arxiv.org/pdf/2308.16217">https://arxiv.org/pdf/2308.16217</a> .  You can see that even within event classes there is a distribution of the average momentum of the particles in the separate collisions.</p>
+<p>They then calculate the skewness and kurtosis of these distributions.  Additionally, these same quantities can also be calculated using theoretical models (shown as the lines on the middle and right panels).  Neither the data nor the models are well described by Gaussians (though the data does become more Gaussian-like moving toward the right on the skewness and kurtosis plots).
+<img alt="image" src="https://drive.google.com/uc?export=view&amp;id=1vHMGct8jpu3sy_gUwlpEQPJ76P6qdUPR" /></p>
 <p><strong>Mixed Moments</strong></p>
-<p>In addition to the moments of a single variable, for multivariate distributions, mixed-moments can be defined.  Taking the equation above:</p>
+<p>In addition to the moments of a single variable, for multivariate distributions, mixed-moments can be defined.  As an example, take the equation above but now let <span class="math notranslate nohighlight">\(g = g(x,y) = x^ny^m\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[ \Large
 \langle g\rangle \equiv \iint dx dy\, g(x,y) P(x,y) \; .
 \]</div>
-<p>if <span class="math notranslate nohighlight">\(g(x,y) = x^ny^m\)</span> then <span class="math notranslate nohighlight">\(\langle g\rangle\)</span> would be the raw moment of
-order <span class="math notranslate nohighlight">\(n\)</span> of x and <span class="math notranslate nohighlight">\(m\)</span> of y.  Central and standard mixed moments can be defined analogously to those for one variable above; for example the central moment of order <span class="math notranslate nohighlight">\(n\)</span> of x and <span class="math notranslate nohighlight">\(m\)</span> of y would be <span class="math notranslate nohighlight">\(g(x,y) = (x-\bar{x})^n(y-\bar{y})^m\)</span> This can be generalized to an aritbrary number
-of variables.</p>
+<p>Then <span class="math notranslate nohighlight">\(\langle g\rangle\)</span> would be the raw moment of
+order <span class="math notranslate nohighlight">\(n\)</span> of x and <span class="math notranslate nohighlight">\(m\)</span> of y.  Central and standard mixed moments can be defined analogously to those for one variable above.</p>
+<ul class="simple">
+<li><p>For example the central moment of order <span class="math notranslate nohighlight">\(n\)</span> of x and <span class="math notranslate nohighlight">\(m\)</span> of y would be <span class="math notranslate nohighlight">\(g(x,y) = (x-\bar{x})^n(y-\bar{y})^m\)</span> This can be generalized to an aritbrary number
+of variables.</p></li>
+</ul>
 <p>This can seem esoteric, but for two variables and <span class="math notranslate nohighlight">\(m=n=1\)</span>, we
 will define the correlation and covariance below that is a key concept for
-interpreting data.  Additionally, my group has a recent paper about using
-moments to try to determine the fluctuations in jet measurements in heavy-ion
-collisions by measuring moments of the angular particle distributions (<a class="reference external" href="https://inspirehep.net/literature/2683577">https://inspirehep.net/literature/2683577</a>).</p>
-</section>
-<section id="span-style-color-lightgreen-covariance-span">
-<h2><span style="color:LightGreen">Covariance</span><a class="headerlink" href="#span-style-color-lightgreen-covariance-span" title="Permalink to this heading">#</a></h2>
-<p>If you have more than one variable, a key question is whether having more than one variable providing new information or are the variables just repeating the same information?  Here will will introduce <strong>correlation</strong> and <strong>covariance</strong>.</p>
-<p>The <strong>correlation between x and y</strong> is defined as:
+interpreting data and understanding how two quantities are related to each other.</p>
+<p><span style="color:LightGreen">Covariance</span></p>
+<p>If you have more than one variable, a key question is whether having more than one variable providing new information or are the variables just repeating the same information?  Here will will introduce <strong>covariance</strong> and <strong>correlation</strong>.</p>
+<p>The <strong>covariance between x and y</strong> is defined as:
 $<span class="math notranslate nohighlight">\( \Large
-\text{Corr}_{xy} \equiv \langle\left( x - \overline{x}\right) \left( y - \overline{y}\right)\rangle \; .
+\text{Cov}_{xy} \equiv \langle\left( x - \overline{x}\right) \left( y - \overline{y}\right)\rangle \; .
 \)</span>$</p>
 <p>A useful combination of the correlation and variances is the <strong>correlation coefficient</strong>,</p>
 <div class="math notranslate nohighlight">
 \[ \Large
-\rho_{xy} \equiv \frac{\text{Corr}_{x,y}}{\sigma_x \sigma_y} \; ,
+\rho_{xy} \equiv \frac{\text{Cov}_{x,y}}{\sigma_x \sigma_y} \; ,
 \]</div>
-<p>which, by construction, must be in the range <span class="math notranslate nohighlight">\([-1, +1]\)</span>. Larger values of <span class="math notranslate nohighlight">\(|\rho_{xy}|\)</span> indicate that <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are measuring related properties of the outcome so, together, carry less information than when <span class="math notranslate nohighlight">\(\rho_{xy} \simeq 0\)</span>. In the limit of <span class="math notranslate nohighlight">\(|\rho_{xy}| = 1\)</span>, <span class="math notranslate nohighlight">\(y = y(x)\)</span> is entirely determined by <span class="math notranslate nohighlight">\(x\)</span>, so carries no new information.</p>
+<p>which, by construction, must be in the range <span class="math notranslate nohighlight">\([-1, +1]\)</span>.</p>
 <p>We say that the variance and correlation are both <em>second-order moments</em> since they are expectation values of second-degree polynomials.</p>
 <p>We call the random variables <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> <strong>uncorrelated</strong> when:</p>
 <div class="math notranslate nohighlight">
 \[ \Large
-x,y\, \text{uncorrelated}\quad\Rightarrow\quad \text{Corr}_{xy} = \rho_{xy} = 0 \; .
+\text{Cov}_{xy} = \rho_{xy} = 0 \; .
 \]</div>
 <p>To obtain an <strong>empirical estimate</strong> of the quantities above derived from your data, use the corresponding numpy functions, as we’ll see below.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">blobs</span><span class="p">[</span><span class="s1">&#39;x0&#39;</span><span class="p">],</span> <span class="n">blobs</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">blobs</span><span class="p">[</span><span class="s1">&#39;x2&#39;</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">blobs</span><span class="p">[</span><span class="s1">&#39;x0&#39;</span><span class="p">],</span> <span class="n">blobs</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p><span style="color:LightGreen">Covariance Matrix</span></p>
 <p>It is useful to construct the <strong>covariance matrix</strong> <span class="math notranslate nohighlight">\(C\)</span> with elements:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \Large
@@ -788,90 +919,78 @@ C_{ii} = \sigma_i^2
 C_{ij} = C_{ji} = \rho_{ij} \sigma_i \sigma_j \; .
 \]</div>
 <p>(The covariance is not only symmetric but also <a class="reference external" href="https://en.wikipedia.org/wiki/Positive-definite_matrix">positive definite</a>).</p>
-<p>The covariance matrix is similar to a pairplot, with each <span class="math notranslate nohighlight">\(2\times 2\)</span> submatrix</p>
-<div class="math notranslate nohighlight">
-\[\begin{split} \Large
-\begin{bmatrix}
-\sigma_i^2 &amp; \rho_{ij} \sigma_i \sigma_j \\
-\rho_{ij} \sigma_i \sigma_j &amp; \sigma_j^2 \\
-\end{bmatrix}
-\end{split}\]</div>
-<p>describing a 2D elllipse in the <span class="math notranslate nohighlight">\((x_i, x_j)\)</span> plane:</p>
-<p><a class="reference internal" href="https://courses.physics.illinois.edu/phys398dap/fa2023/img/Statistics-Ellipse.png"><img alt="https://courses.physics.illinois.edu/phys398dap/fa2023/img/Statistics-Ellipse.png" class="align-left" src="https://courses.physics.illinois.edu/phys398dap/fa2023/img/Statistics-Ellipse.png" style="width: 800px;" /></a></img><br></p>
-<p>Note that you can directly read off the correlation coefficient <span class="math notranslate nohighlight">\(\rho_{ij}\)</span> from any of the points where the ellipse touches its bounding box. The ellipse rotation angle <span class="math notranslate nohighlight">\(\theta\)</span> is given by:</p>
-<div class="math notranslate nohighlight">
-\[ \Large
-\tan 2\theta = \frac{2 C_{ij}}{C_{ii} - C_{jj}} = \frac{2\rho_{ij}\sigma_i\sigma_j}{\sigma_i^2 - \sigma_j^2}
-\]</div>
-<p>and its <a class="reference external" href="https://en.wikipedia.org/wiki/Semi-major_and_semi-minor_axes">principal axes</a> have lengths:</p>
-<div class="math notranslate nohighlight">
-\[ \Large
-a_\pm = 2\sqrt{C_{ii} + C_{jj} \pm d} \quad \text{with} \quad
-d = \sqrt{C_{11}^2 - 2 (1 - 2\rho^2) C_{11} C_{22} + C_{22}^2} \; .
-\]</div>
-<p>For practical calculations, the Singular Value Decomposition (SVD) of the covariance is useful:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
-<span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">U</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">ap</span><span class="p">,</span> <span class="n">am</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>The above assumes <span class="math notranslate nohighlight">\(C\)</span> is <span class="math notranslate nohighlight">\(2\times 2\)</span>. In the general <span class="math notranslate nohighlight">\(D\times D\)</span> case, use <code class="docutils literal notranslate"><span class="pre">C[[[j],</span> <span class="pre">[i]],</span> <span class="pre">[[j,</span> <span class="pre">i]]]</span></code> to pick out the <span class="math notranslate nohighlight">\((i,j)\)</span> <span class="math notranslate nohighlight">\(2\times 2\)</span> submatrix.</p>
-<p>Going back to the multivariate Gaussian of Week 2…</p>
+<p>Here we can take a look at the covariance matrix for two variables in the <em>blobs</em> dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">simpson</span>
-<span class="kn">from</span> <span class="nn">matplotlib.gridspec</span> <span class="kn">import</span> <span class="n">GridSpec</span>
-
-
-
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">cov1</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">mean</span><span class="p">,</span> <span class="n">cov</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="n">cov1</span><span class="p">],</span> <span class="p">[</span><span class="n">cov1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span> <span class="c1">#means and covariance matrix</span>
-<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">cov</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:])</span>
-
-<span class="n">fz</span><span class="p">,</span> <span class="n">ex</span><span class="p">,</span> <span class="n">ey</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram2d</span><span class="p">(</span><span class="o">*</span><span class="n">z</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">ex</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">ex</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">ey</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">ey</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">/</span> <span class="mi">2</span>
-
-<span class="n">fx</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">fz</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">fy</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">fz</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">gs</span> <span class="o">=</span> <span class="n">GridSpec</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">width_ratios</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">height_ratios</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
-<span class="n">ax_fz</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">ax_fx</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">sharex</span><span class="o">=</span><span class="n">ax_fz</span><span class="p">)</span>
-<span class="n">ax_fy</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">sharey</span><span class="o">=</span><span class="n">ax_fz</span><span class="p">)</span>
-
-<span class="n">ax_fz</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">fz</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-<span class="n">ax_fx</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
-<span class="n">ax_fy</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">fy</span><span class="p">)</span>
-
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">z</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">z</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span> <span class="c1">#this gets the correlation coefficient</span>
-<span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">z</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">z</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># just a nice sanity check :)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">blobs</span><span class="p">[</span><span class="s1">&#39;x0&#39;</span><span class="p">],</span> <span class="n">blobs</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">blobs</span><span class="p">[</span><span class="s1">&#39;x0&#39;</span><span class="p">],</span> <span class="n">blobs</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>EXERCISE:</strong> Calculate the empirical covariance matrix of the <code class="docutils literal notranslate"><span class="pre">blobs</span></code> dataset using <code class="docutils literal notranslate"><span class="pre">np.cov</span></code> (pay attention to the <code class="docutils literal notranslate"><span class="pre">rowvar</span></code> arg!). Next, calculate the ellipse rotation angles <span class="math notranslate nohighlight">\(\theta\)</span> in degrees for each of this matrix’s 2D projections.</p>
+<p><strong>Uncorrelated versus Independent</strong></p>
+<p>It is tempting to think that if two variables are uncorrelated, they are independent.  However that is not the case.</p>
+<p>Let’s take the simple case two random variables X and Y where
+<span class="math notranslate nohighlight">\(X = x\)</span> and <span class="math notranslate nohighlight">\(Y = x^2\)</span>.  Clearly these two variables are not independent.  If you know any value of x, you can determine y and vise versa.  Let’s use the machinary from last week to calculate the correlation coefficient with x sampled from a Guassian centered at <span class="math notranslate nohighlight">\(x=0\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">blobs</span><span class="p">,</span> <span class="n">rowvar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
-        <span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">C</span><span class="p">[[[</span><span class="n">j</span><span class="p">],</span> <span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="p">[[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]]])</span>
-        <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">U</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ntries</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">gaussarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+<span class="n">gaussarray_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntries</span><span class="p">):</span>
+  <span class="n">value</span> <span class="o">=</span> <span class="n">gauss</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">100</span><span class="p">:</span>
+    <span class="n">gaussarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">gaussarray_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gaussarray_sq</span><span class="p">,</span><span class="n">value</span><span class="o">*</span><span class="n">value</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">gaussarray_sq</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">gaussarray_sq</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Recall that the <code class="docutils literal notranslate"><span class="pre">blobs</span></code> data was generated as a mixture of three Gaussian blobs, each with different parameters. However, describing a dataset with a single covariance matrix suggests a single Gaussian model. The lesson is that
-we can calculate an empirical covariance for <em>any</em> data, whether or not it is well described a single Gaussian.</p>
+<p>The plot looks sensible, but the correlation coefficent is approximately zero.  Running more events isn’t going to give us the strong correlation we might expect.  We can clearly see that given a value of X, Y is uniquely determined.</p>
+<p>Let’s take a look at this mathematically for our case of <span class="math notranslate nohighlight">\(X = x\)</span> and <span class="math notranslate nohighlight">\(Y = x^2\)</span> with x being symmetric around the origin.  In that case:
+$<span class="math notranslate nohighlight">\(
+\bar{X} = 0 \\
+\bar{Y} = \langle x^2 \rangle
+\)</span><span class="math notranslate nohighlight">\(
+plugging in what we know:
+\)</span><span class="math notranslate nohighlight">\(
+\bar{Y} = \sigma^2_x
+\)</span><span class="math notranslate nohighlight">\(
+so the correlation between X and Y is:
+\)</span><span class="math notranslate nohighlight">\(\text{Cov}_{xy} = \langle\left( x\right) \left( x^2 - \overline{x^2}\right)\rangle \\
+= \langle (x\left( x^2 - \sigma^2\right)\rangle \\
+=\langle x^3 - x^2\langle x\rangle \rangle = 0.
+\)</span>$</p>
+<p>This is true because the function is symmetric about <span class="math notranslate nohighlight">\(x=0\)</span>.  Let’s look at the same Gaussian centered at the origin, but only with the requirement that <span class="math notranslate nohighlight">\(x&gt;0\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ntries</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">gaussarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+<span class="n">gaussarray_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntries</span><span class="p">):</span>
+  <span class="n">value</span> <span class="o">=</span> <span class="n">gauss</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">0</span><span class="p">:</span>
+    <span class="n">gaussarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">gaussarray_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gaussarray_sq</span><span class="p">,</span><span class="n">value</span><span class="o">*</span><span class="n">value</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">gaussarray_sq</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">gaussarray_sq</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We have seen that if two variables are uncorrelated they are not necessarily independent.  However, if two variables are <em>independent</em> then they are uncorrelated.  This means you can’t necessarily directly take the correlation between two variables as telling you how much extra information is being provided by the second quantity.</p>
+<p>If we just had the datasets themselves and didn’t know the <span class="math notranslate nohighlight">\(Y = x^2\)</span> relationship set out above, we might calculate the correlation coefficient and think that the two variables are independent.  The plots however make clear that if you know <span class="math notranslate nohighlight">\(x\)</span> you directly know <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p><span style="color:LightGreen">Other Correlation Measures</span></p>
+<p><span class="math notranslate nohighlight">\(\rho_{xy}\)</span> is known as the Pearson correlation coeffient and is sensitive to the degree of linear correlation and is very common in physics (just google it).</p>
+<p>There are other measures of the correlation, e.g. Spearman’s <span class="math notranslate nohighlight">\(\rho\)</span> and other rank correlation measures.</p>
 </section>
 </section>
 
@@ -942,8 +1061,7 @@ we can calculate an empirical covariance for <em>any</em> data, whether or not i
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-get-data-span"><span style="color:Orange">Get Data</span></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-load-data-span"><span style="color:Orange">Load Data</span></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-statistical-methods-span"><span style="color:Orange">Statistical Methods</span></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-expectation-span"><span style="color:LightGreen">Expectation</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-covariance-span"><span style="color:LightGreen">Covariance</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-expectation-values-span"><span style="color:LightGreen">Expectation Values</span></a></li>
 </ul>
 </li>
 </ul>
