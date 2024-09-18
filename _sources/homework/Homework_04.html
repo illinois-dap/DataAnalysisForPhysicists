@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Estimating Probability Density from Data" href="../Week_05.html" />
-    <link rel="prev" title="Correlation vs. Independence" href="../lectures/Statistics2.html" />
+    <link rel="prev" title="Uncertainties on the Mean" href="../lectures/Statistics2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -197,13 +197,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week_04.html"><span style="color: blue;"><b>Theory of Estimators</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1El5ZPCZU_J45VfFUg80DigBZ8jnC5xXrXVnpOSdx0KY/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1rIkCqC0TgwbDADqCD4WVhQYjTC18wLsXKzFgemI5p30/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../lectures/Statistics.html">Statistics</a></li>
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="../lectures/Statistics2.html"><span style="color:LightGreen">Correlation vs. Independence</span></a></li>
-
+<li class="toctree-l2"><a class="reference internal" href="../lectures/Statistics2.html"><span style="color:LightGreen">Uncertainties on the Mean</span></a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week_05.html"><span style="color: blue;"><b>Estimating Probability Density from Data</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -494,11 +493,18 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <p><strong>Problem 1</strong></p>
-<p>The Large Hadron Collider (and all colliders) operate by colliding bunches of ions together (a bunch at the LHC contains more than <span class="math notranslate nohighlight">\(10^{11}\)</span> protons).  Each proton has a very small change of hitting another one so we can think of each potential collision as independent.  Let’s say that for a given setup of the LHC the average number of collisions per bunch is <span class="math notranslate nohighlight">\(\mu\)</span>.  Write a function that determines the probability of more than one collision per bunch crossing <em>in the case that there is at least one collision</em>.</p>
+<p>The Large Hadron Collider (and all colliders) operate by colliding bunches of ions together (a bunch at the LHC contains more than <span class="math notranslate nohighlight">\(10^{11}\)</span> protons).  Each proton has a very small change of hitting another one so we can think of each potential collision as independent.  Let’s say that for a given setup of the LHC the average number of collisions per bunch is <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+<p><em>Part 1</em> Write a function that determines the probability of more than one collision per bunch crossing <em>in the case that there is at least one collision</em>.</p>
+<p><em>Part 2</em>  Let’s assume that <span class="math notranslate nohighlight">\(\mu = 40\)</span>.  What is the probability that there are more than 60 collisions in a single bunch crossing?</p>
 <p><strong>Problem 2</strong></p>
-<p>In class, we discussed the error on the mean of a distribution.  Determining the error on higher order moments can be difficult.  A common technique is bootstrapping.  This essentially determines the error from subsamples of the data (we will talk more about these techniques later).  scipy has a nice functions for this.  Write a function that takes in an array of values and an order of a moment <span class="math notranslate nohighlight">\(n\)</span> and determines the error on that moment.  Verify that the function works as expected for the mean by generating random samples according to a Poisson distribution of sizes 2, 5, 10, 50, 100, 500, 1000 and make a plot comparing the expected standard deviation to that from the bootstrapping method.</p>
+<p>In class, we discussed the error on the mean of a distribution via bootstrapping.</p>
+<p><em>Part 1</em> Write a function that takes in an array of values and an order of a moment <span class="math notranslate nohighlight">\(n\)</span> and determines the error on that moment.</p>
+<p><em>Part 2</em> Verify that the function works as expected for the mean by generating random samples according to a Poisson distribution of sizes 2, 5, 10, 50, 100, 500, 1000 and make a plot comparing the analytic uncertainty on the mean to that from the bootstrapping method.  Make a plot (with labels) to show your results.</p>
 <p><strong>Problem 3</strong></p>
-<p>A colection of relativistic particles from a nuclear collision at the LHC are measured.  They are all created at the origin of the coordinate system and can be described by the angles <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span> (the usual angles from spherical coordintates) and their energy <span class="math notranslate nohighlight">\(E\)</span> and momenta <span class="math notranslate nohighlight">\(p\)</span>.  Write a function to determine each of the pairwise correlation coefficients between these four quantities.  Rank the pairs of quantities by the strength of their correlations.  Find the particle information to use here: <a class="reference external" href="https://courses.physics.illinois.edu/phys398dap/fa2023/data/particles.txt">https://courses.physics.illinois.edu/phys398dap/fa2023/data/particles.txt</a></p>
+<p>We looked at bootstrapping with 1D distributions in class.  Generate a set of a 1000 random numbers according to a 2D Gaussian with a mean of 0 and <span class="math notranslate nohighlight">\(\sigma\)</span> in both dimension equal to 1.  Let <span class="math notranslate nohighlight">\(\rho\)</span> be 0.95.</p>
+<p>Use bootstrapping to find the 68% confidence interval for the difference of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>Use bootstrapping to find the 68% confidence interval on the Pearson correlation coefficient of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>Generate two new sets of random numbers with the same mean and widths but now with <span class="math notranslate nohighlight">\(\rho\)</span> of 0 and -0.95.  Calculate the value of the Pearson correlation coefficient on this new dataset.  Does what you see make sense?</p>
 
     <script type="text/x-thebe-config">
     {
@@ -536,7 +542,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span style="color:LightGreen">Correlation vs. Independence</span></p>
+        <p class="prev-next-title"><span style="color:LightGreen">Uncertainties on the Mean</span></p>
       </div>
     </a>
     <a class="right-next"

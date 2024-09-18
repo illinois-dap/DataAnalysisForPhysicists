@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Correlation vs. Independence &#8212; PHYS 398 DAP</title>
+    <title>Uncertainties on the Mean &#8212; PHYS 398 DAP</title>
   
   
   
@@ -197,13 +197,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../Week_04.html"><span style="color: blue;"><b>Theory of Estimators</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1El5ZPCZU_J45VfFUg80DigBZ8jnC5xXrXVnpOSdx0KY/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1rIkCqC0TgwbDADqCD4WVhQYjTC18wLsXKzFgemI5p30/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Statistics.html">Statistics</a></li>
 
 
 
-<li class="toctree-l2 current active"><a class="current reference internal" href="#"><span style="color:LightGreen">Correlation vs. Independence</span></a></li>
-
+<li class="toctree-l2 current active"><a class="current reference internal" href="#"><span style="color:LightGreen">Uncertainties on the Mean</span></a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week_05.html"><span style="color: blue;"><b>Estimating Probability Density from Data</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -458,9 +457,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -471,21 +468,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><span style="color:LightGreen">Correlation vs. Independence</span></h1>
+    <h1><span style="color:LightGreen">Uncertainties on the Mean</span></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><span style="color:LightGreen">Correlation vs. Independence</span></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-uncertainties-on-the-mean-span"><span style="color:LightGreen">Uncertainties on the Mean</span></a></li>
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -495,111 +482,44 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="span-style-color-lightgreen-correlation-vs-independence-span">
-<h1><span style="color:LightGreen">Correlation vs. Independence</span><a class="headerlink" href="#span-style-color-lightgreen-correlation-vs-independence-span" title="Permalink to this heading">#</a></h1>
-<p>Last time we discussed the correlation and covariance between two variables:
-The <strong>correlation between x and y</strong> is defined as:
-$<span class="math notranslate nohighlight">\( \Large
-\text{Corr}_{xy} \equiv \langle\left( x - \overline{x}\right) \left( y - \overline{y}\right)\rangle \; .
-\)</span>$</p>
-<p>A useful combination of the correlation and variances is the <strong>correlation coefficient</strong>,</p>
-<div class="math notranslate nohighlight">
-\[ \Large
-\rho_{xy} \equiv \frac{\text{Corr}_{x,y}}{\sigma_x \sigma_y} \; ,
-\]</div>
-<p>It is tempting to think that if two variables are uncorrelated, they are independent.  However that is not the case.</p>
-<p>Let’s take the simple case two random variables X and Y where
-<span class="math notranslate nohighlight">\(X = x\)</span> and <span class="math notranslate nohighlight">\(Y = x^2\)</span>.  Clearly these two variables are not independent.  If you know any value of x, you can determine y and vise versa.  Let’s use the machinary from last week to calculate the correlation coefficient with x sampled from a Guassian centered at <span class="math notranslate nohighlight">\(x=0\)</span></p>
+  <section id="span-style-color-lightgreen-uncertainties-on-the-mean-span">
+<h1><span style="color:LightGreen">Uncertainties on the Mean</span><a class="headerlink" href="#span-style-color-lightgreen-uncertainties-on-the-mean-span" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.stats</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">moment</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">poisson</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">gauss</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">moment</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">poisson</span>
 
-
-<span class="n">ntries</span> <span class="o">=</span> <span class="mi">10000</span>
-<span class="n">gaussarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
-<span class="n">gaussarray_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
-
-<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntries</span><span class="p">):</span>
-  <span class="n">value</span> <span class="o">=</span> <span class="n">gauss</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-  <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">100</span><span class="p">:</span>
-    <span class="n">gaussarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
-    <span class="n">gaussarray_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gaussarray_sq</span><span class="p">,</span><span class="n">value</span><span class="o">*</span><span class="n">value</span><span class="p">)</span>
-
-
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">gaussarray_sq</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">gaussarray_sq</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>The plot looks sensible, but the correlation coefficent is approximately zero.  Running more events isn’t going to give us the strong correlation we might expect.  We can clearly see that given a value of X, Y is uniquely determined.</p>
-<p>Let’s take a look at this mathematically for our case of <span class="math notranslate nohighlight">\(X = x\)</span> and <span class="math notranslate nohighlight">\(Y = x^2\)</span> with x being symmetric around the origin.  In that case:
-$<span class="math notranslate nohighlight">\(
-\bar{X} = 0 \\
-\bar{Y} = \langle x^2 \rangle
-\)</span><span class="math notranslate nohighlight">\(
-plugging in what we know from last time:
-\)</span><span class="math notranslate nohighlight">\(
-\bar{Y} = \sigma^2_x
-\)</span><span class="math notranslate nohighlight">\(
-so the correlation between X and Y is:
-\)</span><span class="math notranslate nohighlight">\(\text{Corr}_{xy} = \langle\left( x\right) \left( x^2 - \overline{x^2}\right)\rangle \\
-= \langle (x\left( x^2 - \sigma^2\right)\rangle \\
-=\langle x^3 - x^2\langle x\rangle \rangle = 0.
-\)</span>$</p>
-<p>This works because the function is symmetric about <span class="math notranslate nohighlight">\(x=0\)</span>.  Let’s look at the same Gaussian centered at the origin, but only with the requirement that <span class="math notranslate nohighlight">\(x&gt;0\)</span>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ntries</span> <span class="o">=</span> <span class="mi">10000</span>
-<span class="n">gaussarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
-<span class="n">gaussarray_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
-
-<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ntries</span><span class="p">):</span>
-  <span class="n">value</span> <span class="o">=</span> <span class="n">gauss</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-  <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">0</span><span class="p">:</span>
-    <span class="n">gaussarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
-    <span class="n">gaussarray_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gaussarray_sq</span><span class="p">,</span><span class="n">value</span><span class="o">*</span><span class="n">value</span><span class="p">)</span>
-
-
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">gaussarray_sq</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaussarray</span><span class="p">,</span> <span class="n">gaussarray_sq</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>We have seen that if two variables are uncorrelated they are not necessarily independent.  However, if two variables are <em>independent</em> then they are uncorrelated.  This means you can’t necessarily directly take the correlation between two variables as telling you how much extra information is being provided by the second quantity.</p>
-<p>If we just had the datasets themselves and didn’t know the <span class="math notranslate nohighlight">\(Y = x^2\)</span> relationship set out above, we might calculate the correlation coefficient and think that the two variables are independent.  The plots however make clear that if you know <span class="math notranslate nohighlight">\(x\)</span> you directly know <span class="math notranslate nohighlight">\(Y\)</span>.</p>
-<p><span class="math notranslate nohighlight">\(\rho_{xy}\)</span> is known as the Pearson correlation coeffient and is sensitive to the degree of linear correlation.  There are other measures of the correlation (e.g. Spearman’s rho).  The Pearson correlation coeffiecent is very common.  Here is a paper from ATLAS where the observable is <span class="math notranslate nohighlight">\(\rho\)</span> between the magnitude of the correlations between particles and the average momentum of the particles produced in the collision of two nuclei: <a class="reference external" href="https://arxiv.org/pdf/2205.00039.pdf">https://arxiv.org/pdf/2205.00039.pdf</a>.</p>
-</section>
-<section id="span-style-color-lightgreen-uncertainties-on-the-mean-span">
-<h1><span style="color:LightGreen">Uncertainties on the Mean</span><a class="headerlink" href="#span-style-color-lightgreen-uncertainties-on-the-mean-span" title="Permalink to this heading">#</a></h1>
-<p>Given a dataset of a finite size, there are uncertainties on any of the associated moments.  We’ll discuss the special case of counting experiments using the Poisson distribution.</p>
+<p>Given a dataset of a finite size, there are uncertainties on any of the associated moments.  We’ll discuss the special case of counting experiments using the Poisson distribution.  We’re going to focus on the uncertainty on the mean.</p>
 <p>Last week we discussed:</p>
 <div class="math notranslate nohighlight">
 \[\Large P(k; \lambda) = \frac{e^{-\lambda} \lambda^k}{k!}\]</div>
 <p>The Poisson distribution is a useful model for describing the statistics of event-counting rates in (uncorrelated) counting measurements (which are ubiquitous in astronomy and particle physics).</p>
 <p>It’s useful to note that the Poisson distribution is defined for integer values of <span class="math notranslate nohighlight">\(k\)</span>, but <span class="math notranslate nohighlight">\(\lambda\)</span> of course doesn’t need to be an integer.</p>
-<p><span class="math notranslate nohighlight">\(\lambda\)</span> is the probability times the number of trials (<span class="math notranslate nohighlight">\(\lambda = np\)</span>) so it
-is the expectation value for the mean,
-but what about the variance (recall <span class="math notranslate nohighlight">\(\sigma_x^2 \equiv \langle\left( x - \overline{x} \right)^2\rangle\)</span> and the standard deviation is <span class="math notranslate nohighlight">\(\sigma_x\)</span>)?  It requires a bit of  work to show, but for a Poisson distribution
-<span class="math notranslate nohighlight">\(\sigma^2 = \lambda\)</span>
-so the standard deviation is <span class="math notranslate nohighlight">\(\sqrt{\lambda}\)</span>.</p>
+<p>As we discussed in the last notebook <span class="math notranslate nohighlight">\(\lambda\)</span> is both the mean and the variance of the Poisson distribution.  Thus the relative width of the Poisson distribution goes as <span class="math notranslate nohighlight">\(1/\sqrt{\lambda}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mi">4</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mf">1.5</span>
 <span class="n">rv</span> <span class="o">=</span> <span class="n">poisson</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
 <span class="n">R</span> <span class="o">=</span> <span class="n">poisson</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">R</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">highval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+
+<span class="n">binedge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">highval</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">highval</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">#this binning definition makes each bin have a width of 1 and has the bin centers be integers</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">R</span><span class="p">,</span><span class="n">bins</span> <span class="o">=</span> <span class="n">binedge</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">R</span><span class="p">),</span> <span class="s2">&quot; &amp; variance: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">R</span><span class="p">))</span>
+<span class="c1">#note with a Poisson, the mean doesn&#39;t have to be an integer even though the distribution itself only generates integers</span>
 </pre></div>
 </div>
 </div>
@@ -614,6 +534,126 @@ if you want 1% precision you need:
 \)</span><span class="math notranslate nohighlight">\(1/\sqrt{N} = 0.01\\
 N=10000\)</span>$</p>
 <p>Precision improves quickly at first as you add data, but then much more slowly.</p>
+<p><strong>Counting Experiments</strong></p>
+<p>So what is a <em>counting experiment</em> where the Poisson is so useful?</p>
+<p>A classic example is counting radioactive decays.  Let’s say you have a sample of Americium-241 (this is the isotope used in smoke detectors).  You want to know how many decays per second are measured.  It doesn’t make sense to just measure for one second because then you won’t get very many decays and it’s tough to measure the one second.  You decide to measure for 1 minute (60 seconds) and divide the total rate by 60 seconds to get the rate per second.</p>
+<p>Over the 60 seconds you measure 1594 decays.  Then the best estimate for the mean of the Poisson distribution for the number of decays in 60 seconds is 1594.  How much variation would you expect if you did this measurement again.  It seems unreasonable that you would get exactly 1594 again but how do you understand the uncertainty on your measurement?</p>
+<p>Well we know this is a Poisson distribution and now <span class="math notranslate nohighlight">\(\lambda = 1594\)</span>, the variance is also 1594 and the standard deviation of the Poisson is <span class="math notranslate nohighlight">\(\sqrt{\lambda} = 40\)</span>.</p>
+<ul class="simple">
+<li><p>Thinking of the <em>relative width</em> from the last notebook, <span class="math notranslate nohighlight">\(1/\sqrt{\lambda} = 0.03\)</span>.  The overall precision of the measurement is about 3%.</p></li>
+</ul>
+<p>We weren’t interested in the decay rate per minute, we wanted the decays per <em>second</em>.  The best estimate of that is:</p>
+<ul class="simple">
+<li><p><em>decays / second</em> = <span class="math notranslate nohighlight">\(1594 / 60 s = 26.56 / s\)</span></p></li>
+<li><p>3% of <span class="math notranslate nohighlight">\(26.56 / s\)</span> is <span class="math notranslate nohighlight">\(0.8 /s\)</span></p></li>
+<li><p>so our measurement is this sample produces 26.6 <span class="math notranslate nohighlight">\(\pm\)</span> 0.8 decays / second.</p></li>
+</ul>
+<p>You have a very distractable colleague who cannot imagine running a counting measurement for a whole minute.  They decide to make the same measurement but only for 5 seconds.  Over 5 seconds they measure 134 decays.  There we havee <span class="math notranslate nohighlight">\(\lambda = 134\)</span> and <span class="math notranslate nohighlight">\(1/\sqrt{\lambda} = 0.08\)</span>.  Following the above this measurement
+is 26 <span class="math notranslate nohighlight">\(\pm\)</span> 2 decays / second.</p>
+<p>Finally, you have a colleague who gets engrossed in a book while the experiment is running and takes data for 10 minutes.  They measure 16,258 decays for 27.1 <span class="math notranslate nohighlight">\(\pm\)</span> 0.2 decays / second.</p>
+<p>A few thoughts about the above example:</p>
+<ul class="simple">
+<li><p>increasing the number of counts in a sample is what decreases the uncertainty, often that just means running the experiment for a longer amount of time.</p></li>
+<li><p>the reason that is the case is because the relative width (uncertainty) is <em>only</em> a function of the total number of counts that you have, not the absolute rate.</p></li>
+<li><p>doubling the number of counts decreases the uncertainty by <span class="math notranslate nohighlight">\(1/\sqrt{2} = 0.707\)</span>.  In the beginning doubling is easy and eventually it becomes hard…</p></li>
+</ul>
+<p><strong>Uncertainty Evaluation by Sampling</strong></p>
+<p>The analytic formulas for uncertainty evaluation are extremely useful but in many cases, using the data itself to evaluate the uncertainties is useful.  These techniques go by names like <em>subsampling</em> and <em>bootstrapping</em> and they are useful for datasets that involve complicated calculations (making direct propagation difficult) or the analytic techniques don’t work for some reason.</p>
+<p>This seems like a scam, but it works as we’ll see below.  Basically this replaces the analytic calculations we worked through with computing power (to generate the bootstraps as well see below).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># let&#39;s just start with a Gaussian</span>
+<span class="c1">#making 100 random values</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For these 100 values we would expect to know the mean to the level of <span class="math notranslate nohighlight">\(4/\sqrt{100} = 0.4\)</span>  (think of the lecture slides) and we don’t have an estimate of how precisely we should know the standard deviation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean: &quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;standard dev: &quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The deviation of the sample mean from the expected value checks out with our estimate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">bootstrap</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="n">data_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">,)</span>  <span class="c1"># samples must be in a sequence</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">data_tuple</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The bootstrapping code has an argument <em>confidence_interval</em>.  The uncertainties we have generally talked about are “1-<span class="math notranslate nohighlight">\(\sigma\)</span>” uncertainties which correspond to a 68% confidence interval.  In many places in statistics a higher confidence level is used, often 90% or 95%.</p>
+<ul class="simple">
+<li><p>Be aware of what the default value is for any code that you use.  That’s an often silent way to get results you do not understand.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">bootstrap</span><span class="p">(</span><span class="n">data_tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">,</span> <span class="n">n_resamples</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">confidence_level</span><span class="o">=</span><span class="mf">0.68</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">bootstrap_distribution</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="c1">#res.bootstrap_distribution is an nd array with a size of n_resamples</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Bootstrap Distribution&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;statistic value&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">standard_error</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="o">.</span><span class="n">bootstrap_distribution</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is the distribution of the mean value of the resampled distributions.  There is one entry in this histogram for each <em>n_resample</em>.  For each resample, the software pulls the same number of random values according to the original distribution.  This resampled distribution will have 100 entries (in this case) just like the original distribution but it will not be identical to the original distribution (just like drawing 100 random numbers according to a Gaussian distribution isn’t exactly a Gaussian distribution).  The mean of this resampled distribution is evaluated.  The standard deviation of the distribution of means of the resampled distribution is the uncertainty on the mean.</p>
+<p>Chosing <em>n_resample</em> depends on computational limits on the high end and math on the low end.  Obviously a generating only a few resamplings is not going to be useful or provide an accurate representation of the uncertainty (note the default value of <em>n_resample</em> is 9999 so beware with large datasets).  Typical values range from 100-1000 but depend on a lot of factors.</p>
+<p>In the example above, we are only calculating the mean of a distribution and so perhaps the bootstrap is overkill.  We know how to calculate the uncertainty on the mean from the size of the sample and the standard deviation.</p>
+<p>Let’s try something a little more complicated….</p>
+<p>Here we’ll take the data from before and square each element (it’s simpler to go back to the original numpy array and square the elements there then handle the type conversation to what the bootstrapping wants).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data2</span> <span class="o">=</span> <span class="n">data</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">data2</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
+<span class="n">data2_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="n">data2</span><span class="p">,)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">bootstrap</span><span class="p">(</span><span class="n">data2_tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">,</span> <span class="n">n_resamples</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span> <span class="n">confidence_level</span><span class="o">=</span><span class="mf">0.68</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">bootstrap_distribution</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="c1">#res.bootstrap_distribution is an nd array with a size of n_resamples</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Bootstrap Distribution&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;statistic value&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">standard_error</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Bootstrapping is a part of a collection of techniques used in sampling.  They are all modern because they rely on having computational power.</p>
+<p>One of the earliest forms of resampling is <a class="reference external" href="https://en.wikipedia.org/wiki/Jackknife_resampling">jackknife</a>.  Here the <em>N</em> points are divided into <em>N</em> samples of size <em>N-1</em> to understand the variation and look for biases.
+Another one of these techniques is <em>subsampling</em>.  There the dataset is randomly divided into <em>M</em> samples of the same size.  For each sample the mean is evaluated.  The uncertainty on the mean can then be evaluated using standard techniques for evaluating the uncertainty on the mean (discussed in the slides).</p>
+<p>The bootstrap is used <em>heavily</em> in modern physics because it is so straightforward even for complicated quantities.  <a class="reference external" href="http://cds.cern.ch/record/2759945">Here</a> is a document describing the use of this technique in ATLAS.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -670,22 +710,6 @@ N=10000\)</span>$</p>
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><span style="color:LightGreen">Correlation vs. Independence</span></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-uncertainties-on-the-mean-span"><span style="color:LightGreen">Uncertainties on the Mean</span></a></li>
-</ul>
-
-  </nav></div>
-
-</div></div>
               
             
           </div>
