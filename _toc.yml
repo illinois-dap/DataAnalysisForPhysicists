@@ -28,7 +28,7 @@ chapters:
   - file: _sources/homework/Homework_03
 - file: _sources/Week_04 # Theory of Estimators
   sections:
-  - url: https://docs.google.com/presentation/d/1El5ZPCZU_J45VfFUg80DigBZ8jnC5xXrXVnpOSdx0KY/edit?usp=sharing
+  - url: https://docs.google.com/presentation/d/1rIkCqC0TgwbDADqCD4WVhQYjTC18wLsXKzFgemI5p30/edit?usp=sharing
     title: Slides
   - file: _sources/lectures/Statistics
   - file: _sources/lectures/Statistics2
