@@ -680,7 +680,7 @@ b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldot
 <p>This is an improvement, but an even better use of the data is to center the contribution of each sample on the sample itself, which is the key idea of <strong>kernel density estimation</strong>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate_density1d</span><span class="p">(</span><span class="n">blobs1d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">kernels</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate_density1d</span><span class="p">(</span><span class="n">blobs1d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">kernels</span><span class="o">=</span><span class="s1">&#39;tophat&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -776,7 +776,7 @@ b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldot
 </div>
 </div>
 </div>
-<p>For more quantitative applications, first run a <code class="docutils literal notranslate"><span class="pre">KernelDensity</span></code> fit with the usual calling convention:</p>
+<p>For more quantitative applications, first run a <code class="docutils literal notranslate"><span class="pre">KernelDensity</span></code> fit with the following calling convention:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit</span> <span class="o">=</span> <span class="n">neighbors</span><span class="o">.</span><span class="n">KernelDensity</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="n">bandwidth</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">blobs_data</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
