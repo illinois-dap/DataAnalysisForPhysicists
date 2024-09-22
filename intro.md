@@ -10,7 +10,7 @@
 * 3 credit hours
 
 ## <span style="color:Red">Calendar</span>
-__Note__: *This schedule will evolve throughout the semseter*
+__Note__: *This schedule will evolve throughout the semester*
 
 | Week          | Topic                 | Homework                               | Projects                   |
 |---------------|-----------------------|----------------------------------------|----------------------------|
