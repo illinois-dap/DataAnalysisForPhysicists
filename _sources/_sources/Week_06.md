@@ -8,7 +8,7 @@ You will learn about sources of uncertainty
 * Learn about sources of uncertainty
 
 ## *Lecture Materials*
-* [Slides](https://docs.google.com/presentation/d/1PTfD9Ds2XGWao6XB387rg11-17sX0dYQvWWLYs78lFo/edit?usp=sharing)
+* [Slides](https://docs.google.com/presentation/d/12TS8EaTSQPM-6EQGT8PUVKfycVTMA2Tf0HwmhBz-uXY/edit?usp=sharing)
 * {doc}`lectures/UncertaintiesandFitting``
 
 ## *Homework Assignment*
