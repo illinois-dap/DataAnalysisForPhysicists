@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Uncertainties and Fitting &#8212; PHYS 398 DAP</title>
+    <title>Fitting &#8212; PHYS 398 DAP</title>
   
   
   
@@ -212,8 +212,11 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../Week_06.html"><span style="color: blue;"><b>Statistics and Sources of Uncertainty</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1PTfD9Ds2XGWao6XB387rg11-17sX0dYQvWWLYs78lFo/edit?usp=sharing">Slides</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Uncertainties and Fitting</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/12TS8EaTSQPM-6EQGT8PUVKfycVTMA2Tf0HwmhBz-uXY/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Fitting</a></li>
+
+
+
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week_07.html"><span style="color: blue;"><b>Frequentist and Bayesian Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -457,7 +460,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -468,11 +473,30 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Uncertainties and Fitting</h1>
+    <h1>Fitting</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Fitting</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-very-simple-example">A Very Simple Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#least-square-fitting">Least Square Fitting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-tell-if-a-fit-is-any-good">How to tell if a fit is any good</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qualitatively">Qualitatively</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantitatively">Quantitatively</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-more-complicated-example">A More Complicated Example</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -482,167 +506,331 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="uncertainties-and-fitting">
-<h1>Uncertainties and Fitting<a class="headerlink" href="#uncertainties-and-fitting" title="Permalink to this heading">#</a></h1>
+  <section id="fitting">
+<h1>Fitting<a class="headerlink" href="#fitting" title="Permalink to this heading">#</a></h1>
+<p>Fitting data to a model is a very common task in physics that is non-trivial.  Here we’ll go through a few ways to fit data and some common pitfalls.</p>
+<p>There are a number of python fitting modules out there and we’ll using <em>iminuit</em> for this class as it neatly allows the consideration of uncertainties.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">seed</span>
-<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
-<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">gauss</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">iminuit</span>
+<span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">numba_stats</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>Counting Uncertainties</strong></p>
-<p>Here we’re going to generate <em>ndatasets</em> of size <em>ntries</em> of random numbers distributed according to a Gaussian with <span class="math notranslate nohighlight">\(\mu = 0\)</span> and <span class="math notranslate nohighlight">\(\sigma = 1\)</span>.  The distinction between <em>ndatasets</em> and <em>ntries</em> is artifical; we’re really just generating <em>ndatasets x ntries</em> random numbers.  We’re going to treat them as separate datasets though and see if we can understand how the datasets compare to each other.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#just generate the datasets</span>
-<span class="n">ntries</span> <span class="o">=</span> <span class="mi">200</span>
-<span class="n">ndatasets</span> <span class="o">=</span> <span class="mi">500</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">ntries</span><span class="p">,</span><span class="n">ndatasets</span><span class="p">))</span>
-<span class="c1">#print(data)</span>
-
-</pre></div>
-</div>
-</div>
-</div>
-<p>Let’s start by looking at a single dataset.  Maybe this is what Student A measured…</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nbins</span> <span class="o">=</span> <span class="mi">25</span>
-<span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">bars</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">bins</span><span class="o">=</span><span class="n">nbins</span><span class="p">,</span><span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>How many points are outside of <span class="math notranslate nohighlight">\(\pm 1 \sigma\)</span>?  How many are outside of <span class="math notranslate nohighlight">\(\pm 2 \sigma\)</span>.  Is that about what you expect based on the Gaussian distribution?</p>
-<p>About how many datasets would you expect to need to see a count outside of <span class="math notranslate nohighlight">\(\pm 3 \sigma\)</span>?</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nbins</span> <span class="o">=</span> <span class="mi">25</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-  <span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">bars</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span><span class="n">bins</span><span class="o">=</span><span class="n">nbins</span><span class="p">,</span><span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now that we’ve generated the datasets we want to just plot them.  If ndatasets is pretty small, we can just overlay them.  We see that they are all different (as we expect) but that they all roughly look like our Gaussian that we expect.</p>
-<p>The code below also puts the histogram bin content into a 2D array using <em>np.concatenate</em>.  This gives us an array which has <em>ntries</em> columns and <em>nbins</em> rows.</p>
-<p>If we look near the center of the Gaussian we expect to have a lot more counts and we should be able to see that the bin contents themselves are Gaussian distributed around their mean.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nbins</span> <span class="o">=</span> <span class="mi">25</span>
-<span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">bars</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">bins</span><span class="o">=</span><span class="n">nbins</span><span class="p">,</span><span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
-<span class="n">bincontent_array</span> <span class="o">=</span> <span class="n">counts</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">guess</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">uncertainties</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
-<span class="n">bins</span> <span class="o">=</span> <span class="n">bins</span><span class="p">[:</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">counts</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">bins</span><span class="p">))</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndatasets</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-  <span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">bars</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">bins</span><span class="o">=</span><span class="n">nbins</span><span class="p">,</span><span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
-  <span class="n">uncertainties</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
-  <span class="n">bins</span> <span class="o">=</span> <span class="n">bins</span><span class="p">[:</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-  <span class="n">bincontent_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">counts</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">bincontent_array</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">iminuit</span> <span class="kn">import</span> <span class="n">Minuit</span>
+<span class="kn">from</span> <span class="nn">iminuit.cost</span> <span class="kn">import</span> <span class="n">LeastSquares</span>
+<span class="kn">import</span> <span class="nn">iminuit</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bincontent_array</span><span class="p">[</span><span class="mi">12</span><span class="p">,:]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bincontent_array</span><span class="p">[</span><span class="mi">10</span><span class="p">,:],</span><span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;dataset&quot;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">bincontent_array</span><span class="p">[</span><span class="mi">10</span><span class="p">,:]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">bincontent_array</span><span class="p">[</span><span class="mi">10</span><span class="p">,:]</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pdf_demo</span><span class="p">(</span><span class="n">xlo</span><span class="p">,</span> <span class="n">xhi</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xlo</span><span class="p">,</span> <span class="n">xhi</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+    <span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">()</span><span class="o">.</span><span class="n">as_hex</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">arglist</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)):</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;dict(&#39;</span> <span class="o">+</span> <span class="n">arglist</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;scipy.stats.&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)(</span><span class="o">**</span><span class="n">args</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">cmap</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="n">j</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;large&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Not too bad for what we can generate in class and we expect this estimation to get better as we increase both <em>ntries</em> and <em>ndatasets</em>.</p>
-<p><strong>Least Squares Fitting</strong></p>
-<p>Least squares fitting is implemented in scipy.  In order to use it, you define a function which is your functional form and fit parameters (here, <em>func</em>).</p>
+</section>
+<section id="a-very-simple-example">
+<h1>A Very Simple Example<a class="headerlink" href="#a-very-simple-example" title="Permalink to this heading">#</a></h1>
+<p>To get started we need something to fit.  Real data is always messy and complicated.  We’ll start with something very simple.</p>
+<p>Here is a simple linear model and we’ll generate a few random points along some line.  We need to identify some uncertainties but here we’ll just take them all to have the same size (here 0.1).</p>
+<p>Plotting the data confirms that we’ve got the code working as we expect.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># a simple linear model,</span>
+<span class="k">def</span> <span class="nf">line</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="n">b</span>
+
+
+<span class="c1"># generate random toy data with random offsets in y</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">data_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">data_yerr</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># could also be an array</span>
+<span class="n">data_y</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">line</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">data_yerr</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">data_y</span><span class="p">,</span> <span class="n">data_yerr</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;ok&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="least-square-fitting">
+<h1>Least Square Fitting<a class="headerlink" href="#least-square-fitting" title="Permalink to this heading">#</a></h1>
+<p>In the example above, we are going to fit the data points to a line of the form <span class="math notranslate nohighlight">\(\alpha + \beta x\)</span>, where <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> are the values we would like the fit to choose. This is a choice (in this case, a very good choice).  As we’ll see below, the fit parameters can be very meaningful.  There is no limit on the number of fit parameters you can include.  Adding more and more parameters will make the fit unstable (try it).</p>
+<p>If you’ve run across fitting before it has probably been
+<em>Least-squares</em> fitting.  This finds the best fit by
+minimizing this quantity:</p>
+<div class="math notranslate nohighlight">
+\[\Large \chi^2(\alpha,\beta) ≡ \sum_i (y_i - y_{\alpha,\beta}(x_i))^2/\sigma_i^2\]</div>
+<p>Here:</p>
+<ul class="simple">
+<li><p>in the case of the data we’ve generated above, <span class="math notranslate nohighlight">\(i\)</span> would run from 1-10</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_i\)</span> are each of the individual measured
+values of <span class="math notranslate nohighlight">\(y\)</span> (so the contents of <em>data_y</em> in our example code),</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma_i\)</span> are the values of the measurement uncertainties (0.1 for all <span class="math notranslate nohighlight">\(i\)</span> in our example code)</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_{\alpha,\beta}(x_i)\)</span> are the values of the fitted function evaluated for a particular choice of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> at <span class="math notranslate nohighlight">\(x_i\)</span> values</p></li>
+</ul>
+<p>We don’t know what values of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> are optimal. The least-squares fitting routine tries different fit parameters and evaluates the <span class="math notranslate nohighlight">\(\chi^2\)</span> value for each choice.  The best choice of <span class="math notranslate nohighlight">\(\alpha\)</span> and
+<span class="math notranslate nohighlight">\(\beta\)</span> values correspond to the minimum value of $\chi^2(\alpha,\beta).</p>
+<p>Looking at the expression for <span class="math notranslate nohighlight">\(\chi^2_{\alpha,\beta}\)</span> more closely, we see:</p>
+<ul class="simple">
+<li><p>Minimizing the square of the deviations makes sense qualitatively because if you minimized the deviations themselves, it would be possible to get a fit that was equally off in the positive and negative direction that had a very small value of <span class="math notranslate nohighlight">\(\chi^2\)</span> (maybe like a horizontal line in linear example above).</p></li>
+<li><p>The factors of <span class="math notranslate nohighlight">\(1/\sigma_i^2\)</span> ensure that the points with smaller uncertainty have more power in the fit.  In the example above all the uncertainties are the same but that’s not true in many cases.  You wouldn’t want to get a wildly different fit by adding a outlying but very imprecise point (in the example above maybe <span class="math notranslate nohighlight">\(x=0.5\)</span>, <span class="math notranslate nohighlight">\(y = 7 \pm 4\)</span>).</p></li>
+</ul>
+<p><em>iminuit</em> has a  inutitive interface for least squares minimization.  It is based on <em>Minuit</em> which is widely used in high energy and nuclear physics.  There are many different implementations of least-squares fitting available.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="n">least_squares</span> <span class="o">=</span> <span class="n">LeastSquares</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">data_y</span><span class="p">,</span> <span class="n">data_yerr</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">Minuit</span><span class="p">(</span><span class="n">least_squares</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># starting values for α and β</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">migrad</span><span class="p">()</span>  <span class="c1"># finds minimum of least_squares function</span>
+<span class="n">m</span><span class="o">.</span><span class="n">hesse</span><span class="p">()</span>   <span class="c1"># accurately computes uncertainties</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<p>So what do we see?</p>
+<ul class="simple">
+<li><p>First the values of the parameters <em>alpha</em> and <em>beta</em> are close to the values we put in above.  And the fitted curve goes through the points (mostly).  This is promising and suggests we’re doing pretty good.</p></li>
+<li><p>it also computes the <a class="reference external" href="https://scikit-hep.org/iminuit/notebooks/hesse_and_minos.html">Hesse errors</a>.  This is a way of computationally getting the covariance matrix.</p></li>
+<li><p>you can find the covariance matrix right above the plot (check out week 4).  The diagonal elements of the covariance matrix are the squares of the errors quoted in the table above as we expect.  The matrix is symmetric (as we expect) and the off-diagonal elements should be <span class="math notranslate nohighlight">\(\rho_{xy}\sigma_x \sigma_y\)</span> (the second number in bold on the off-diagonal elements is just <span class="math notranslate nohighlight">\(\rho_{xy}\)</span>).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># draw data and fitted line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">data_y</span><span class="p">,</span> <span class="n">data_yerr</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;ok&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">line</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="o">*</span><span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;fit&quot;</span><span class="p">)</span>
+
+<span class="c1"># display legend with some fit info</span>
+<span class="n">fit_info</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sa">f</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">chi^2$/$n_</span><span class="se">\\</span><span class="s2">mathrm</span><span class="se">{{</span><span class="s2">dof</span><span class="se">}}</span><span class="s2">$ = </span><span class="si">{</span><span class="n">m</span><span class="o">.</span><span class="n">fval</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">m</span><span class="o">.</span><span class="n">ndof</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">m</span><span class="o">.</span><span class="n">fmin</span><span class="o">.</span><span class="n">reduced_chi2</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">errors</span><span class="p">):</span>
+    <span class="n">fit_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2"> = $</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> </span><span class="se">\\</span><span class="s2">pm </span><span class="si">{</span><span class="n">e</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="c1">#you want to format this so there is generally one significant figure in the uncertainty</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fit_info</span><span class="p">),</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we’ve got the <span class="math notranslate nohighlight">\(χ^2/n_{dof}\)</span>, what does that mean? And where do the uncertainties come from?</p>
+<p>In lecture 3 we had the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution being:
+$<span class="math notranslate nohighlight">\(\Large f(x;n) = \frac{1}{{2^{n/2}\Gamma(n/2)}} x^{(n/2)-1} e^{-x/2}\)</span>$.</p>
+<p>Above we had:
+$<span class="math notranslate nohighlight">\(\Large \chi^2 ≡ \sum_{i=1}^{n} (y_i - y(x_i))^2/\sigma_i^2\)</span>$</p>
+<p>It is possible to show that for <span class="math notranslate nohighlight">\(n\)</span> independent Gaussian random variables <span class="math notranslate nohighlight">\(y_i\)</span> the above summation follows the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution for <span class="math notranslate nohighlight">\(n\)</span> degrees of freedom (Cowan 10.2).  For any particular dataset, we get a single value of <span class="math notranslate nohighlight">\(\chi^2\)</span>, but if we generate new datasets independently drawn from the same Gaussian PDFs as the one we did generate, then the <span class="math notranslate nohighlight">\(\chi^2\)</span> values of those datasets will be drawn according to the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution.</p>
+<p>The above plot has 10 data points and <span class="math notranslate nohighlight">\(n_{dof} = 8\)</span> in the plot.  Why are these numbers not the same?  Because there are 2 fit parameters (the slope and the intercept) so there are only <span class="math notranslate nohighlight">\(10-2 = 8\)</span> independent pieces of information in the fit.</p>
+<p>A good fit with have <span class="math notranslate nohighlight">\(χ^2/n_{dof} ≈ 1\)</span>.  How close does it have to be?  Well for a given dataset, the value of <span class="math notranslate nohighlight">\(\chi^2\)</span> can be calculated as above.  The expectation value of the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution is <span class="math notranslate nohighlight">\(n\)</span> (recall from lecture 3) and so one should have a <span class="math notranslate nohighlight">\(χ^2/n_{dof} ≈ 1\)</span>.</p>
+<section id="how-to-tell-if-a-fit-is-any-good">
+<h2>How to tell if a fit is any good<a class="headerlink" href="#how-to-tell-if-a-fit-is-any-good" title="Permalink to this heading">#</a></h2>
+<section id="qualitatively">
+<h3>Qualitatively<a class="headerlink" href="#qualitatively" title="Permalink to this heading">#</a></h3>
+<p>The variance of the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution is <span class="math notranslate nohighlight">\(2n\)</span>, so the relative width of the distribution <span class="math notranslate nohighlight">\(\sigma / \mu \)</span> gets smaller as <span class="math notranslate nohighlight">\(n\)</span> increases, thus <span class="math notranslate nohighlight">\(χ^2/n_{dof}\)</span> for a good fit should be closer to one as <span class="math notranslate nohighlight">\(n_{dof}\)</span> increases.</p>
+</section>
+<section id="quantitatively">
+<h3>Quantitatively<a class="headerlink" href="#quantitatively" title="Permalink to this heading">#</a></h3>
+<p>We look at the CDF of the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution for <span class="math notranslate nohighlight">\(n_{dof}\)</span>  What we’re interested in is <em>what fraction of the time would we get a larger value of <span class="math notranslate nohighlight">\(\chi^2\)</span> if this data are described by this parameterization?</em></p>
+<p>The CDF, provides the integral of the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution that has a smaller <span class="math notranslate nohighlight">\(\chi^2\)</span> value than we got and the <em>survival fraction</em> is 1 - CDF for our <span class="math notranslate nohighlight">\(\chi^2\)</span> value.</p>
+<p>With this now there is a probability that if these fit parameters are correct, we would have gotten a smaller <span class="math notranslate nohighlight">\(\chi^2\)</span> value from the data.  If the CDF for our <span class="math notranslate nohighlight">\(\chi^2\)</span> value is very small, that means that the <span class="math notranslate nohighlight">\(\chi^2\)</span> value is very small and the fit parameters well describe the data.  As the CDF value approaches unity, the chances that these parameter describe the data decrease (though perhaps we got unlucky).</p>
+<p>You have to judge whether the CDF associated with a particular fit is good enough for your purposes.</p>
+<p>In general, if the conditions above are met and many independent datasets are each fit to a correct model, the CDF values associated with the <span class="math notranslate nohighlight">\(\chi^2\)</span> values for each dataset should populate a uniform distribution between 0 and 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span>
+<span class="n">pdf_demo</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">chi2</span><span class="o">=</span><span class="s1">&#39;df=8&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chi2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chi2</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nbins</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">bars</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">bins</span><span class="o">=</span><span class="n">nbins</span><span class="p">)</span>
-<span class="n">guess</span><span class="o">=</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">uncertainties</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
-<span class="n">bins</span> <span class="o">=</span> <span class="n">bins</span><span class="p">[:</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">counts</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">bins</span><span class="p">))</span>
-<span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span><span class="p">,</span> <span class="n">infodict</span><span class="p">,</span> <span class="n">mesg</span><span class="p">,</span> <span class="n">ier</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span><span class="n">guess</span><span class="p">,</span><span class="n">uncertainties</span><span class="p">,</span><span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">fitparameters</span> <span class="o">=</span> <span class="n">popt</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndatasets</span><span class="o">-</span><span class="mi">2</span><span class="p">):</span>
-  <span class="n">counts</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">bars</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">bins</span><span class="o">=</span><span class="n">nbins</span><span class="p">)</span>
-  <span class="n">uncertainties</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
-  <span class="n">bins</span> <span class="o">=</span> <span class="n">bins</span><span class="p">[:</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-  <span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span><span class="p">,</span> <span class="n">infodict</span><span class="p">,</span> <span class="n">mesg</span><span class="p">,</span> <span class="n">ier</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span><span class="n">guess</span><span class="p">,</span><span class="n">uncertainties</span><span class="p">,</span><span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-  <span class="c1">#print(ier, mesg)</span>
-  <span class="k">if</span> <span class="n">ier</span><span class="o">!=</span><span class="mi">4</span><span class="p">:</span> <span class="n">fitparameters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">popt</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">fitparameters</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="c1">#print(fitparameters)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>If you are going to use the fit for something, you had better check to make sure it converges!  Sometimes it does not!</p>
-<p>we’re going to use: <a class="reference external" href="https://lmfit.github.io/lmfit-py/model.html">https://lmfit.github.io/lmfit-py/model.html</a> scipy.optimize doesn’t cut it here because there isn’t a way to access the fit quality information without hand-coding the <span class="math notranslate nohighlight">\(\chi^2\)</span> calculation (happy to be shown to have just missed it).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>from numpy import exp, loadtxt, pi, sqrt
-!pip install lmfit
-from lmfit import Model
-
-
-x = bins
-y = counts
-
-
-def gaussian(x, amp, cen, wid):
-    &quot;&quot;&quot;1-d gaussian: gaussian(x, amp, cen, wid)&quot;&quot;&quot;
-    return (amp / (sqrt(2*pi) * wid)) * exp(-(x-cen)**2 / (2*wid**2))
-
-
-gmodel = Model(gaussian)
-result = gmodel.fit(y, x=x, weights=1.0/uncertainties, amp=5, cen=5, wid=1)
-
-print(result.fit_report())
-
-plt.plot(x, y, &#39;o&#39;)
-plt.plot(x, result.init_fit, &#39;--&#39;, label=&#39;initial fit&#39;)
-plt.plot(x, result.best_fit, &#39;-&#39;, label=&#39;best fit&#39;)
-plt.legend()
-plt.show()
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">migrad</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;fit results, amplitude, mean, and sigma&#39;</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">fitparameters</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span><span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">fitparameters</span><span class="p">[</span><span class="mi">1</span><span class="p">,:],</span><span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">fitparameters</span><span class="p">[</span><span class="mi">2</span><span class="p">,:],</span><span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">iminuit</span> <span class="kn">import</span> <span class="n">cost</span><span class="p">,</span> <span class="n">Minuit</span>
+<span class="kn">import</span> <span class="nn">numba_stats</span>
+<span class="kn">from</span> <span class="nn">numba_stats</span> <span class="kn">import</span> <span class="n">truncnorm</span><span class="p">,</span> <span class="n">truncexpon</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">expon</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span> <span class="k">as</span> <span class="n">mvnorm</span>
+<span class="c1"># accurate numerical derivatives</span>
+<span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">jacobi</span>
+<span class="kn">from</span> <span class="nn">jacobi</span> <span class="kn">import</span> <span class="n">jacobi</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="a-more-complicated-example">
+<h1>A More Complicated Example<a class="headerlink" href="#a-more-complicated-example" title="Permalink to this heading">#</a></h1>
+<p>Now let’s take a look at something more complicated.  Here is a two part distribution composed of a Gaussian on an exponential distribution. Physics has many many cases like this where the peak is some kind of signal and there is a smooth is a background contribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">xr</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># xrange</span>
 
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
+<span class="n">xdata</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">ydata</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">xdata</span><span class="p">))</span>
+<span class="n">xmix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">)</span>
+<span class="n">xmix</span> <span class="o">=</span> <span class="n">xmix</span><span class="p">[(</span><span class="n">xr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">xmix</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">xmix</span> <span class="o">&lt;</span> <span class="n">xr</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
 
+<span class="c1">#np.histogram returns the values (n in this case) and the bin edges (xe in this case)</span>
+<span class="n">n</span><span class="p">,</span> <span class="n">xe</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">xmix</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="n">xr</span><span class="p">)</span>
+<span class="n">cx</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">xe</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">xe</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">xe</span><span class="p">)</span>
+
+<span class="c1">#this plots &quot;cx&quot; which is the middle of every bin &quot;xe&quot; and n, the total counts in each bin along with the sqrt(n) as the error bar</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;ok&quot;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’re going to take a different tactic here (though the least-squares fitting will still work with this example).</p>
+<p>First, let’s define a PDF for our fit, <span class="math notranslate nohighlight">\(f(y; \theta)\)</span>,
+<span class="math notranslate nohighlight">\(\theta\)</span> are the fit parameters.
+With our PDF and our data, we can find the parameters that <em>maximize</em> the probability of our data, <span class="math notranslate nohighlight">\(y_i\)</span>, being described by the PDF we have chosen.  To do that, we’ll write out the <em>likelihood function</em>:</p>
+<div class="math notranslate nohighlight">
+\[\Large L(\theta) ≡ \prod_{i=1}^{n} f(y_i; \theta)\]</div>
+<p>We get the product here because the measurement of each <span class="math notranslate nohighlight">\(y_i\)</span> is independent of each other measurement, so the probabilities multiply.  Often the log of <span class="math notranslate nohighlight">\(L(\theta)\)</span> is
+maximized because then the product turns into a summation.</p>
+<p>Maximizing <span class="math notranslate nohighlight">\(L(\theta)\)</span> means that we want:
+$<span class="math notranslate nohighlight">\(\Large \frac{\delta L}{\delta \theta_k} = 0\)</span>$.</p>
+<p>One (sometime) advantage here is that having a binned dataset is not required; note that below <em>xmix</em> which is the data itself, not a histogram, is fed into the fitter.
+The least squares fitting above required that the data be
+binned and assumes the random variables are Gaussian.
+For many datasets these aren’t issues, but for some datasets, especially sparse ones, binning will require either loss of information due to wide bins, or bins which have so few counts in them that the uncertainties aren’t Gaussian.  In general, one wants to use binning  for large datasets because using evaluating likelihoods
+for each measurement value will take much longer than evaluating likelihoods for each bin.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">z</span> <span class="o">*</span> <span class="n">truncnorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">+</span>
+            <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">*</span> <span class="n">truncexpon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">tau</span><span class="p">))</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">cost</span><span class="o">.</span><span class="n">UnbinnedNLL</span><span class="p">(</span><span class="n">xmix</span><span class="p">,</span> <span class="n">pdf</span><span class="p">)</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">Minuit</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">limits</span><span class="p">[</span><span class="s2">&quot;z&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">limits</span><span class="p">[</span><span class="s2">&quot;mu&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">limits</span><span class="p">[</span><span class="s2">&quot;sigma&quot;</span><span class="p">,</span> <span class="s2">&quot;tau&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">migrad</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Of course we can define a binning and use that as well. (Scrolling up, see that <em>n</em> is a histogram.)  Clearly this is an advantage as the size of the dataset grows, the number of points grows with each new measurement but the size of the histogram is fixed by the choice of binning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">z</span> <span class="o">*</span> <span class="n">truncnorm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">+</span>
+            <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">z</span><span class="p">)</span> <span class="o">*</span> <span class="n">truncexpon</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tau</span><span class="p">))</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">cost</span><span class="o">.</span><span class="n">BinnedNLL</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">xe</span><span class="p">,</span> <span class="n">cdf</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Minuit</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">limits</span><span class="p">[</span><span class="s2">&quot;z&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">limits</span><span class="p">[</span><span class="s2">&quot;sigma&quot;</span><span class="p">,</span> <span class="s2">&quot;tau&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">migrad</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also use the least squared fitting that we discussed above for our more complex fitting example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">ng</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">ng</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">d</span><span class="p">)</span><span class="o">/</span><span class="n">sigma</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">cost</span><span class="o">.</span><span class="n">LeastSquares</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="o">**</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Minuit</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ng</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">limits</span><span class="p">[</span><span class="s2">&quot;sigma&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">migrad</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this case, all three methods give the same parameters.  Why do we need all these methods?</p>
+<p>Let’s consider a very small dataset….Whereas before we had 1000 samples, now let’s only generate 50.  Everything else is the same.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#just copying from above....except that now size = 50 rather than 1000</span>
+
+<span class="n">xdata</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">ydata</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">xdata</span><span class="p">))</span>
+<span class="n">xmix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">)</span>
+<span class="n">xmix</span> <span class="o">=</span> <span class="n">xmix</span><span class="p">[(</span><span class="n">xr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">xmix</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">xmix</span> <span class="o">&lt;</span> <span class="n">xr</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+
+<span class="c1">#np.histogram returns the values (n in this case) and the bin edges (xe in this case)</span>
+<span class="n">n</span><span class="p">,</span> <span class="n">xe</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">xmix</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="n">xr</span><span class="p">)</span>
+<span class="n">cx</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">xe</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">xe</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">xe</span><span class="p">)</span>
+
+<span class="c1">#this plots &quot;cx&quot; which is the middle of every bin &quot;xe&quot; and n, the total counts in each bin along with the sqrt(n) as the error bar</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;ok&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ve set the error bars on the histogram just to be the square root of the number of counts in each bin.  That made sense when we had a lot of counts but here it’s not the right choice:</p>
+<ul class="simple">
+<li><p>the error bars here for empty bins are shown as zero (since 0 is the sqrt of 0) and</p></li>
+<li><p>1 for bins with a single count, but we know (from lecture X) that the probablity distribution is just a  Poisson and so you should have <em>asymmetric</em> uncertainties here.
+We could make the bins wider so that we have a larger number of counts/bin and that would make the <span class="math notranslate nohighlight">\(\sqrt{N}\)</span>
+uncertainties correct, but we then lose information about where the points were.</p></li>
+</ul>
+<p>However, this unbinned fit doesn’t care at all about the number of counts per bin because it doesn’t know about them; it just has the data itself, no binning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">cost</span><span class="o">.</span><span class="n">UnbinnedNLL</span><span class="p">(</span><span class="n">xmix</span><span class="p">,</span> <span class="n">pdf</span><span class="p">)</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">Minuit</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">limits</span><span class="p">[</span><span class="s2">&quot;z&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">limits</span><span class="p">[</span><span class="s2">&quot;mu&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">limits</span><span class="p">[</span><span class="s2">&quot;sigma&quot;</span><span class="p">,</span> <span class="s2">&quot;tau&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">migrad</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s the <em>binned</em> fit, but it doesn’t take in the errors, it just takes in the <em>counts</em> (<em>n</em>) and the bins (<em>xe</em>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">z</span> <span class="o">*</span> <span class="n">truncnorm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">+</span>
+            <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">z</span><span class="p">)</span> <span class="o">*</span> <span class="n">truncexpon</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tau</span><span class="p">))</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">cost</span><span class="o">.</span><span class="n">BinnedNLL</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">xe</span><span class="p">,</span> <span class="n">cdf</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Minuit</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">limits</span><span class="p">[</span><span class="s2">&quot;z&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">limits</span><span class="p">[</span><span class="s2">&quot;sigma&quot;</span><span class="p">,</span> <span class="s2">&quot;tau&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">migrad</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -703,6 +891,31 @@ plt.show()
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Fitting</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-very-simple-example">A Very Simple Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#least-square-fitting">Least Square Fitting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-tell-if-a-fit-is-any-good">How to tell if a fit is any good</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qualitatively">Qualitatively</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantitatively">Quantitatively</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-more-complicated-example">A More Complicated Example</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
