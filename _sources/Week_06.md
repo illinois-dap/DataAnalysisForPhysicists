@@ -10,6 +10,7 @@ You will learn about sources of uncertainty
 ## *Lecture Materials*
 * [Slides](https://docs.google.com/presentation/d/12TS8EaTSQPM-6EQGT8PUVKfycVTMA2Tf0HwmhBz-uXY/edit?usp=sharing)
 * {doc}`lectures/UncertaintiesandFitting``
+* {doc}`lectures/Fitting2``
 
 ## *Homework Assignment*
 * {doc}`homework/Homework_06`

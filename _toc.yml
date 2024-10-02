@@ -44,6 +44,7 @@ chapters:
   - url: https://docs.google.com/presentation/d/12TS8EaTSQPM-6EQGT8PUVKfycVTMA2Tf0HwmhBz-uXY/edit?usp=sharing
     title: Slides
   - file: _sources/lectures/UncertaintiesandFitting
+  - file: _sources/lectures/Fitting2
   - file: _sources/homework/Homework_06
 - file: _sources/Week_07 # Frequentists and Bayesian Statistics
   sections:

@@ -19,7 +19,7 @@ __Note__: *This schedule will evolve throughout the semester*
 | Sep 09	| {doc}`_sources/Week_03`     | [HW 03](_sources/homework/Homework_03.ipynb) |                            |
 | Sep 16	| {doc}`_sources/Week_04`     | [HW 04](_sources/homework/Homework_04.ipynb) |                            |
 | Sep 23	| {doc}`_sources/Week_05` [zoom](https://cern.zoom.us/j/61715550905?pwd=rQMozPyW9JQ95Ma9vbteKgMF5ZpBM0.1)    | [HW 05](_sources/homework/Homework_05.ipynb) |                            |
-| Sep 30  | {doc}`_sources/Week_06`     | [HW 06]() |                            |
+| Sep 30  | {doc}`_sources/Week_06`     | [HW 06](_sources/homework/Homework_06.ipyng) |                            |
 | Oct 07  | {doc}`_sources/Week_07`     | [HW 07]() | {doc}`_sources/Project_01` |
 | Oct 14	| {doc}`_sources/Week_08`     | [HW 08]() |                            |
 | Oct 21  | {doc}`_sources/Week_09`     | [HW 09]() |                            |
