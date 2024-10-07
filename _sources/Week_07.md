@@ -7,7 +7,7 @@ You will learn about frequentist and Bayesian methods
 * Learn about frequentist and Bayesian methods
 
 ## *Lecture Materials*
-* [Slides](https://docs.google.com/presentation/d/1i9vv4J9iaAeiDIbI7y46tcSdteM9js9uiNpy5j2mF0E/edit?usp=sharing)
+* [Slides](https://docs.google.com/presentation/d/1WZoT_MrSyDjF3qvCWINDM6k3CafRiLcJS21E5L5u4Do/edit?usp=sharing)
 * {doc}`lectures/FrequentistBayesian`
 * {doc}`lectures/MCMC`
 
