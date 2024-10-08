@@ -1,4 +1,4 @@
-	# <span style="color: blue;"><b>Project 01</b></span>
+# <span style="color: blue;"><b>Project 01</b></span>
 
 ## Select from one of the following projects (due Nov 6):
 
