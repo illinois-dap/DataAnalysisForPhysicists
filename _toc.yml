@@ -68,10 +68,9 @@ chapters:
   - file: _sources/homework/Homework_08
 - file: _sources/Week_09 # Confidence Intervals and Hypothesis Testing
   sections:
-  - url: https://docs.google.com/presentation/d/1qz-upN4lyUPY6_YxAuHbLoa5JCKtexUrM7LWITM1sg0/edit?usp=sharing
+  - url: https://docs.google.com/presentation/d/1j82yCTrctslrjFAPirTx4uihFUmM8ammw2qPwThIPPY/edit?usp=sharing
     title: Slides
   - file: _sources/lectures/ConfidenceIntervals
-  - file: _sources/lectures/HypothesisTesting
   - file: _sources/homework/Homework_09
 - file: _sources/Week_10 # Responses, Convolution and Unfolding
   sections:
