@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; PHYS 398 DAP</title>
+    <title>Problem 1 &#8212; PHYS 398 DAP</title>
   
   
   
@@ -62,6 +62,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_sources/homework/Homework_09';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -168,7 +170,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week_01.html"><span style="color: blue;"><b>Course Introduction</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1vq4b3zxrhEMJbfeCH52hufBbXvTwhufEXdSs8mWY2ec/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../lectures/JupyterNumpy.html">Jupyter Notebooks and Numerical Python</a></li>
@@ -239,9 +241,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="Homework_08.html">Homework 08: Markov Chains</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_09.html"><span style="color: blue;"><b>Confidence Intervals and Hypothesis Testing</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Week_09.html"><span style="color: blue;"><b>Confidence Intervals and Hypothesis Testing</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1j82yCTrctslrjFAPirTx4uihFUmM8ammw2qPwThIPPY/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../lectures/ConfidenceIntervals.html">Confidence from Data</a></li>
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Problem 1</a></li>
 
 
 </ul>
@@ -471,7 +476,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Problem 1</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -480,7 +485,14 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Problem 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2">Problem 2</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1">Part 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2">Part 2</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3">Part 3</a></li>
 </ul>
 
             </nav>
@@ -493,10 +505,28 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <p><strong>Problem 1</strong>
-Write a toy Monte Carlo to go through the discussion outlined for the Gaussian  problem discussed in class.  Run the MC 1000 times for the alternative and null hypothesis.  Verify that you get the Type 1 and Type 2 error rates you expect (each iteration of the MC would have the 16 samples in the original problem).</p>
-<p><strong>Problem 2</strong>
-Reduce the number of samples from 16 to 9.  How does the power of the test change?</p>
+  <section id="problem-1">
+<h1>Problem 1<a class="headerlink" href="#problem-1" title="Permalink to this heading">#</a></h1>
+<p>Write a program to calculate an confidence limits at arbitrary confidence levels for a given number of observed counts (remember those are integers).  Calculate upper and lower limits (if possible) at 68% and 95% CL for observed counts between 0 and 10.</p>
+</section>
+<section id="problem-2">
+<h1>Problem 2<a class="headerlink" href="#problem-2" title="Permalink to this heading">#</a></h1>
+<p>Another common statistical test is the Student’s-t test.  This is similar to a Gaussian test, except that the standard deviations of the distributions are calculated from the data rather than known a priori.  Implementations of this test exist in python (e.g in scipy).</p>
+<section id="part-1">
+<h2>Part 1<a class="headerlink" href="#part-1" title="Permalink to this heading">#</a></h2>
+<p>Write a function that uses the Student’s t-test to descriminate at an arbitrary level between two samples.</p>
+</section>
+<section id="part-2">
+<h2>Part 2<a class="headerlink" href="#part-2" title="Permalink to this heading">#</a></h2>
+<p>Generate two normally distributed samples with <span class="math notranslate nohighlight">\(n = 10\)</span> entries with means <span class="math notranslate nohighlight">\(\mu_1 = 5\)</span> and <span class="math notranslate nohighlight">\(\mu_2 = 10\)</span> with both with <span class="math notranslate nohighlight">\(\sigma = 2\)</span></p>
+<p>Calculate the Student’s t-test for whether the sample means (the mean calculated from the <span class="math notranslate nohighlight">\(n\)</span> values in each sample) <span class="math notranslate nohighlight">\(\mu_{1,s}\)</span> is significantly different from <span class="math notranslate nohighlight">\(\mu_{2,s}\)</span>.</p>
+</section>
+</section>
+<section id="part-3">
+<h1>Part 3<a class="headerlink" href="#part-3" title="Permalink to this heading">#</a></h1>
+<p>Repeat this test for <span class="math notranslate nohighlight">\(\sigma = {1, 3, 5}\)</span> and <span class="math notranslate nohighlight">\(n = 2, 5, 15, 25, 250\)</span>.</p>
+<p>How does the significance of the difference in the sample means vary with <span class="math notranslate nohighlight">\(\sigma\)</span> and <span class="math notranslate nohighlight">\(n\)</span>.  Make a plot to illustrate your conclusion.</p>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -560,7 +590,14 @@ Reduce the number of samples from 16 to 9.  How does the power of the test chang
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Problem 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2">Problem 2</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1">Part 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2">Part 2</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3">Part 3</a></li>
 </ul>
 
   </nav></div>

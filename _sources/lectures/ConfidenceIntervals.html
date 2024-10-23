@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '_sources/lectures/ConfidenceIntervals';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="../homework/Homework_09.html" />
+    <link rel="next" title="Problem 1" href="../homework/Homework_09.html" />
     <link rel="prev" title="Confidence Intervals and Hypothesis Testing" href="../Week_09.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -244,6 +244,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../Week_09.html"><span style="color: blue;"><b>Confidence Intervals and Hypothesis Testing</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1j82yCTrctslrjFAPirTx4uihFUmM8ammw2qPwThIPPY/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Confidence from Data</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_09.html">Problem 1</a></li>
 
 
 </ul>
@@ -626,8 +629,27 @@ $<span class="math notranslate nohighlight">\(\sum_{n =0}^{n_{obs}} f(k;\lambda)
 where \)</span>f_{\chi^2}(z;n_d)<span class="math notranslate nohighlight">\( is the pdf for the \)</span>\chi^2<span class="math notranslate nohighlight">\( distribution.  This relation can  be used to get \)</span>a<span class="math notranslate nohighlight">\( and \)</span>b<span class="math notranslate nohighlight">\( for given values of \)</span>\alpha<span class="math notranslate nohighlight">\( and \)</span>\beta$.</p>
 <p><strong>Limits Near Unphysical Boundaries</strong>
 What if you have measured something close to zero that can’t be negatve? Think about a yield of particles, a mass or a decay rate.  Physics requires that these values be non-negative, however, depending on how your experiment is setup you can completely measure a central value that it is in the unphysical region.</p>
-<p>First, assuming that there is nothing wrong with the measurement itself, this is fine.  In some fraction of the cases, the true value of what you’re trying to measure will be outside the confidence interval.  If you have measured an unphysical value, the measured value and uncertainty should still be reported so that they can be combined/compared with other values (many of which will presumably be in the physical region).</p>
-<p>Second, there are several techniques for dealing with this situation which we will omit here.</p>
+<p>For example, let’s say you measured <span class="math notranslate nohighlight">\(m\)</span> of a neutrino
+to be -0.4 eV with a 68% CL in the range of -0.6 to -0.2 eV (the current upper limit on the sum of all three neutrino masses is <a class="reference external" href="https://www.nature.com/articles/s41567-021-01463-1">0.8 eV at the 90% CL</a>.</p>
+<p><em>If you think you can’t measure a non-physical mass, consider a case where you measure <span class="math notranslate nohighlight">\(E^2\)</span> and <span class="math notranslate nohighlight">\(p^2\)</span> and then calculate <span class="math notranslate nohighlight">\(m^2 = E^2 - p^2\)</span>.  Depending on the setup getting a negative <span class="math notranslate nohighlight">\(m^2\)</span> is certainly possible.  The same kind of thing can happen with rates or yields in cases where there is background that must be subtracted off.</em></p>
+<p>First, <em>don’t panic</em> assuming that there is nothing wrong with the measurement itself, this is fine.  In some fraction of the cases, the true value of what you’re trying to measure will be outside the confidence interval.  If you have measured an unphysical value, the measured value and uncertainty should still be reported so that they can be combined/compared with other values (many of which will presumably be in the physical region).</p>
+<p>Going back to the neutrino example, the entire 68% CL is in the unphysical region.  We are clearly interested in reporting an upper limit in this case.  <span class="math notranslate nohighlight">\(1-\beta\)</span> for a Gaussian at the 95% CL is 1.65<span class="math notranslate nohighlight">\(\sigma\)</span> which yields a 95% upper limit following the conventional procedure as -0.3 eV.</p>
+<p>One might consider widening the CL to 99% upper limit (which is about 2.33<span class="math notranslate nohighlight">\(\sigma\)</span> for a Gaussian), then the upper limit on the mass is 0.07 eV.  This finally includes some physical values.  Here the issue is you are stating a very tight limit on the <span class="math notranslate nohighlight">\(m\)</span>.  A The resolution of your experiment is about 0.2 eV so it doesn’t seem like you should be able to place such tight limits on <span class="math notranslate nohighlight">\(m\)</span> given the measurement you are doing.
+Moreover, the vast majority of the distribution allowed in this case is in the unphysical region and that knowledge is no where reflected in what you’ve done.</p>
+<p>One technique is to just shift the measurement into the physical region before calculating the upper limit.  The advantage of this is that the limit will be in-line with the resolution of your measurement.  The disadvantage is that you’ve lost the information from your measurement itself and the interpretation of the CL in terms of the probability described above no longer applies.</p>
+<p>This scenario is actually very well suited to a Bayesian analysis.  Going back to the likelihood function.  Given the data <span class="math notranslate nohighlight">\(x\)</span> and a particular true value of the parameter, <span class="math notranslate nohighlight">\(\theta\)</span>: <span class="math notranslate nohighlight">\(L(x|\theta)\)</span> is the likelihood function.  We want, is the conditional pdf <span class="math notranslate nohighlight">\(p(\theta|x)\)</span> for <span class="math notranslate nohighlight">\(\theta\)</span> given the data <span class="math notranslate nohighlight">\(x\)</span>.  Recall Bayes theorem:</p>
+<div class="math notranslate nohighlight">
+\[P(A|B) = \frac{P(B|A) P(A)}{P(B)}
+= \frac{P(B|A) P(A)}{\sum_i P(B|A_i)P(A_i)}\]</div>
+<p>putting in the pdf we want for <span class="math notranslate nohighlight">\(P(A|B)\)</span> we get:</p>
+<div class="math notranslate nohighlight">
+\[p(\theta|x) = \frac{L(x|\theta) \pi(\theta)}{\int L(x|\theta') \pi(\theta') d\theta'}\]</div>
+<p>Great, except we need the <em>prior probability</em> <span class="math notranslate nohighlight">\(\pi(\theta)\)</span>.  The advantage of this is that we can incorporate our physical knowledge, in this case that the mass is non-negative, into <span class="math notranslate nohighlight">\(\pi(\theta)\)</span>.  We can then have a nice pdf <span class="math notranslate nohighlight">\(p(\theta|x)\)</span> with which to generate our CL as above.  Because of the constraints on <span class="math notranslate nohighlight">\(\pi(\theta)\)</span> it will naturally be zero in the non-physical region.</p>
+<p>However, what about the form of <span class="math notranslate nohighlight">\(\pi(\theta)\)</span> in the physical region.
+Here there is no way to procede without making an assumption.  The simplest choice is to make it <em>flat</em>, e.g. <span class="math notranslate nohighlight">\(\pi(\theta) = 1\)</span> in the physical region and 0 outside of it.  This might be a good choice but in our example (neutrinos) we know that the mass scales involved are small so we might choose something that incorporates that knowledge like <span class="math notranslate nohighlight">\(\pi(\theta) = 1/\theta\)</span> for positive <span class="math notranslate nohighlight">\(\theta\)</span> values.</p>
+<p>No matter what you do, it should clearly be stated what was assumed and why.  Exploring the sensitivity to the prior is often done in Bayesian analyses and is very informative.</p>
+<p>Below is an illustration of what the 95% CL could look like under the defaul “classical” procedure, shifting the observed value to be in the physical region (“shifted”) and a Bayesian procedure (Fig from Cowan).  For observed values in the physical region the three methods agree (as they should) but when the observations are in the unphysical region, they differ by quite a lot in many places.</p>
+<p><img alt="" src="https://drive.google.com/uc?export=view&amp;id=18GMuIODO4K6R-tqf9tAZ_ZFa4pPU-KiV" /></p>
 </section>
 </section>
 </section>
@@ -930,7 +952,7 @@ so now,
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">Problem 1</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
