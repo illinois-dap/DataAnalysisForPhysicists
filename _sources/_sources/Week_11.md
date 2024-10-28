@@ -11,5 +11,6 @@ You will learn about Fourier methods
 * {doc}`lectures/FourierMethods`
 
 ## *Homework Assignment*
-* {doc}[HW]`homework/Homework_11`
+* [HW](https://illinois-dap.github.io/DataAnalysisForPhysicists/_sources/homework/Homework_11.html)
+
 
