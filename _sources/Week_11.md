@@ -1,16 +1,17 @@
-# <span style="color: blue;"><b>Fourier Methods</b></span>
+# <span style="color: blue;"><b>Response, Convolution and Unfolding</b></span>
 
 ## *Overview*
-You will learn about Fourier methods
+You will learn about response, convolution and unfolding
 
 ## *Goals*
-* Learn about Fourier methods
+* Learn about response, convolution and unfolding
 
 ## *Lecture Materials*
-* [Slides](https://docs.google.com/presentation/d/1D9rJ6R2EfDgswnlM69RUFzD3xJTFMFtQxZeqcA7uyiI/edit?usp=sharing)
-* {doc}`lectures/FourierMethods`
+* [Slides](https://docs.google.com/presentation/d/132-j5XibZfUJi-74fDGiW7_EGEuJBNqfIoj0H52Lv7s/edit?usp=sharing)
+* {doc}`lectures/ResponseConvolutionUnfolding`
 
 ## *Homework Assignment*
-* [HW](https://illinois-dap.github.io/DataAnalysisForPhysicists/_sources/homework/Homework_11.html)
+* {doc}`homework/Homework_10`
 
-
+## *Supplemental Readings*
+* None
