@@ -1,4 +1,4 @@
-# <span style="color: blue;"><b>Response, Convolution and Unfolding</b></span>
+# <span style="color: blue;"><b>Fourier methods</b></span>
 
 ## *Overview*
 You will learn about Fourier methods: Fourier series, Fouriers tricker for extracting the coefficients, 2-particle correlations in heavy ions collisions, and music
