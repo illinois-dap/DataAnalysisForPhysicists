@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Unfolding &#8212; PHYS 398 DAP</title>
+    <title>&lt;no title&gt; &#8212; PHYS 398 DAP</title>
   
   
   
@@ -62,10 +62,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_sources/homework/Homework_10';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Fourier Methods" href="../Week_11.html" />
+    <link rel="next" title="Response, Convolution and Unfolding" href="../Week_11.html" />
     <link rel="prev" title="Unfolding" href="../lectures/ResponseConvolutionUnfolding.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -168,7 +170,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week_01.html"><span style="color: blue;"><b>Course Introduction</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1vq4b3zxrhEMJbfeCH52hufBbXvTwhufEXdSs8mWY2ec/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../lectures/JupyterNumpy.html">Jupyter Notebooks and Numerical Python</a></li>
@@ -249,15 +251,15 @@ const thebe_selector_output = ".output, .cell_output"
 
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Week_10.html"><span style="color: blue;"><b>Response, Convolution and Unfolding</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_10.html"><span style="color: blue;"><b>Response, Convolution and Unfolding</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/132-j5XibZfUJi-74fDGiW7_EGEuJBNqfIoj0H52Lv7s/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../lectures/ResponseConvolutionUnfolding.html">Unfolding</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Unfolding</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_11.html"><span style="color: blue;"><b>Fourier Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_11.html"><span style="color: blue;"><b>Response, Convolution and Unfolding</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1QbUPr2X_PZhAqpmmaUbotf66ijRqWDMDhFSeREr3GY4/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../lectures/FourierMethods.html">Fourier Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Homework_11.html">Unfolding</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Week_12.html"><span style="color: blue;"><b>Time Series</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -461,7 +463,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -472,11 +476,19 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Unfolding</h1>
+    <h1><no title></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -486,27 +498,23 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="unfolding">
-<h1>Unfolding<a class="headerlink" href="#unfolding" title="Permalink to this heading">#</a></h1>
-<p>Here we will setup and test an unfolding problem.  You my use pyunfold (as in the lecture) or another piece of unfolding software you find for this exercise.  You <em>may not</em> just do an efficiency correction or matrix inversion.  Make sure to submit the <em>executed</em> version of your notebook.  Make sure to label all plots clearly.</p>
-<p>The samples you will use to unfold are below.  They are from the pythia MC which generates random proton-proton collisions.  The units are in GeV (billion electron volts).  The two columns in dataset 1 are the truth momentum and the reconstructed momentum.  In dataset 2 there is only the reconstructed momentum.</p>
-<p>These are <a class="reference external" href="https://en.wikipedia.org/wiki/Jet_(particle_physics)">jets</a> and the reconstructed momentum has been smeared in a realistic way compared to the truth momentum.</p>
-<p>Generate the response matrix with:</p>
-<p>(dataset 1) <a class="reference external" href="https://courses.physics.illinois.edu/phys398dap/fa2023/data/unf_response.csv">https://courses.physics.illinois.edu/phys398dap/fa2023/data/unf_response.csv</a></p>
-<p>and use this as the ‘data’ to unfold:</p>
-<p>(dataset 2) <a class="reference external" href="https://courses.physics.illinois.edu/phys398dap/fa2023/data/unf_data.csv">https://courses.physics.illinois.edu/phys398dap/fa2023/data/unf_data.csv</a></p>
-<p>Note that the spectra fall steeply with increasing momentum, you might find it better to use logarithmically spaced bins in the histogram.  You can do that straightforwardly by setting up the problem in terms of log(momentum).  In any case, just be very clear about what you have done.</p>
-<p><em>Part 1:</em></p>
-<p>Write a paragraph summarizing what you’ve done.  (This is the first part of the homework but do it last.  This is for me to understand what you’ve done as I read through your work.)</p>
-<p><em>Part 2</em>:</p>
-<p>Plot the truth and reconstructed quantities on the same plot; then take a ratio of those two histograms.  Comment on what you see.</p>
-<p>Generate a response matrix using the simulations provided.  Plot the response matrix both before and after the normlization of the matrix.</p>
-<p>Everything in this part is using (dataset 1).</p>
-<p><em>Part 3:</em></p>
-<p>Unfold the measured distribution with the response matrix (the <em>technical closure</em>).  Justify the convergence criteria used in the unfolding.  Either get convergence within the uncertainties on the sample statistics or explain what you tried to get the convergence to improve (showing plots with multiple convergence criteria would be very illustrative…).</p>
-<p>Everything in this part is using (dataset 1).</p>
-<p><em>Part 4</em>: Use the setup from Part 4 to unfold the reconstructed sample (dataset 2).  Is this unfolding adequate?  Why or why not?</p>
-</section>
+  <p>In class we discussed fitting correlation functions to calculate Fourier coefficients.  Here we’re going to use additional techniques to calculate Fourier coefficients from data.</p>
+<p>There are two data sets:</p>
+<p><a class="reference external" href="https://courses.physics.illinois.edu/phys398dap/fa2023/data/vn_set1.csv">https://courses.physics.illinois.edu/phys398dap/fa2023/data/vn_set1.csv</a></p>
+<p>and</p>
+<p><a class="reference external" href="https://courses.physics.illinois.edu/phys398dap/fa2023/data/vn_set2.csv">https://courses.physics.illinois.edu/phys398dap/fa2023/data/vn_set2.csv</a></p>
+<p>Each data set contains two columns; the first is the event number and the second is an angle <span class="math notranslate nohighlight">\(\phi\)</span>.</p>
+<p>One common technique is calculating the average value of the correlator
+<span class="math notranslate nohighlight">\( v_n\{2\}^2 = \langle \langle \cos n (\phi_i - \phi_j) \rangle \rangle\)</span> for all pairs where <span class="math notranslate nohighlight">\(i \neq j \)</span>.  The inner set of <span class="math notranslate nohighlight">\(\langle \rangle\)</span> indicates an average over all distinct pairs in the event and the outer set of <span class="math notranslate nohighlight">\(\langle \rangle\)</span> indicates an average over all events.</p>
+<p>(remember: all combinations of angles should only occur for particles <em>within the same event</em>).</p>
+<p>Part 1: Calculate <span class="math notranslate nohighlight">\(\langle v_2^2 \rangle\)</span> of the dataset provided using the fit method from class.  Include a plot and make sure to include the uncertainty in your estimation.</p>
+<p>Part 2:  Using the dataset provided calculate the value of $<span class="math notranslate nohighlight">\(v_n\{2\}^2 = \langle \langle \cos n (\phi_i - \phi_j) \rangle \rangle\)</span><span class="math notranslate nohighlight">\(  Get an uncertainty on the \)</span>v_2{2}^2<span class="math notranslate nohighlight">\( value using the scipy.bootstrap function (make sure to use the confidence_level=0.68 option to get a *1 \)</span>\sigma<span class="math notranslate nohighlight">\(* uncertainty).  Is the value of \)</span>v_2{2}<span class="math notranslate nohighlight">\( you calculated here  the same as the \)</span>\sqrt{\langle v_2^2} \rangle$ from Part 1?  Explain what you see.</p>
+<p>Part 3: One issue with using two particle correlations is that there are many things that can create correlations between pairs of particles (e.g. the particles could come from the decay of another particle, a glitch in the detector could cause a particle to be measured twice, …).  One way people minimize these effects is (you guessed it), measuring more than two particles.</p>
+<p>The simplest extension is the four-particle correlator: <span class="math notranslate nohighlight">\(\langle \langle \cos n (\phi_i + \phi_j - \phi_k - \phi_l) \rangle \rangle\)</span>.  This measures genuine four-particle correlations, plus sets of four where two particles are correlated and the other two are not.  In order to measure <span class="math notranslate nohighlight">\(v_2\)</span> we need to subtract out those two-particle correlations we’re not interested in:
+$<span class="math notranslate nohighlight">\(v_2^4\{4\} = 2 \times \left(\langle \langle \cos 2 (\phi_i - \phi_j) \rangle\rangle\right)^2 - \langle \langle \cos 2 (\phi_i + \phi_j - \phi_k - \phi_l) \rangle \rangle\)</span><span class="math notranslate nohighlight">\( (here \)</span>i \neq j \neq k \neq l$).</p>
+<p>Calculate <span class="math notranslate nohighlight">\(v_2\{4\}\)</span> and the uncertainty and compare the value to what you got for <span class="math notranslate nohighlight">\(v_2\{2\}\)</span> in Part 2. (for the uncertainties, I recommend you do the bootstrap on the rhs of the equation before taking the 1/4 power.  If you have some negative numbers for the difference, you’ll get some problems taking the 1/4 power.)</p>
+<p>Part 4: Compare the two datasets to each other for each observable you calculated here.  Can you conclude anything about the two datasets?</p>
+<p>Part 5:  The four-particle correlations took longer to compute than the two-particle correlations.  How much of an effect was it?  Would you rather increase the precision of the measurement by adding events to the sample or by increasing the number of particles in each event? (There is actually a faster way that doesn’t involve these loops; if you’re interested, take a look at <a class="reference external" href="https://inspirehep.net/literature/871528">this</a>.</p>
 
     <script type="text/x-thebe-config">
     {
@@ -552,7 +560,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span style="color: blue;"><b>Fourier Methods</b></span></p>
+        <p class="prev-next-title"><span style="color: blue;"><b>Response, Convolution and Unfolding</b></span></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -562,6 +570,20 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
