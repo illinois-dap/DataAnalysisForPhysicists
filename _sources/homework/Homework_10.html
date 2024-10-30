@@ -498,7 +498,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <p>In class we discussed fitting correlation functions to calculate Fourier coefficients.  Here we’re going to use additional techniques to calculate Fourier coefficients from data.</p>
+  <p>Problem 1) In class we discussed fitting correlation functions to calculate Fourier coefficients.  Here we’re going to use additional techniques to calculate Fourier coefficients from data.</p>
 <p>There are two data sets:</p>
 <p><a class="reference external" href="https://courses.physics.illinois.edu/phys398dap/fa2023/data/vn_set1.csv">https://courses.physics.illinois.edu/phys398dap/fa2023/data/vn_set1.csv</a></p>
 <p>and</p>
@@ -515,6 +515,15 @@ $<span class="math notranslate nohighlight">\(v_2^4\{4\} = 2 \times \left(\langl
 <p>Calculate <span class="math notranslate nohighlight">\(v_2\{4\}\)</span> and the uncertainty and compare the value to what you got for <span class="math notranslate nohighlight">\(v_2\{2\}\)</span> in Part 2. (for the uncertainties, I recommend you do the bootstrap on the rhs of the equation before taking the 1/4 power.  If you have some negative numbers for the difference, you’ll get some problems taking the 1/4 power.)</p>
 <p>Part 4: Compare the two datasets to each other for each observable you calculated here.  Can you conclude anything about the two datasets?</p>
 <p>Part 5:  The four-particle correlations took longer to compute than the two-particle correlations.  How much of an effect was it?  Would you rather increase the precision of the measurement by adding events to the sample or by increasing the number of particles in each event? (There is actually a faster way that doesn’t involve these loops; if you’re interested, take a look at <a class="reference external" href="https://inspirehep.net/literature/871528">this</a>.</p>
+<p>Problem 2) In this problem we will analytically compute Fourier coefficients to describe several functions in terms of a series of sin and cos components.</p>
+<p>Recall that functions can be decomposed into their ‘’Fourier components’’ according to:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \frac{a_0}{2} + \sum_{n=1}^{∞}a_n \cos nx + \sum_{n=1}^{∞}b_n \sin nx\]</div>
+<p>Your job is to find the coefficients <span class="math notranslate nohighlight">\({a_0}\)</span>, <span class="math notranslate nohighlight">\({a_n}\)</span>, and <span class="math notranslate nohighlight">\({b_n}\)</span>. In Monday’s slides we reviewed how to do this using Fourier’s trick. Find these coefficients for the following functions:</p>
+<p>Part 1: <span class="math notranslate nohighlight">\(f(x)=\sin^2(x)\)</span><br />
+hint: do you need to use Fourier’s trick to determine the Fourier coefficients for this function?</p>
+<p>Part 2: <span class="math notranslate nohighlight">\(f(x)=x^2\)</span> in the range <span class="math notranslate nohighlight">\(-\pi &lt; x &lt; \pi\)</span></p>
+<p>Part 2: <span class="math notranslate nohighlight">\(f(x)=|x|\)</span> (absolute value of <span class="math notranslate nohighlight">\(x\)</span>) in the range <span class="math notranslate nohighlight">\(-\pi &lt; x &lt; \pi\)</span></p>
 
     <script type="text/x-thebe-config">
     {
