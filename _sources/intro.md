@@ -30,7 +30,7 @@ __Note__: *This schedule will evolve throughout the semester*
 | Nov 18	| {doc}`_sources/Week_13`     | [HW 13]() |                            |
 | Nov 25  | __FALL BREAK - NO CLASSES__ |                                        |                            |
 | Dec 02  | {doc}`_sources/Week_14`     | [HW 14]()                                       |                            |
-| Dec 09  | {doc}`_sources/Week_15`     | [HW 15]()                                       |                            |
+| Dec 09  | {doc}`_sources/Week_15`     |                                                 |                            |
 
 ## <span style="color:Red">Overview</span>
 
