@@ -492,7 +492,6 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#response">Response</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-the-response">Determining the response</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incorporating-the-response-into-interpretation">Incorporating the Response into Interpretation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#now-you-need-to-generate-the-statistically-independent-sample-maybe-incorporate-it-above">now you need to generate the statistically independent sample (maybe incorporate it above)</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#unfolding">Unfolding</a><ul class="visible nav section-nav flex-column">
@@ -528,6 +527,7 @@ from numpy.linalg import inv
 from pyunfold import iterative_unfold
 from pyunfold.callbacks import Logger
 import matplotlib.cm as cm
+import scipy as sp
 </pre></div>
 </div>
 </div>
@@ -598,7 +598,7 @@ $<span class="math notranslate nohighlight">\(\bf{R^{-1}}\vec{M} = \bf{R^{-1}}\b
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;lines.markeredgewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
 
 <span class="n">hrange</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">nbins</span> <span class="o">=</span> <span class="mi">21</span>
+<span class="n">nbins</span> <span class="o">=</span> <span class="mi">51</span>
 <span class="n">num_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e4</span><span class="p">)</span>
 <span class="c1">#true_samples = np.random.normal(loc=0.0, scale=1.0, size=num_samples)</span>
 <span class="n">MC_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_samples</span><span class="p">)</span>
@@ -716,9 +716,6 @@ $<span class="math notranslate nohighlight">\(\bf{R^{-1}}\vec{M} =  \vec{T}\)</s
 </div>
 </div>
 </section>
-<section id="now-you-need-to-generate-the-statistically-independent-sample-maybe-incorporate-it-above">
-<h2>now you need to generate the statistically independent sample (maybe incorporate it above)<a class="headerlink" href="#now-you-need-to-generate-the-statistically-independent-sample-maybe-incorporate-it-above" title="Permalink to this heading">#</a></h2>
-</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="unfolding">
 <h1>Unfolding<a class="headerlink" href="#unfolding" title="Permalink to this heading">#</a></h1>
@@ -817,10 +814,11 @@ Choosing an appropriate prior affects the time to reach a the stopping condition
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">alt_unfolded_results</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ts_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">]</span>
+<span class="n">alt_unfolded_results</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">alt_closure</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">alt_closure_err</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
   <span class="n">tmp_results</span> <span class="o">=</span> <span class="n">iterative_unfold</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">MC_reco_hist</span><span class="p">,</span>
                                     <span class="n">data_err</span><span class="o">=</span><span class="n">MC_reco_err_hist</span><span class="p">,</span>
                                     <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span>
@@ -850,19 +848,20 @@ Choosing an appropriate prior affects the time to reach a the stopping condition
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">MC_reco_hist</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
         <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Observed distribution&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts_values</span><span class="p">)):</span>
+  <span class="n">labelwords</span> <span class="o">=</span> <span class="s1">&#39;unfolded, stop: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ts_values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
   <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">alt_unfolded_results</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;unfolded&#39;</span><span class="p">],</span>
-            <span class="n">yerr</span><span class="o">=</span><span class="n">unfolded_results</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;sys_err&#39;</span><span class="p">],</span>
-            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+            <span class="n">yerr</span><span class="o">=</span><span class="n">alt_unfolded_results</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;sys_err&#39;</span><span class="p">],</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
             <span class="n">elinewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
             <span class="n">capsize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
                  <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
             <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Bayesian unf. dist.&#39;</span><span class="p">)</span>
+            <span class="n">label</span><span class="o">=</span><span class="n">labelwords</span><span class="p">)</span>
 
   <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X bins&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
   <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span><span class="n">alt_closure</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">alt_closure_err</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
   <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X bins&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;unfolded / truth&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower center&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -886,6 +885,8 @@ In both cases it is usually the case that bootstrapping the statistical uncertai
 one takes a minimum in:
 $<span class="math notranslate nohighlight">\(\sum_{bins} \left(\sigma^2_{stat} + \sigma^2_{conv}\right)\)</span><span class="math notranslate nohighlight">\(
 where \)</span>\sigma_{stat}<span class="math notranslate nohighlight">\( is statistical uncertainty from a bin and \)</span>\sigma_{conv}<span class="math notranslate nohighlight">\( is the difference between the unfolded results for \)</span>n<span class="math notranslate nohighlight">\( and \)</span>n-1$ iterations.</p>
+<p>In another way of doing it, Pyunfold implements a variety of test statistics to determine the stopping condition.</p>
+<p>One wants to iterate as few times as necessary because over iterating causes large fluctuations/uncertainties.</p>
 <p>What we’ve done so far is set up a nice example but we have been unfolding our MC_reco sample with a response matrix generated from MC_reco and MC_true.  No where has anything like a real measurement come in.</p>
 <p>Here we’ll go back to the data_true sample we generated above and generate data_reco.  This sample was generated independently from MC_true and so this is the situation that one would have with a
 real measurement scenario.  We will also generate an independent noise sample (but with the same parameters as above).</p>
@@ -904,7 +905,7 @@ real measurement scenario.  We will also generate an independent noise sample (b
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data_unfolded_results</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">data_closure</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">data_closure_err</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts_values</span><span class="p">)):</span>
   <span class="n">tmp_results</span> <span class="o">=</span> <span class="n">iterative_unfold</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data_reco_hist</span><span class="p">,</span>
                                     <span class="n">data_err</span><span class="o">=</span><span class="n">data_reco_err_hist</span><span class="p">,</span>
                                     <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span>
@@ -934,19 +935,20 @@ real measurement scenario.  We will also generate an independent noise sample (b
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">data_reco_hist</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
         <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;data reco distribution&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts_values</span><span class="p">)):</span>
+  <span class="n">labelwords</span> <span class="o">=</span> <span class="s1">&#39;unfolded, stop: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ts_values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
   <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">data_unfolded_results</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;unfolded&#39;</span><span class="p">],</span>
-            <span class="n">yerr</span><span class="o">=</span><span class="n">unfolded_results</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;sys_err&#39;</span><span class="p">],</span>
+            <span class="n">yerr</span><span class="o">=</span><span class="n">data_unfolded_results</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;sys_err&#39;</span><span class="p">],</span>
             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
             <span class="n">elinewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
             <span class="n">capsize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
                  <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
             <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Bayesian unf. dist.&#39;</span><span class="p">)</span>
+            <span class="n">label</span><span class="o">=</span><span class="n">labelwords</span><span class="p">)</span>
 
   <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X bins&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
   <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span><span class="n">data_closure</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">data_closure_err</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
   <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X bins&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;unfolded / truth&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower center&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -961,6 +963,19 @@ real measurement scenario.  We will also generate an independent noise sample (b
 </section>
 <section id="convolution">
 <h2>Convolution<a class="headerlink" href="#convolution" title="Permalink to this heading">#</a></h2>
+<p>A convolution is an operation that takes place on two functions, <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span>, producing a third function <span class="math notranslate nohighlight">\(f * g\)</span>:
+$<span class="math notranslate nohighlight">\((f * g)(t) = \int_{-\infty}^{\infty} f(\tau) g(t-\tau) d\tau\)</span>$
+Intuitively, this involves flipping one of the functions and sliding it past the other.  The value of the convlution at a particular point is then the integral of the overlap of the two functions.</p>
+<p><img alt="" src="https://drive.google.com/uc?export=view&amp;id=1olgQ6PWsmguah8NHyilyVK3R9Sl4nt6Q" /> (image from wikipedia)</p>
+<p>There are a few properties of convolutions that are useful to know:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((f * g) = (g *f)\)</span>, communtativity</p></li>
+<li><p><span class="math notranslate nohighlight">\(f * (g * h) =  (f * g) * h\)</span>, associativity</p></li>
+<li><p><span class="math notranslate nohighlight">\(f * (g + h) = f * g + f * h\)</span>, distributivity</p></li>
+<li><p><span class="math notranslate nohighlight">\( f * \delta = f\)</span></p></li>
+</ul>
+<p>Convolutions show up in lots of places, particularly signal processing, responses, physics, etc.  This is what is going on in kernel density estimation as well (from earlier in the semester).</p>
+<p>Of course there are multiple implementations of convolutions in python (we’ll use the scipy one) but it is easy to lose intuition of what’s going on without working through some simple examples.</p>
 <p>Here’s a simple way to think abou a discrete convolution.  Let’s say that we have <span class="math notranslate nohighlight">\(f = [1 2 3 4]\)</span> and <span class="math notranslate nohighlight">\(g = [1 2]\)</span>.  In order to evaluate the convolution, we flip <span class="math notranslate nohighlight">\(g\)</span> and slide it across <span class="math notranslate nohighlight">\(f\)</span>.  At each step, we
 take the product of the element of <span class="math notranslate nohighlight">\(f\)</span> and the element of <span class="math notranslate nohighlight">\(g\)</span> that are lined up.  Those elements are summed together to create an element of the convolution.
 <img alt="" src="https://drive.google.com/uc?export=view&amp;id=1BBxKcLTPmZh1gWmS68dJUY9_eDZOxOmg" /></p>
@@ -1050,6 +1065,105 @@ take the product of the element of <span class="math notranslate nohighlight">\(
 </div>
 </div>
 </div>
+<p>It’s worth knowing that a Gaussian convoluted with a Gaussian remains a Gaussian.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">std_dev</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std_dev</span><span class="p">)</span>
+<span class="n">win</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">,)</span>
+
+
+<span class="n">filtered</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">win</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax_orig</span><span class="p">,</span> <span class="n">ax_win</span><span class="p">,</span> <span class="n">ax_filt</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax_orig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span>
+<span class="n">ax_orig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original pulse&#39;</span><span class="p">)</span>
+<span class="n">ax_orig</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">ax_win</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>
+<span class="n">ax_win</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Filter impulse response&#39;</span><span class="p">)</span>
+<span class="n">ax_win</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">ax_filt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span>
+<span class="n">ax_filt</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Filtered signal&#39;</span><span class="p">)</span>
+<span class="n">ax_filt</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We saw that convolving something with sharp edges with a Gaussian smooths out the edges, as we expect.  One use for this is in image processing.  Here we’ll create a 2D Gaussian and blur an image.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="k">def</span> <span class="nf">wget_data</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">local_path</span><span class="o">=</span><span class="s1">&#39;./&#39;</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;wget&quot;</span><span class="p">,</span> <span class="s2">&quot;-nc&quot;</span><span class="p">,</span> <span class="s2">&quot;-P&quot;</span><span class="p">,</span> <span class="n">local_path</span><span class="p">,</span> <span class="n">url</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">locate_data</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">check_exists</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">local_path</span><span class="o">=</span><span class="s1">&#39;./&#39;</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">local_path</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">check_exists</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">RuxntimeError</span><span class="p">(</span><span class="s1">&#39;No such data file: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">path</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wget_data</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/refs/heads/main/data/belt.png&#39;</span><span class="p">)</span>
+<span class="n">locate_data</span><span class="p">(</span><span class="s1">&#39;belt.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;./belt.png&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+<span class="n">sigma2</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">bump</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span><span class="n">sigma2</span><span class="p">)</span>
+<span class="n">bump</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">bump</span><span class="p">)</span>
+<span class="n">kernel</span> <span class="o">=</span> <span class="n">bump</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">bump</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">bump</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;amplitude&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower center&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1">#print(kernel)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">img3</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">kernel</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -1120,7 +1234,6 @@ take the product of the element of <span class="math notranslate nohighlight">\(
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#response">Response</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-the-response">Determining the response</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incorporating-the-response-into-interpretation">Incorporating the Response into Interpretation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#now-you-need-to-generate-the-statistically-independent-sample-maybe-incorporate-it-above">now you need to generate the statistically independent sample (maybe incorporate it above)</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#unfolding">Unfolding</a><ul class="visible nav section-nav flex-column">
