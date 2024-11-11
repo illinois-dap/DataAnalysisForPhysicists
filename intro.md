@@ -26,7 +26,7 @@ __Note__: *This schedule will evolve throughout the semester*
 | Oct 21  | {doc}`_sources/Week_09`     | [HW 09](_sources/homework/Homework_09.ipynb) |                            |
 | Oct 28  | {doc}`_sources/Week_10`     | [HW 10](_sources/homework/Homework_10.ipynb) |                            |
 | Nov 04  | {doc}`_sources/Week_11`     | [HW 11](_sources/homework/Homework_11.ipynb) | {doc}`_sources/Project_02`  |
-| Nov 11	| {doc}`_sources/Week_12`     | [HW 12]() |                            |
+| Nov 11	| {doc}`_sources/Week_12`     | [HW 12](_sources/homework/Homework_12.ipynb) |                            |
 | Nov 18	| {doc}`_sources/Week_13`     | [HW 13]() |                            |
 | Nov 25  | __FALL BREAK - NO CLASSES__ |                                        |                            |
 | Dec 02  | {doc}`_sources/Week_14`     | [HW 14]()                                       |                            |
