@@ -7,7 +7,7 @@ You will learn about time series
 * Learn about time series
 
 ## *Lecture Materials*
-* [Slides](https://docs.google.com/presentation/d/1YfS8VFVGFZOIyf3ktE4a752tTy7XCAgWBATPeIt3Q9s/edit?usp=sharing)
+* [Slides](https://docs.google.com/presentation/d/11UZD3ujDZZuzTdxpIEImF8S7uPBVRDPSX3jnWdDlyjk/edit?usp=sharing)
 * {doc}`lectures/TimeSeries`
 
 ## *Homework Assignment*
