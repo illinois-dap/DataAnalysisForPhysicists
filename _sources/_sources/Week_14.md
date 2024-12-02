@@ -7,7 +7,7 @@ You will learn about bias and blind analysis
 * Learn about bias and blind analysis
 
 ## *Lecture Materials*
-* [Slides](https://docs.google.com/presentation/d/1M-kEhd9YPDOOkuDhTRS9oHY9yUnq9xLuu0Gl4I-5yeo/edit?usp=sharing)
+* [Slides](https://docs.google.com/presentation/d/1yBaHFYOQ7BzZPR7R-HRU_ouvaVQRKMoTcCk4VrsVtjw/edit?usp=sharing)
 * {doc}`lectures/BiasBlindAnalysis`
 
 ## *Homework Assignment*
