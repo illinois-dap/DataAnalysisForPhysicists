@@ -7,7 +7,7 @@ You will learn about machine learning methods
 * Learn about machine learning methods
 
 ## *Lecture Materials*
-* [Slides](https://docs.google.com/presentation/d/1YTYGG6R_LapMASxfeEXcyFiyXYy1e73vxpjJ0E9VyvE/edit?usp=sharing)
+* [Slides](https://docs.google.com/presentation/d/1naX8Eqn-GIN6dcZrRLFS1ZcpgirnmTuHjQsCyJNYCK0/edit?usp=sharing)
 * {doc}`lectures/MachineLearningMethodsInference`
 
 ## *Homework Assignment*
