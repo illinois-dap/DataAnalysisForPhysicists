@@ -13,7 +13,7 @@ You will learn the basics of probability theory
 * {doc}`lectures/ProbabilityTheory2`
 
 ## *Homework Assignment*
-* {doc}`homework/Homework_02`
+<!--* {doc}`homework/Homework_02`-->
 
 ## *Supplemental Readings*
 * None

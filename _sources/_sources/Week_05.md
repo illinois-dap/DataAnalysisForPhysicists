@@ -13,7 +13,7 @@ You will learn about estimatimng probability density from data through kernel de
 * [Slides (probability density, part 2)](https://docs.google.com/presentation/d/1b2FvwWrtog8zATx_3Z89JHYrciuE8s0b9ViKCZXxIHA/edit?usp=sharing)
 
 ## *Homework Assignment*
-* {doc}`homework/Homework_05`
+<!--* {doc}`homework/Homework_05`-->
 
 ## *Supplemental Readings*
   * [Positive Definite Matrix definition](https://en.wikipedia.org/wiki/Positive-definite_matrix)

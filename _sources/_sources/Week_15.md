@@ -11,7 +11,7 @@ You will learn about machine learning methods
 * {doc}`lectures/MachineLearningMethodsInference`
 
 ## *Homework Assignment*
-* None
+<!--* None-->
 
 ## *Supplemental Readings*
 * None

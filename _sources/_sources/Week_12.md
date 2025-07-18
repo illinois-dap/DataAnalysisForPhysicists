@@ -11,7 +11,7 @@ You will learn about time series
 * {doc}`lectures/TimeSeries`
 
 ## *Homework Assignment*
-* {doc}`homework/Homework_12`
+<!--* {doc}`homework/Homework_12`-->
 
 ## *Supplemental Readings*
 * None
