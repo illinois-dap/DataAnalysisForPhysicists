@@ -12,7 +12,7 @@ You will learn about the theory of estimators
 * {doc}`lectures/Statistics2`
 
 ## *Homework Assignment*
-* {doc}`homework/Homework_04`
+<!--* {doc}`homework/Homework_04`-->
 
 ## *Supplemental Readings*
 * None

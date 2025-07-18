@@ -11,7 +11,7 @@ You will learn about hypothesis testing
 * {doc}`lectures/ConfidenceIntervals`
 
 ## *Homework Assignment*
-* {doc}`homework/Homework_09`
+<!--* {doc}`homework/Homework_09`-->
 
 ## *Supplemental Readings*
 * None

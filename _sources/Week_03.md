@@ -12,7 +12,7 @@ You will learn about important probability distributions
 * {doc}`lectures/CentralLimitTheorem`
 
 ## *Homework Assignment*
-* {doc}`homework/Homework_03`
+<!--* {doc}`homework/Homework_03`-->
 
 ## *Supplemental Readings*
 * None

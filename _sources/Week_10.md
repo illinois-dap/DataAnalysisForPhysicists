@@ -8,4 +8,4 @@ You will learn about Fourier methods: Fourier series, Fouriers tricker for extra
 * {doc}`lectures/FourierMethods`
 
 ## *Homework Assignment*
-* {doc}`homework/Homework_10`
+<!--* {doc}`homework/Homework_10`-->

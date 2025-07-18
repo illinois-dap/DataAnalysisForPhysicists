@@ -11,7 +11,7 @@ You will learn about bias and blind analysis
 * {doc}`lectures/BiasBlindAnalysis`
 
 ## *Homework Assignment*
-* None
+<!--* None-->
 
 ## *Supplemental Readings*
 * None
