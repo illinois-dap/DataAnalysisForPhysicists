@@ -4,7 +4,6 @@
 <font size="6"> __Physics 398 DAP__ &nbsp; *Fall 2024* </font>
 * *Instructors:* 
   * Professor [Anne Sickles](http://heavyions.physics.illinois.edu)
-  * Professor [Ben Hooberman](http://research.physics.illinois.edu/hooberman/people/)
 * *Class Meetings*: 
   * Monday and Wednesday from 10:30 am to 11:50 am
   * *Room*: 276 Loomis Laboratory
@@ -15,22 +14,22 @@ __Note__: *This schedule will evolve throughout the semester*
 
 | Week          | Topic                 | Homework                               | Projects                   |
 |---------------|-----------------------|----------------------------------------|----------------------------|
-| Aug 26	| {doc}`_sources/Week_01`     | [HW 01](_sources/homework/Homework_01.ipynb) |                            |
-| Sep 02  | {doc}`_sources/Week_02`     | [HW 02](_sources/homework/Homework_02.ipynb) |                            |
-| Sep 09	| {doc}`_sources/Week_03`     | [HW 03](_sources/homework/Homework_03.ipynb) |                            |
-| Sep 16	| {doc}`_sources/Week_04`     | [HW 04](_sources/homework/Homework_04.ipynb) |                            |
-| Sep 23	| {doc}`_sources/Week_05` [zoom](https://cern.zoom.us/j/61715550905?pwd=rQMozPyW9JQ95Ma9vbteKgMF5ZpBM0.1)    | [HW 05](_sources/homework/Homework_05.ipynb) |                            |
-| Sep 30  | {doc}`_sources/Week_06`     | [HW 06](_sources/homework/Homework_06.ipynb) |                            |
-| Oct 07  | {doc}`_sources/Week_07`     | [HW 07](_sources/homework/Homework_07.ipynb) | {doc}`_sources/Project_01` |
-| Oct 14	| {doc}`_sources/Week_08`     | [HW 08](_sources/homework/Homework_08.ipynb) |                       |
-| Oct 21  | {doc}`_sources/Week_09`     | [HW 09](_sources/homework/Homework_09.ipynb) |                            |
-| Oct 28  | {doc}`_sources/Week_10`     | [HW 10](_sources/homework/Homework_10.ipynb) |                            |
-| Nov 04  | {doc}`_sources/Week_11`     | [HW 11](_sources/homework/Homework_11.ipynb) | {doc}`_sources/Project_02`  |
-| Nov 11	| {doc}`_sources/Week_12`     | [HW 12](_sources/homework/Homework_12.ipynb) |                            |
-| Nov 18	| {doc}`_sources/Week_13`     | [HW 13](_sources/homework/Homework_13.ipynb) |                            |
-| Nov 25  | __FALL BREAK - NO CLASSES__ |                                        |                            |
-| Dec 02  | {doc}`_sources/Week_14`     | [HW 14]()                                       |                            |
-| Dec 09  | {doc}`_sources/Week_15`     |                                                 |                            |
+| Aug 25	| {doc}`x_sources/Week_01`     | [HW 01](x_sources/homework/Homework_01.ipynb) |                            |
+| Sep 01  | {doc}`_sources/Week_02`     | [HW 02](_sources/homework/Homework_02.ipynb) |                            |
+| Sep 08	| {doc}`_sources/Week_03`     | [HW 03](_sources/homework/Homework_03.ipynb) |                            |
+| Sep 15	| {doc}`_sources/Week_04`     | [HW 04](_sources/homework/Homework_04.ipynb) |                            |
+| Sep 22	| {doc}`_sources/Week_05`     | [HW 05](_sources/homework/Homework_05.ipynb) |                            |
+| Sep 29  | {doc}`_sources/Week_06`     | [HW 06](_sources/homework/Homework_06.ipynb) |                            |
+| Oct 06  | {doc}`_sources/Week_07`     | [HW 07](_sources/homework/Homework_07.ipynb) | {doc}`_sources/Project_01` |
+| Oct 13	| {doc}`_sources/Week_08`     | [HW 08](_sources/homework/Homework_08.ipynb) |                       |
+| Oct 20  | {doc}`_sources/Week_09`     | [HW 09](_sources/homework/Homework_09.ipynb) |                            |
+| Oct 27  | {doc}`_sources/Week_10`     | [HW 10](_sources/homework/Homework_10.ipynb) |                            |
+| Nov 03  | {doc}`_sources/Week_11`     | [HW 11](_sources/homework/Homework_11.ipynb) | {doc}`_sources/Project_02`  |
+| Nov 10	| {doc}`_sources/Week_12`     | [HW 12](_sources/homework/Homework_12.ipynb) |                            |
+| Nov 17	| {doc}`_sources/Week_13`     | [HW 13](_sources/homework/Homework_13.ipynb) |                            |
+| Nov 24  | __FALL BREAK - NO CLASSES__ |                                        |                            |
+| Dec 01  | {doc}`_sources/Week_14`     | [HW 14]()                                       |                            |
+| Dec 08  | {doc}`_sources/Week_15`     |                                                 |                            |
 
 ## <span style="color:Red">Overview</span>
 
