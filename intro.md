@@ -48,22 +48,14 @@ You can find more detail in the [Calendar](#calendar) section on the specific to
 
 ## <span style="color:Red">Course Logistics</span>
 ### Format
-* This course will consist of two meetings per week: one lecture period and one in-class practical session.
-* Lecture: Monday from 10:30 am - 11:50 am in 276 Loomis
-* Practical Session: Wednesday from 10:30 am - 11:50 am in 276 Loomis
+* This course will consist of two meetings per week.  The class meetings will include lectures and practical work.
 
 ### Instructors
 * Professor [Anne Sickles](http://heavyions.physics.illinois.edu)
   * email: sickles@illinois.edu
-  * Office Hour: Mondays 4pm, Loomis 403
+  * Office Hour: (TBD), Loomis 403
 
-* Professor [Ben Hooberman](https://physics.illinois.edu/people/directory/profile/benhoob)
-  * email: benhoob@illinois.edu
-  * Office Hour: Tuesday 3pm, Loomis 413
-
-* Grader Mayisha Nakib
-    * email: mnakib2@illinois.edu
-    * Office Hour: Tuesday 4pm, via [zoom](https://illinois.zoom.us/j/82102324374?pwd=8txHg1rUvNjUXXgJDmD3NkBxTaCjZV.1) or via appointment
+* Grader (TBD)
 
 ## <span style="color:Red">Online Tools</span>
 
@@ -95,9 +87,9 @@ For projects you will put together a Jupyter notebook that demonstrates your pro
 Each project notebook must be submitted via Gradescope for grading.
 
 ## <span style="color:Red">Grading</span>
-* Class attendence and participation: 10%
-* Homework: 65%
-* Projects: 25%
+* Class attendence and participation: 5%
+* Homework: 70%
+* Projects: 25% (mid-semester project 10% and final project 15%)
 
 Letter grades will be assigned as follows:
 
@@ -117,11 +109,6 @@ Letter grades will be assigned as follows:
 
 ## <span style="color:Red">Policies</span>
 
-### Covid 
-
-* Policies as it relates to COVID-19 can be found at https://covid19.illinois.edu
-* If you feel ill or are unable to come to class or complete class assignments due to issues related to COVID-19, including but not limited to testing positive yourself, feeling ill, caring for a family member with COVID-19, or having unexpected child-care obligations, you should contact your instructor immediately, and you are encouraged to copy your academic advisor. 
-  
 ### About using code you find on the web or generative AI for homework and projects
 In this course, you are fully responsible for all the code, solutions, and analyses that you submit. While tools like ChatGPT can be useful for brainstorming ideas or getting unstuck, they are not foolproof. If you rely on them to generate code or answers without fully understanding the underlying concepts, you're likely to encounter errors, produce incorrect results, or answer the wrong question. Submitting work that you don’t fully understand or have not verified yourself will limit the benefit you get from the class. It’s essential to critically evaluate and thoroughly test any code or solutions you create, ensuring you grasp the underlying principles and techniques. This approach will help you develop the skills necessary for effective data analysis. 
 
