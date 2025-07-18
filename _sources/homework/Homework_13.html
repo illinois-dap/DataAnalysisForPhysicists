@@ -517,14 +517,14 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span><span class="p">,</span> <span class="n">trange</span>
-<span class="kn">import</span> <span class="nn">timeit</span>
-<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">jit</span>
-<span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span>
-<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span><span class="p">,</span> <span class="n">trange</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">timeit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">jit</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ipywidgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ipywidgets</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">widgets</span>
 </pre></div>
 </div>
 </div>
@@ -542,7 +542,7 @@ document.write(`
 <h3><span style="color:LightGreen">Complexity Analysis</span><a class="headerlink" href="#span-style-color-lightgreen-complexity-analysis-span" title="Permalink to this heading">#</a></h3>
 <p>To gain an understanding of complexity analysis, let’s start by looking at a function that defines just the MCMC step.  Prepare to dust off your counting skills:</p>
 <hr class="docutils" />
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="k">def</span> <span class="nf">MCMC_step</span><span class="p">(</span><span class="n">T</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">lattice</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="k">def</span><span class="w"> </span><span class="nf">MCMC_step</span><span class="p">(</span><span class="n">T</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">lattice</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">):</span>
 <span class="mf">2.</span>     <span class="p">[</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">]</span> <span class="o">=</span> <span class="n">lattice</span><span class="o">.</span><span class="n">shape</span>
 <span class="mf">3.</span>     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">rows</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
 <span class="mf">4.</span>         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
@@ -646,7 +646,7 @@ T_2 \approx 4 T_1
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Complete the initialize_lattice function below</span>
 
-<span class="k">def</span> <span class="nf">initialize_lattice</span><span class="p">(</span><span class="n">sqrt_n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">initialize_lattice</span><span class="p">(</span><span class="n">sqrt_n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function to initialize lattice.  Adds a border of zeros</span>
 <span class="sd">    to represent non-interacting atoms and make the neighbor</span>
@@ -682,7 +682,7 @@ T_2 \approx 4 T_1
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Complete the MCMC_step function below</span>
 
-<span class="k">def</span> <span class="nf">MCMC_step</span><span class="p">(</span><span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lattice</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">MCMC_step</span><span class="p">(</span><span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lattice</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function to repeat the Monte Carlo Markov Chain for this system.</span>
 <span class="sd">    beta: the inverse temperature value for the MCMC step</span>
@@ -731,7 +731,7 @@ T_2 \approx 4 T_1
 </div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main_exercise1b</span><span class="p">(</span><span class="n">sqrt_N</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">main_exercise1b</span><span class="p">(</span><span class="n">sqrt_N</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main function to complete a simple Metropolis-Hastings Ising model</span>
 <span class="sd">    experiment.</span>
@@ -803,7 +803,7 @@ T_2 \approx 4 T_1
 <li><p>Add a <code class="docutils literal notranslate"><span class="pre">numba</span></code> “decorator” to the line just above the function declaration.  It should look like this:</p></li>
 </ol>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@jit</span><span class="p">()</span>
-<span class="k">def</span> <span class="nf">MCMC_step_optimized</span><span class="p">(</span><span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lattice</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">MCMC_step_optimized</span><span class="p">(</span><span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lattice</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">):</span>
 <span class="o">...</span>
 </pre></div>
 </div>
@@ -828,7 +828,7 @@ T_2 \approx 4 T_1
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#from tqdm.gui import tqdm_gui</span>
 <span class="c1"># Here is a slightly altered main function for you</span>
 
-<span class="k">def</span> <span class="nf">main_exercise1c</span><span class="p">(</span><span class="n">sqrt_N</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main_exercise1c</span><span class="p">(</span><span class="n">sqrt_N</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main function to complete a simple Metropolis-Hastings Ising model</span>
 <span class="sd">    experiment.</span>
@@ -918,7 +918,7 @@ T_2 \approx 4 T_1
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main_exercise2</span><span class="p">(</span><span class="n">sqrt_N</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">main_exercise2</span><span class="p">(</span><span class="n">sqrt_N</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main function to complete a simple Metropolis-Hastings Ising model</span>
 <span class="sd">    experiment.</span>
@@ -955,7 +955,7 @@ T_2 \approx 4 T_1
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_mag_domains</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_mag_domains</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lattices</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\beta$ = &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span>
@@ -1055,7 +1055,7 @@ T_2 \approx 4 T_1
 &gt; f(x) = 3x^2 + 17
 &gt; \]</div>
 <p>and I would write the following function:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">integrand</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">integrand</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="n">f_x</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">17</span>
     <span class="k">return</span> <span class="n">f_x</span>
 </pre></div>
@@ -1077,7 +1077,7 @@ T_2 \approx 4 T_1
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">integrand</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">integrand</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="c1"># YOUR CODE HERE</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 </pre></div>

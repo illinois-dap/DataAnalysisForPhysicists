@@ -509,7 +509,7 @@ from numpy.fft import fft, ifft
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">wget_data</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">wget_data</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
     <span class="n">local_path</span><span class="o">=</span><span class="s1">&#39;./tmp_data&#39;</span>
     <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;wget&quot;</span><span class="p">,</span> <span class="s2">&quot;-nc&quot;</span><span class="p">,</span> <span class="s2">&quot;-P&quot;</span><span class="p">,</span> <span class="n">local_path</span><span class="p">,</span> <span class="n">url</span><span class="p">])</span>
 </pre></div>
@@ -575,7 +575,7 @@ The rhs only depends on the difference between the angles so we can define \)</s
 <span class="n">wget_data</span><span class="p">(</span><span class="s1">&#39;https://courses.physics.illinois.edu/phys398dap/fa2023/data/vn_sigma00.txt&#39;</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tmp_data/vn_sigma00.txt&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
 <span class="n">dphi_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
 <span class="k">for</span> <span class="n">row1</span><span class="p">,</span> <span class="n">row2</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">(),</span><span class="mi">2</span><span class="p">):</span>
     <span class="c1">#print(&quot;row 1&quot;,row1[1])</span>
@@ -616,7 +616,7 @@ The rhs only depends on the difference between the angles so we can define \)</s
 <span class="n">y</span> <span class="o">=</span> <span class="n">counts</span>
 
 
-<span class="k">def</span> <span class="nf">cos_mod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">v2</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cos_mod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">v2</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;1-d gaussian: gaussian(x, amp, cen, wid)&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">amp</span><span class="o">*</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">v2</span><span class="o">*</span><span class="n">v2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)))</span>
 
@@ -648,7 +648,7 @@ The rhs only depends on the difference between the angles so we can define \)</s
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wget_data</span><span class="p">(</span><span class="s1">&#39;https://courses.physics.illinois.edu/phys398dap/fa2023/data/vn_sigma10.txt&#39;</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tmp_data/vn_sigma10.txt&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
 <span class="n">dphi_vals_sigma01</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
 <span class="k">for</span> <span class="n">row1</span><span class="p">,</span> <span class="n">row2</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">(),</span><span class="mi">2</span><span class="p">):</span>
     <span class="c1">#print(&quot;row 1&quot;,row1[1])</span>

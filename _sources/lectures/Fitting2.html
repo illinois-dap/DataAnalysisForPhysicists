@@ -509,19 +509,19 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">numba_stats</span>
 <span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">iminuit</span>
 <span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">jacobi</span>
-<span class="kn">import</span> <span class="nn">iminuit</span>
-<span class="kn">from</span> <span class="nn">iminuit</span> <span class="kn">import</span> <span class="n">cost</span><span class="p">,</span> <span class="n">Minuit</span>
-<span class="kn">import</span> <span class="nn">numba_stats</span>
-<span class="kn">from</span> <span class="nn">numba_stats</span> <span class="kn">import</span> <span class="n">truncnorm</span><span class="p">,</span> <span class="n">truncexpon</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">expon</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span> <span class="k">as</span> <span class="n">mvnorm</span>
-<span class="kn">from</span> <span class="nn">jacobi</span> <span class="kn">import</span> <span class="n">jacobi</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">iminuit.cost</span> <span class="kn">import</span> <span class="n">LeastSquares</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">iminuit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">iminuit</span><span class="w"> </span><span class="kn">import</span> <span class="n">cost</span><span class="p">,</span> <span class="n">Minuit</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numba_stats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba_stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">truncnorm</span><span class="p">,</span> <span class="n">truncexpon</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">expon</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">multivariate_normal</span> <span class="k">as</span> <span class="n">mvnorm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jacobi</span><span class="w"> </span><span class="kn">import</span> <span class="n">jacobi</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">iminuit.cost</span><span class="w"> </span><span class="kn">import</span> <span class="n">LeastSquares</span>
 
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -554,7 +554,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">z</span> <span class="o">*</span> <span class="n">truncnorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">+</span>
             <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">*</span> <span class="n">truncexpon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">tau</span><span class="p">))</span>
 
@@ -579,7 +579,7 @@ uncertainties correct, but we then lose information about where the points were.
 <p>However, this unbinned fit doesn’t care at all about the number of counts per bin because it doesn’t know about them; it just has the data itself, no binning.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">z</span> <span class="o">*</span> <span class="n">truncnorm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">+</span>
             <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">z</span><span class="p">)</span> <span class="o">*</span> <span class="n">truncexpon</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tau</span><span class="p">))</span>
 
@@ -620,15 +620,15 @@ uncertainties correct, but we then lose information about where the points were.
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">config</span> <span class="n">InlineBackend</span><span class="o">.</span><span class="n">figure_formats</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;svg&#39;</span><span class="p">]</span>
 <span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">iminuit</span>
-<span class="kn">from</span> <span class="nn">iminuit</span> <span class="kn">import</span> <span class="n">Minuit</span>
-<span class="kn">from</span> <span class="nn">iminuit.cost</span> <span class="kn">import</span> <span class="n">poisson_chi2</span><span class="p">,</span> <span class="n">Template</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">truncexpon</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">expon</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">iminuit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Minuit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">iminuit.cost</span><span class="w"> </span><span class="kn">import</span> <span class="n">poisson_chi2</span><span class="p">,</span> <span class="n">Template</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">truncexpon</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">expon</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
 
 </pre></div>
 </div>
@@ -667,7 +667,7 @@ uncertainties correct, but we then lose information about where the points were.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cost</span><span class="p">(</span><span class="n">yields</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cost</span><span class="p">(</span><span class="n">yields</span><span class="p">):</span>
     <span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">yields</span><span class="p">,</span> <span class="n">template</span><span class="p">):</span>
         <span class="n">mu</span> <span class="o">+=</span> <span class="n">y</span> <span class="o">*</span> <span class="n">c</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
@@ -697,7 +697,7 @@ uncertainties correct, but we then lose information about where the points were.
     <span class="n">ti</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
     <span class="c1">#vary the template to bootstrap the uncertainty</span>
 
-    <span class="k">def</span> <span class="nf">cost</span><span class="p">(</span><span class="n">yields</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cost</span><span class="p">(</span><span class="n">yields</span><span class="p">):</span>
         <span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">yields</span><span class="p">,</span> <span class="n">ti</span><span class="p">):</span>
             <span class="n">mu</span> <span class="o">+=</span> <span class="n">y</span> <span class="o">*</span> <span class="n">c</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>

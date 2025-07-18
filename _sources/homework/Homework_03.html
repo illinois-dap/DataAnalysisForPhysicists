@@ -507,10 +507,10 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 </pre></div>
 </div>
 </div>
@@ -521,9 +521,9 @@ document.write(`
 <p>For example: if the trials were <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">1]</span></code>, the function should return <code class="docutils literal notranslate"><span class="pre">{1:</span> <span class="pre">2,</span> <span class="pre">2:</span> <span class="pre">1}</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
 
-<span class="k">def</span> <span class="nf">count_runs</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">count_runs</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Count number of success runs of length k.</span>
 
 <span class="sd">    Parameters</span>
@@ -561,7 +561,7 @@ document.write(`
 <p>Using <code class="docutils literal notranslate"><span class="pre">count_runs</span></code> above, write a method <code class="docutils literal notranslate"><span class="pre">run_prob</span></code> that returns the probability of observing at least one run of length <code class="docutils literal notranslate"><span class="pre">k</span></code> or more from <code class="docutils literal notranslate"><span class="pre">n</span></code> trials with success probabilty <code class="docutils literal notranslate"><span class="pre">p</span></code> per trial. This probability is estimated from <code class="docutils literal notranslate"><span class="pre">expts</span></code> simulated experinents.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_prob</span><span class="p">(</span><span class="n">expts</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1234</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run_prob</span><span class="p">(</span><span class="n">expts</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1234</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the probability of observing at least one run of length `k` or more from `n` trials with success probabilty `p` per trial. This probability is estimated from `expts` simulated experinents.</span>
 
 <span class="sd">    Parameters</span>
@@ -619,7 +619,7 @@ document.write(`
 <p>Implement the function below using <code class="docutils literal notranslate"><span class="pre">np.random.multivariate_normal</span></code> to generate random samples from an arbitrary multidimensional normal distribution, for a specified random seed:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">generate_normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate random samples from a normal distribution.</span>
 
 <span class="sd">    Parameters</span>
@@ -668,7 +668,7 @@ document.write(`
 <p>Visualize a generated 3D dataset using:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">visualize_3d</span><span class="p">():</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">visualize_3d</span><span class="p">():</span>
     <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.</span><span class="p">])</span>
     <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">C</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.9</span>
@@ -689,7 +689,7 @@ document.write(`
 <p>Read about <a class="reference external" href="https://en.wikipedia.org/wiki/Covariance_and_correlation">correlation and covariance</a>, then implement the function below to create a 2x2 covariance matrix given values of <span class="math notranslate nohighlight">\(\sigma_x\)</span>, <span class="math notranslate nohighlight">\(\sigma_y\)</span> and the correlation coefficient <span class="math notranslate nohighlight">\(\rho\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_2d_covariance</span><span class="p">(</span><span class="n">sigma_x</span><span class="p">,</span> <span class="n">sigma_y</span><span class="p">,</span> <span class="n">rho</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_2d_covariance</span><span class="p">(</span><span class="n">sigma_x</span><span class="p">,</span> <span class="n">sigma_y</span><span class="p">,</span> <span class="n">rho</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create and return the 2x2 covariance matrix specified by the input args.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="p">(</span><span class="n">sigma_x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">sigma_y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;sigmas must be &gt; 0.&#39;</span>
@@ -713,7 +713,7 @@ document.write(`
 <p>Run the following cell that uses your <code class="docutils literal notranslate"><span class="pre">create_2d_covariance</span></code> and <code class="docutils literal notranslate"><span class="pre">generate_normal</span></code> functions to compare the 2D normal distributions with <span class="math notranslate nohighlight">\(\rho = 0\)</span> (blue), <span class="math notranslate nohighlight">\(\rho = +0.9\)</span> (red) and <span class="math notranslate nohighlight">\(\rho = -0.9\)</span> (green):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compare_rhos</span><span class="p">():</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compare_rhos</span><span class="p">():</span>
     <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">sigma_x</span><span class="p">,</span> <span class="n">sigma_y</span> <span class="o">=</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">1.</span>
     <span class="k">for</span> <span class="n">rho</span><span class="p">,</span> <span class="n">cmap</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">((</span><span class="mf">0.</span><span class="p">,</span> <span class="o">+</span><span class="mf">0.9</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="s1">&#39;Reds&#39;</span><span class="p">,</span> <span class="s1">&#39;Greens&#39;</span><span class="p">)):</span>
@@ -762,7 +762,7 @@ C_{X|Y} \equiv \langle \left( \vec{x} - \vec{\mu}_{X|Y}\right)
 <p>Implement the function below to calculate these expressions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gauss_conditional_predicted</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">muX</span><span class="p">,</span> <span class="n">muY</span><span class="p">,</span> <span class="n">CXX</span><span class="p">,</span> <span class="n">CXY</span><span class="p">,</span> <span class="n">CYY</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gauss_conditional_predicted</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">muX</span><span class="p">,</span> <span class="n">muY</span><span class="p">,</span> <span class="n">CXX</span><span class="p">,</span> <span class="n">CXY</span><span class="p">,</span> <span class="n">CYY</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Predicted conditional Gaussian means and covariances.</span>
 
 <span class="sd">    Parameters</span>
@@ -825,7 +825,7 @@ C_{X|Y} \equiv \langle \left( \vec{x} - \vec{\mu}_{X|Y}\right)
 <p>and apply <code class="docutils literal notranslate"><span class="pre">np.mean</span></code> and <code class="docutils literal notranslate"><span class="pre">np.cov</span></code> to the resulting subset of samples. <em>Hint: pay attention to the <code class="docutils literal notranslate"><span class="pre">rowvar</span></code> parameter of <code class="docutils literal notranslate"><span class="pre">np.cov</span></code>.</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gauss_conditional_measured</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1.5</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gauss_conditional_measured</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1.5</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Measured conditional Gaussian means and covariances.</span>
 
 <span class="sd">    Parameters</span>

@@ -519,19 +519,19 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">iminuit</span>
 <span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">numba_stats</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">iminuit</span> <span class="kn">import</span> <span class="n">Minuit</span>
-<span class="kn">from</span> <span class="nn">iminuit.cost</span> <span class="kn">import</span> <span class="n">LeastSquares</span>
-<span class="kn">import</span> <span class="nn">iminuit</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">iminuit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Minuit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">iminuit.cost</span><span class="w"> </span><span class="kn">import</span> <span class="n">LeastSquares</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">iminuit</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pdf_demo</span><span class="p">(</span><span class="n">xlo</span><span class="p">,</span> <span class="n">xhi</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pdf_demo</span><span class="p">(</span><span class="n">xlo</span><span class="p">,</span> <span class="n">xhi</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xlo</span><span class="p">,</span> <span class="n">xhi</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
     <span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">()</span><span class="o">.</span><span class="n">as_hex</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
@@ -554,7 +554,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># a simple linear model,</span>
-<span class="k">def</span> <span class="nf">line</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">line</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="n">b</span>
 
 
@@ -658,8 +658,8 @@ $<span class="math notranslate nohighlight">\(\Large \chi^2 ≡ \sum_{i=1}^{n} (
 <p>In general, if the conditions above are met and many independent datasets are each fit to a correct model, the CDF values associated with the <span class="math notranslate nohighlight">\(\chi^2\)</span> values for each dataset should populate a uniform distribution between 0 and 1.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">chi2</span>
 <span class="n">pdf_demo</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">chi2</span><span class="o">=</span><span class="s1">&#39;df=8&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">chi2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">chi2</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
@@ -676,15 +676,15 @@ $<span class="math notranslate nohighlight">\(\Large \chi^2 ≡ \sum_{i=1}^{n} (
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">iminuit</span> <span class="kn">import</span> <span class="n">cost</span><span class="p">,</span> <span class="n">Minuit</span>
-<span class="kn">import</span> <span class="nn">numba_stats</span>
-<span class="kn">from</span> <span class="nn">numba_stats</span> <span class="kn">import</span> <span class="n">truncnorm</span><span class="p">,</span> <span class="n">truncexpon</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">expon</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span> <span class="k">as</span> <span class="n">mvnorm</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">iminuit</span><span class="w"> </span><span class="kn">import</span> <span class="n">cost</span><span class="p">,</span> <span class="n">Minuit</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numba_stats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba_stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">truncnorm</span><span class="p">,</span> <span class="n">truncexpon</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">expon</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">multivariate_normal</span> <span class="k">as</span> <span class="n">mvnorm</span>
 <span class="c1"># accurate numerical derivatives</span>
 <span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">jacobi</span>
-<span class="kn">from</span> <span class="nn">jacobi</span> <span class="kn">import</span> <span class="n">jacobi</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jacobi</span><span class="w"> </span><span class="kn">import</span> <span class="n">jacobi</span>
 </pre></div>
 </div>
 </div>
@@ -735,7 +735,7 @@ For many datasets these aren’t issues, but for some datasets, especially spars
 for each measurement value will take much longer than evaluating likelihoods for each bin.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">z</span> <span class="o">*</span> <span class="n">truncnorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">+</span>
             <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">*</span> <span class="n">truncexpon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">tau</span><span class="p">))</span>
 
@@ -753,7 +753,7 @@ for each measurement value will take much longer than evaluating likelihoods for
 <p>Of course we can define a binning and use that as well. (Scrolling up, see that <em>n</em> is a histogram.)  Clearly this is an advantage as the size of the dataset grows, the number of points grows with each new measurement but the size of the histogram is fixed by the choice of binning.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">z</span> <span class="o">*</span> <span class="n">truncnorm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">+</span>
             <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">z</span><span class="p">)</span> <span class="o">*</span> <span class="n">truncexpon</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tau</span><span class="p">))</span>
 
@@ -769,7 +769,7 @@ for each measurement value will take much longer than evaluating likelihoods for
 <p>We can also use the least squared fitting that we discussed above for our more complex fitting example.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">ng</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">ng</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">ng</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">d</span><span class="p">)</span><span class="o">/</span><span class="n">sigma</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="n">c</span> <span class="o">=</span> <span class="n">cost</span><span class="o">.</span><span class="n">LeastSquares</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="o">**</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
@@ -827,7 +827,7 @@ uncertainties correct, but we then lose information about where the points were.
 <p>Here’s the <em>binned</em> fit, but it doesn’t take in the errors, it just takes in the <em>counts</em> (<em>n</em>) and the bins (<em>xe</em>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">z</span> <span class="o">*</span> <span class="n">truncnorm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">+</span>
             <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">z</span><span class="p">)</span> <span class="o">*</span> <span class="n">truncexpon</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="o">*</span><span class="n">xr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tau</span><span class="p">))</span>
 
