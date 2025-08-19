@@ -1,7 +1,7 @@
 
 # <span style="color:Blue">__Data Analysis for Physics__</span>
 
-<font size="6"> __Physics 398 DAP__ &nbsp; *Fall 2024* </font>
+<font size="6"> __Physics 398 DAP__ &nbsp; *Fall 2025* </font>
 * *Instructors:* 
   * Professor [Anne Sickles](http://heavyions.physics.illinois.edu)
 * *Class Meetings*: 
@@ -53,7 +53,7 @@ You can find more detail in the [Calendar](#calendar) section on the specific to
 ### Instructors
 * Professor [Anne Sickles](http://heavyions.physics.illinois.edu)
   * email: sickles@illinois.edu
-  * Office Hour: (TBD), Loomis 403
+  * Office Hour: Monday 4pm, Loomis 403
 
 * Grader (TBD)
 
