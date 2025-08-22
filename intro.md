@@ -33,7 +33,7 @@ __Note__: *This schedule will evolve throughout the semester*
 
 ## <span style="color:Red">Overview</span>
 
-Welcome! Data is everywhere. Efficient data analysis leading to solid conclusions requires performant tools and rigorous mathematical techniques tethered by sound scientific methods. 
+Welcome! Data are everywhere. Efficient data analysis leading to solid conclusions requires performant tools and rigorous mathematical techniques tethered by sound scientific methods. 
 
 Maybe you have data and not sure how to analyze it. Maybe you are looking to make the most of your precious scientific data and derive sound conclusions not sure how. If so, this course is for you!
 
@@ -55,7 +55,9 @@ You can find more detail in the [Calendar](#calendar) section on the specific to
   * email: sickles@illinois.edu
   * Office Hour: Monday 4pm, Loomis 403
 
-* Grader (TBD)
+* Grader Tai Yang 
+    *email: ty39@illinois.edu
+    *Office Hour: TBD
 
 ## <span style="color:Red">Online Tools</span>
 
