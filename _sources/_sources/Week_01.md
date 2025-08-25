@@ -10,7 +10,7 @@ You will start with an overview of the course and then an introduction to statis
 * Learn about handling and describing data
 
 ## *Lecture Materials*
-* [Slides](https://docs.google.com/presentation/d/1BNhbZXQ_DyTlS5hURCTQMwN7FyFjdcZD1xP8vydvxY4/edit?usp=sharing)
+* [Slides](https://docs.google.com/presentation/d/1MOhNJrWA-9Be3YFN-JJBsqV98021v55bg8KaNfiCXR0/edit?usp=sharing)
 * {doc}`lectures/JupyterNumpy`
 * {doc}`lectures/Pandas`
 

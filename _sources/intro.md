@@ -64,9 +64,9 @@ You can find more detail in the [Calendar](#calendar) section on the specific to
 There are several online tools you will need to use as part of this course. 
 
 ### Campuswire
-We will use [Campuswire](https://campuswire.com) as a class forum, a way to message the course staff and each other, and a means to submit your attendance question.  We will allow three missed lectures to be dropped over the course of the semester without impacting your grade.
+We will use [Campuswire](https://campuswire.com) as a class forum, a way to message the course staff and each other.  We will allow three missed lectures to be dropped over the course of the semester without impacting your grade.
 ### Google Colab
-Using [Google Colab](https://colab.research.google.com), you will be able to program your code in a Jupyter notebook and submit it for us to grade. Please sign in to your Illinois account.  While working on the assignment, you will share each of your colab assignments with the professor and the TA (but no one else).
+Using [Google Colab](https://colab.research.google.com), you will be able to program your code in a Jupyter notebook and submit it for us to grade. Please sign in to your Illinois account.  
 ### Gradescope
 On [Gradescope](https://www.gradescope.com), you will submit your assignments and find your graded assignments.
 
