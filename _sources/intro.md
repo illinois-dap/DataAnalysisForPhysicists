@@ -57,7 +57,7 @@ You can find more detail in the [Calendar](#calendar) section on the specific to
 
 * Grader Tai Yang 
     *email: ty39@illinois.edu
-    *Office Hour: TBD
+    *Office Hour: Tuesday 4pm, ESB 3117
 
 ## <span style="color:Red">Online Tools</span>
 
