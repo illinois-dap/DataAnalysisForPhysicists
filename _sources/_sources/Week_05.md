@@ -8,7 +8,7 @@ You will learn about estimatimng probability density from data through kernel de
 * Learn about kernal density estimation methods
 
 ## *Lecture Materials*
-* [Slides (probability density)](https://docs.google.com/presentation/d/1MuOAbywacwtvHUOgw2wP4w_smPEM2e1LIHvG8qFRhFk/edit?usp=sharing)
+* [Slides (probability density)](https://docs.google.com/presentation/d/1BTd_m8EEGN5h32fOXIO8KkBtB7K9QmDe8RQng35LNjg/edit?usp=sharing)
 * {doc}`lectures/Density`
 * [Slides (probability density, part 2)](https://docs.google.com/presentation/d/1b2FvwWrtog8zATx_3Z89JHYrciuE8s0b9ViKCZXxIHA/edit?usp=sharing)
 

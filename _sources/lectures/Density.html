@@ -525,6 +525,35 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting astroML
+  Downloading astroML-1.0.2.post1-py3-none-any.whl.metadata (7.4 kB)
+Requirement already satisfied: scikit-learn&gt;=0.18 in /usr/local/lib/python3.12/dist-packages (from astroML) (1.6.1)
+Requirement already satisfied: numpy&gt;=1.13 in /usr/local/lib/python3.12/dist-packages (from astroML) (2.0.2)
+Requirement already satisfied: scipy&gt;=0.18 in /usr/local/lib/python3.12/dist-packages (from astroML) (1.16.1)
+Requirement already satisfied: matplotlib&gt;=3.0 in /usr/local/lib/python3.12/dist-packages (from astroML) (3.10.0)
+Requirement already satisfied: astropy&gt;=3.0 in /usr/local/lib/python3.12/dist-packages (from astroML) (7.1.0)
+Requirement already satisfied: pyerfa&gt;=2.0.1.1 in /usr/local/lib/python3.12/dist-packages (from astropy&gt;=3.0-&gt;astroML) (2.0.1.5)
+Requirement already satisfied: astropy-iers-data&gt;=0.2025.4.28.0.37.27 in /usr/local/lib/python3.12/dist-packages (from astropy&gt;=3.0-&gt;astroML) (0.2025.9.8.0.36.17)
+Requirement already satisfied: PyYAML&gt;=6.0.0 in /usr/local/lib/python3.12/dist-packages (from astropy&gt;=3.0-&gt;astroML) (6.0.2)
+Requirement already satisfied: packaging&gt;=22.0.0 in /usr/local/lib/python3.12/dist-packages (from astropy&gt;=3.0-&gt;astroML) (25.0)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (1.3.3)
+Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (4.59.2)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (1.4.9)
+Requirement already satisfied: pillow&gt;=8 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (11.3.0)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (3.2.3)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (2.9.0.post0)
+Requirement already satisfied: joblib&gt;=1.2.0 in /usr/local/lib/python3.12/dist-packages (from scikit-learn&gt;=0.18-&gt;astroML) (1.5.2)
+Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /usr/local/lib/python3.12/dist-packages (from scikit-learn&gt;=0.18-&gt;astroML) (3.6.0)
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.12/dist-packages (from python-dateutil&gt;=2.7-&gt;matplotlib&gt;=3.0-&gt;astroML) (1.17.0)
+Downloading astroML-1.0.2.post1-py3-none-any.whl (134 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">134.3/134.3 kB</span> <span class=" -Color -Color-Red">2.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hInstalling collected packages: astroML
+Successfully installed astroML-1.0.2.post1
+</pre></div>
+</div>
+</div>
 </div>
 <p>Helpers for Getting, Loading and Locating Data</p>
 <div class="cell docutils container">
@@ -559,6 +588,35 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2025-09-22 14:39:16--  https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/data/cluster_d_data.hf5
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.109.133, 185.199.110.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 19192 (19K) [application/octet-stream]
+Saving to: ‘./tmp_data/cluster_d_data.hf5’
+     0K .......... ........                                   100% 12.1M=0.002s
+2025-09-22 14:39:16 (12.1 MB/s) - ‘./tmp_data/cluster_d_data.hf5’ saved [19192/19192]
+--2025-09-22 14:39:16--  https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/data/blobs_data.hf5
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.109.133, 185.199.110.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 71192 (70K) [application/octet-stream]
+Saving to: ‘./tmp_data/blobs_data.hf5’
+     0K .......... .......... .......... .......... .......... 71% 2.26M 0s
+    50K .......... .........                                  100% 9.70M=0.02s
+2025-09-22 14:39:16 (2.88 MB/s) - ‘./tmp_data/blobs_data.hf5’ saved [71192/71192]
+--2025-09-22 14:39:16--  https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/data/blobs_targets.hf5
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.109.133, 185.199.110.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 39192 (38K) [application/octet-stream]
+Saving to: ‘./tmp_data/blobs_targets.hf5’
+     0K .......... .......... .......... ........             100% 3.30M=0.01s
+2025-09-22 14:39:16 (3.30 MB/s) - ‘./tmp_data/blobs_targets.hf5’ saved [39192/39192]
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="span-style-color-orange-load-and-examine-data-span">
@@ -583,6 +641,9 @@ document.write(`
 <span class="n">plot_blobs</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">blobs_targets</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/af68a5a4f0753c75df24f28d6452d77fd4911ead81dd1fe6f9323c3da7718dd9.png" src="../../_images/af68a5a4f0753c75df24f28d6452d77fd4911ead81dd1fe6f9323c3da7718dd9.png" />
 </div>
 </div>
 </section>
@@ -626,7 +687,7 @@ N = \sum_{i=1}^B n_i
 b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldots, B \; .
 \]</div>
 <p>However, this is not necessary and non-uniform binning (e.g., logarithmic spacing) can be more effective when sample density varies significantly.</p>
-<p>We will use the following function to compare histograms with other density estimators (as usual, you can ignore the details):</p>
+<p>We will use the following function to compare histograms with other density estimators:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">estimate_density1d</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">kernels</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -658,12 +719,18 @@ b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldot
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/75b181b014bc52e0c7d95e857dea73fd31ffe40aac1cbb877a4c6792ab109683.png" src="../../_images/75b181b014bc52e0c7d95e857dea73fd31ffe40aac1cbb877a4c6792ab109683.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate_density1d</span><span class="p">(</span><span class="n">blobs1d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/84f940dc5b4aab3eba2698f28b5d579c77c12e87e07efbfeae940ec214f31f21.png" src="../../_images/84f940dc5b4aab3eba2698f28b5d579c77c12e87e07efbfeae940ec214f31f21.png" />
 </div>
 </div>
 <p>These histogram density estimates are not very useful because we have chosen fixed bins that are too small for so few samples.  As an alternative, we can use the data to determine the binning, e.g. with the <a class="reference external" href="https://en.wikipedia.org/wiki/Freedman-Diaconis_rule">Freedman-Diaconnis rule</a> that <code class="docutils literal notranslate"><span class="pre">sns.distplot</span></code> uses when <code class="docutils literal notranslate"><span class="pre">bins=None</span></code>:</p>
@@ -674,6 +741,18 @@ b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldot
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          x0
+0  13.726618
+1   2.961001
+2   4.849279
+3   3.101682
+4   5.070941
+5  10.780955
+</pre></div>
+</div>
+<img alt="../../_images/895775ede19fe0b138a13af3b3a9cc8d736b7b8ed40fed51c6909b8e6f230bcd.png" src="../../_images/895775ede19fe0b138a13af3b3a9cc8d736b7b8ed40fed51c6909b8e6f230bcd.png" />
+</div>
 </div>
 <p>This is an improvement, but an even better use of the data is to center the contribution of each sample on the sample itself, which is the key idea of <strong>kernel density estimation</strong>:</p>
 <div class="cell docutils container">
@@ -682,6 +761,12 @@ b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldot
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bandwidth:  0.5
+</pre></div>
+</div>
+<img alt="../../_images/d029bd6067e1b3cac1159b4030feb9f6f9e8ace1483896318a709d806660fc88.png" src="../../_images/d029bd6067e1b3cac1159b4030feb9f6f9e8ace1483896318a709d806660fc88.png" />
+</div>
 </div>
 <p>There is nothing special about the “tophat” shape assigned to each sample, which we call the <strong>kernel</strong>, and other choices are equally valid, as we’ll see below using other options (gaussian, cosine, …).  Also note, that the kernels are centered on the underlying data, not the representation in the histogram!</p>
 <div class="cell docutils container">
@@ -689,6 +774,12 @@ b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldot
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate_density1d</span><span class="p">(</span><span class="n">blobs1d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">kernels</span><span class="o">=</span><span class="s1">&#39;tophat,gaussian,cosine&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bandwidth:  0.5
+</pre></div>
+</div>
+<img alt="../../_images/2df333521938e0fa9f521b288fa7aef83b5fad90ed37e20ce79051ad3ac5b6de.png" src="../../_images/2df333521938e0fa9f521b288fa7aef83b5fad90ed37e20ce79051ad3ac5b6de.png" />
 </div>
 </div>
 <p><strong>NOTE:</strong> this <strong>kernel</strong> is not the same as the <strong>kernel functions</strong> we discussed earlier:</p>
@@ -703,12 +794,24 @@ b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldot
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bandwidth:  0.5
+</pre></div>
+</div>
+<img alt="../../_images/2bbeb570b22f656c47d7471e1da5521859419f1a28ee647d50225c1654bc01a5.png" src="../../_images/2bbeb570b22f656c47d7471e1da5521859419f1a28ee647d50225c1654bc01a5.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate_density1d</span><span class="p">(</span><span class="n">blobs1d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2000</span><span class="p">],</span> <span class="n">kernels</span><span class="o">=</span><span class="s1">&#39;tophat,gaussian,cosine&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bandwidth:  0.5
+</pre></div>
+</div>
+<img alt="../../_images/3576f921185dc870a94792d66fecd5dc50d9843f7c597ca770970b8ca78709d0.png" src="../../_images/3576f921185dc870a94792d66fecd5dc50d9843f7c597ca770970b8ca78709d0.png" />
 </div>
 </div>
 <p>The <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KernelDensity.html">sklearn implementation</a> of <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_density_estimation">kernel density estimation (KDE)</a> uses the familiar calling pattern, with two significant hyperparameters:</p>
@@ -727,12 +830,24 @@ b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldot
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bandwidth:  0.5
+</pre></div>
+</div>
+<img alt="../../_images/2df333521938e0fa9f521b288fa7aef83b5fad90ed37e20ce79051ad3ac5b6de.png" src="../../_images/2df333521938e0fa9f521b288fa7aef83b5fad90ed37e20ce79051ad3ac5b6de.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate_density1d</span><span class="p">(</span><span class="n">blobs1d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">kernels</span><span class="o">=</span><span class="s1">&#39;tophat,gaussian,cosine&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bandwidth:  1.0714285714285714
+</pre></div>
+</div>
+<img alt="../../_images/7906a00fbe6a75ecc5b342230d2f973b7b7ce8c7fcee8f70192826b6ada3da90.png" src="../../_images/7906a00fbe6a75ecc5b342230d2f973b7b7ce8c7fcee8f70192826b6ada3da90.png" />
 </div>
 </div>
 <p><strong>DISCUSS:</strong> How should the bandwidth be tuned, if at all, to account for:</p>
