@@ -482,6 +482,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-load-and-examine-data-span"><span style="color:Orange">Load and Examine Data</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-from-histograms-to-kernel-density-estimates-span"><span style="color:Orange">From Histograms to Kernel Density Estimates</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-multidimensional-kde-span"><span style="color:Orange">Multidimensional KDE</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-cross-validation-span"><span style="color:Orange">Cross Validation</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-gaussian-mixture-models-span"><span style="color:Orange">Gaussian Mixture Models</span></a></li>
 </ul>
             </nav>
@@ -513,6 +514,8 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">neighbors</span><span class="p">,</span> <span class="n">mixture</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KernelDensity</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">GridSearchCV</span>
 </pre></div>
 </div>
 </div>
@@ -522,35 +525,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>astroML
 <span class="kn">import</span><span class="w"> </span><span class="nn">astroML.density_estimation</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting astroML
-  Downloading astroML-1.0.2.post1-py3-none-any.whl.metadata (7.4 kB)
-Requirement already satisfied: scikit-learn&gt;=0.18 in /usr/local/lib/python3.12/dist-packages (from astroML) (1.6.1)
-Requirement already satisfied: numpy&gt;=1.13 in /usr/local/lib/python3.12/dist-packages (from astroML) (2.0.2)
-Requirement already satisfied: scipy&gt;=0.18 in /usr/local/lib/python3.12/dist-packages (from astroML) (1.16.1)
-Requirement already satisfied: matplotlib&gt;=3.0 in /usr/local/lib/python3.12/dist-packages (from astroML) (3.10.0)
-Requirement already satisfied: astropy&gt;=3.0 in /usr/local/lib/python3.12/dist-packages (from astroML) (7.1.0)
-Requirement already satisfied: pyerfa&gt;=2.0.1.1 in /usr/local/lib/python3.12/dist-packages (from astropy&gt;=3.0-&gt;astroML) (2.0.1.5)
-Requirement already satisfied: astropy-iers-data&gt;=0.2025.4.28.0.37.27 in /usr/local/lib/python3.12/dist-packages (from astropy&gt;=3.0-&gt;astroML) (0.2025.9.8.0.36.17)
-Requirement already satisfied: PyYAML&gt;=6.0.0 in /usr/local/lib/python3.12/dist-packages (from astropy&gt;=3.0-&gt;astroML) (6.0.2)
-Requirement already satisfied: packaging&gt;=22.0.0 in /usr/local/lib/python3.12/dist-packages (from astropy&gt;=3.0-&gt;astroML) (25.0)
-Requirement already satisfied: contourpy&gt;=1.0.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (1.3.3)
-Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (0.12.1)
-Requirement already satisfied: fonttools&gt;=4.22.0 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (4.59.2)
-Requirement already satisfied: kiwisolver&gt;=1.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (1.4.9)
-Requirement already satisfied: pillow&gt;=8 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (11.3.0)
-Requirement already satisfied: pyparsing&gt;=2.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (3.2.3)
-Requirement already satisfied: python-dateutil&gt;=2.7 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (2.9.0.post0)
-Requirement already satisfied: joblib&gt;=1.2.0 in /usr/local/lib/python3.12/dist-packages (from scikit-learn&gt;=0.18-&gt;astroML) (1.5.2)
-Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /usr/local/lib/python3.12/dist-packages (from scikit-learn&gt;=0.18-&gt;astroML) (3.6.0)
-Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.12/dist-packages (from python-dateutil&gt;=2.7-&gt;matplotlib&gt;=3.0-&gt;astroML) (1.17.0)
-Downloading astroML-1.0.2.post1-py3-none-any.whl (134 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">134.3/134.3 kB</span> <span class=" -Color -Color-Red">2.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25hInstalling collected packages: astroML
-Successfully installed astroML-1.0.2.post1
 </pre></div>
 </div>
 </div>
@@ -588,35 +562,6 @@ Successfully installed astroML-1.0.2.post1
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2025-09-22 14:39:16--  https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/data/cluster_d_data.hf5
-Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.109.133, 185.199.110.133, ...
-Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 19192 (19K) [application/octet-stream]
-Saving to: ‘./tmp_data/cluster_d_data.hf5’
-     0K .......... ........                                   100% 12.1M=0.002s
-2025-09-22 14:39:16 (12.1 MB/s) - ‘./tmp_data/cluster_d_data.hf5’ saved [19192/19192]
---2025-09-22 14:39:16--  https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/data/blobs_data.hf5
-Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.109.133, 185.199.110.133, ...
-Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 71192 (70K) [application/octet-stream]
-Saving to: ‘./tmp_data/blobs_data.hf5’
-     0K .......... .......... .......... .......... .......... 71% 2.26M 0s
-    50K .......... .........                                  100% 9.70M=0.02s
-2025-09-22 14:39:16 (2.88 MB/s) - ‘./tmp_data/blobs_data.hf5’ saved [71192/71192]
---2025-09-22 14:39:16--  https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/data/blobs_targets.hf5
-Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.109.133, 185.199.110.133, ...
-Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 39192 (38K) [application/octet-stream]
-Saving to: ‘./tmp_data/blobs_targets.hf5’
-     0K .......... .......... .......... ........             100% 3.30M=0.01s
-2025-09-22 14:39:16 (3.30 MB/s) - ‘./tmp_data/blobs_targets.hf5’ saved [39192/39192]
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="span-style-color-orange-load-and-examine-data-span">
@@ -642,9 +587,6 @@ Saving to: ‘./tmp_data/blobs_targets.hf5’
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/af68a5a4f0753c75df24f28d6452d77fd4911ead81dd1fe6f9323c3da7718dd9.png" src="../../_images/af68a5a4f0753c75df24f28d6452d77fd4911ead81dd1fe6f9323c3da7718dd9.png" />
-</div>
 </div>
 </section>
 <section id="span-style-color-orange-from-histograms-to-kernel-density-estimates-span">
@@ -657,37 +599,6 @@ Saving to: ‘./tmp_data/blobs_targets.hf5’
 </div>
 </div>
 </div>
-<p>A histogram is a useful visualization of the 1D distribution of a feature. However, here we are after something more quantitative: a <strong>density estimate</strong>.  The underlying assumption of density estimation is that our data <span class="math notranslate nohighlight">\(X\)</span> is a random sampling of some underlying continuous probability density function <span class="math notranslate nohighlight">\(P(x)\)</span>,</p>
-<div class="math notranslate nohighlight">
-\[ \Large
-X \sim P(x) \; .
-\]</div>
-<p>The task of <strong>density estimation</strong> is then to empirically estimate <span class="math notranslate nohighlight">\(P(x)\)</span> from the observed <span class="math notranslate nohighlight">\(X\)</span>. This will always be an error prone process since, generally, <span class="math notranslate nohighlight">\(P(x)\)</span> contains infinitely more information than the finite <span class="math notranslate nohighlight">\(X\)</span> that we cannot hope to recover. Our goal is therefore to do the best possible job with the limited information available.</p>
-<p>A histogram usually counts the number <span class="math notranslate nohighlight">\(n_i\)</span> of samples falling into each of its <span class="math notranslate nohighlight">\(B\)</span> predefined bins <span class="math notranslate nohighlight">\(b_{i-1} \le x \lt b_i\)</span> (note that there are <span class="math notranslate nohighlight">\(B\)</span> counts <span class="math notranslate nohighlight">\(n_i\)</span> and <span class="math notranslate nohighlight">\(B+1\)</span> bin edges <span class="math notranslate nohighlight">\(b_i\)</span>). This convention has the advantage that the error on each bin value is described by the <a class="reference external" href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson distribution</a>, which becomes indistinguishable from the <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_distribution">Normal distribution</a> for large counts <span class="math notranslate nohighlight">\(n_i\)</span>, leading to the rule of thumb</p>
-<div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned} \Large
-n_i \pm \sqrt{n_i} ~~~~~~~~~~~~~~~~~\text{(Gaussian statistics per bin } i)
-$$.\\In order to estimate probability density, we convert each bin count $n_i$ into a corresponding density\\$$ \Large
-\rho_i = \frac{n_i}{N \left(b_i - b_{i-1}\right)}
-\end{aligned}\end{align} \]</div>
-<p>where</p>
-<div class="math notranslate nohighlight">
-\[ \Large
-N = \sum_{i=1}^B n_i
-\]</div>
-<p>is the usual total number of samples, so that</p>
-<div class="math notranslate nohighlight">
-\[ \Large
-\sum_{i=1}^B \rho_i (b_i - b_{i-1}) \simeq \int \rho(x)\,dx = 1 \; .
-\]</div>
-<p>Use <code class="docutils literal notranslate"><span class="pre">normed=True</span></code> with <code class="docutils literal notranslate"><span class="pre">plt.hist</span></code> or <code class="docutils literal notranslate"><span class="pre">norm_hist=True</span></code> with <code class="docutils literal notranslate"><span class="pre">sns.distplot</span></code> to request this convention.</p>
-<p>Histogram bins are often equally spaced,</p>
-<div class="math notranslate nohighlight">
-\[ \Large
-b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldots, B \; .
-\]</div>
-<p>However, this is not necessary and non-uniform binning (e.g., logarithmic spacing) can be more effective when sample density varies significantly.</p>
-<p>We will use the following function to compare histograms with other density estimators:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">estimate_density1d</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">kernels</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -715,12 +626,9 @@ b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldot
 <p>Let’s first compare histograms of very small samples (by restricting the rows of <code class="docutils literal notranslate"><span class="pre">blobs1d</span></code>). Note how the bin locations <span class="math notranslate nohighlight">\(b_i\)</span> are predefined, independently of the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate_density1d</span><span class="p">(</span><span class="n">blobs1d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate_density1d</span><span class="p">(</span><span class="n">blobs1d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2000</span><span class="p">])</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/75b181b014bc52e0c7d95e857dea73fd31ffe40aac1cbb877a4c6792ab109683.png" src="../../_images/75b181b014bc52e0c7d95e857dea73fd31ffe40aac1cbb877a4c6792ab109683.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -728,9 +636,6 @@ b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldot
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate_density1d</span><span class="p">(</span><span class="n">blobs1d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/84f940dc5b4aab3eba2698f28b5d579c77c12e87e07efbfeae940ec214f31f21.png" src="../../_images/84f940dc5b4aab3eba2698f28b5d579c77c12e87e07efbfeae940ec214f31f21.png" />
 </div>
 </div>
 <p>These histogram density estimates are not very useful because we have chosen fixed bins that are too small for so few samples.  As an alternative, we can use the data to determine the binning, e.g. with the <a class="reference external" href="https://en.wikipedia.org/wiki/Freedman-Diaconis_rule">Freedman-Diaconnis rule</a> that <code class="docutils literal notranslate"><span class="pre">sns.distplot</span></code> uses when <code class="docutils literal notranslate"><span class="pre">bins=None</span></code>:</p>
@@ -741,18 +646,6 @@ b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldot
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          x0
-0  13.726618
-1   2.961001
-2   4.849279
-3   3.101682
-4   5.070941
-5  10.780955
-</pre></div>
-</div>
-<img alt="../../_images/895775ede19fe0b138a13af3b3a9cc8d736b7b8ed40fed51c6909b8e6f230bcd.png" src="../../_images/895775ede19fe0b138a13af3b3a9cc8d736b7b8ed40fed51c6909b8e6f230bcd.png" />
-</div>
 </div>
 <p>This is an improvement, but an even better use of the data is to center the contribution of each sample on the sample itself, which is the key idea of <strong>kernel density estimation</strong>:</p>
 <div class="cell docutils container">
@@ -761,12 +654,6 @@ b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldot
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bandwidth:  0.5
-</pre></div>
-</div>
-<img alt="../../_images/d029bd6067e1b3cac1159b4030feb9f6f9e8ace1483896318a709d806660fc88.png" src="../../_images/d029bd6067e1b3cac1159b4030feb9f6f9e8ace1483896318a709d806660fc88.png" />
-</div>
 </div>
 <p>There is nothing special about the “tophat” shape assigned to each sample, which we call the <strong>kernel</strong>, and other choices are equally valid, as we’ll see below using other options (gaussian, cosine, …).  Also note, that the kernels are centered on the underlying data, not the representation in the histogram!</p>
 <div class="cell docutils container">
@@ -774,12 +661,6 @@ b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldot
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate_density1d</span><span class="p">(</span><span class="n">blobs1d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">kernels</span><span class="o">=</span><span class="s1">&#39;tophat,gaussian,cosine&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bandwidth:  0.5
-</pre></div>
-</div>
-<img alt="../../_images/2df333521938e0fa9f521b288fa7aef83b5fad90ed37e20ce79051ad3ac5b6de.png" src="../../_images/2df333521938e0fa9f521b288fa7aef83b5fad90ed37e20ce79051ad3ac5b6de.png" />
 </div>
 </div>
 <p><strong>NOTE:</strong> this <strong>kernel</strong> is not the same as the <strong>kernel functions</strong> we discussed earlier:</p>
@@ -794,24 +675,12 @@ b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldot
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bandwidth:  0.5
-</pre></div>
-</div>
-<img alt="../../_images/2bbeb570b22f656c47d7471e1da5521859419f1a28ee647d50225c1654bc01a5.png" src="../../_images/2bbeb570b22f656c47d7471e1da5521859419f1a28ee647d50225c1654bc01a5.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate_density1d</span><span class="p">(</span><span class="n">blobs1d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2000</span><span class="p">],</span> <span class="n">kernels</span><span class="o">=</span><span class="s1">&#39;tophat,gaussian,cosine&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bandwidth:  0.5
-</pre></div>
-</div>
-<img alt="../../_images/3576f921185dc870a94792d66fecd5dc50d9843f7c597ca770970b8ca78709d0.png" src="../../_images/3576f921185dc870a94792d66fecd5dc50d9843f7c597ca770970b8ca78709d0.png" />
 </div>
 </div>
 <p>The <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KernelDensity.html">sklearn implementation</a> of <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_density_estimation">kernel density estimation (KDE)</a> uses the familiar calling pattern, with two significant hyperparameters:</p>
@@ -830,24 +699,12 @@ b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldot
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bandwidth:  0.5
-</pre></div>
-</div>
-<img alt="../../_images/2df333521938e0fa9f521b288fa7aef83b5fad90ed37e20ce79051ad3ac5b6de.png" src="../../_images/2df333521938e0fa9f521b288fa7aef83b5fad90ed37e20ce79051ad3ac5b6de.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate_density1d</span><span class="p">(</span><span class="n">blobs1d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">kernels</span><span class="o">=</span><span class="s1">&#39;tophat,gaussian,cosine&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bandwidth:  1.0714285714285714
-</pre></div>
-</div>
-<img alt="../../_images/7906a00fbe6a75ecc5b342230d2f973b7b7ce8c7fcee8f70192826b6ada3da90.png" src="../../_images/7906a00fbe6a75ecc5b342230d2f973b7b7ce8c7fcee8f70192826b6ada3da90.png" />
 </div>
 </div>
 <p><strong>DISCUSS:</strong> How should the bandwidth be tuned, if at all, to account for:</p>
@@ -937,6 +794,61 @@ b_i = x_{\min} + (x_{\max} - x_{\min}) \frac{i}{B} \quad , \quad i = 0, 1, \ldot
 <p>The most general Gaussian kernel would have <span class="math notranslate nohighlight">\(D(D+1)/2\)</span> shape parameters (covariance matrix elements) that vary slowly over the <span class="math notranslate nohighlight">\(N\)</span>-dimensional parameter space, instead of a single <code class="docutils literal notranslate"><span class="pre">bandwidth</span></code> parameter.</p>
 <p>There are more sophisticated implementations of KDE that use the data itself to estimate kernels that are neither isotropic or homogeneous, e.g., in the <a class="reference external" href="http://www.statsmodels.org/devel/generated/statsmodels.nonparametric.kernel_density.KDEMultivariate.html">statsmodels package</a>. For an in-depth comparison of sklearn KDE with other python implementations, see <a class="reference external" href="https://jakevdp.github.io/blog/2013/12/01/kernel-density-estimation/">this blog post</a>.</p>
 <p><strong>However, there is no magic in KDE and the problem is fundamentally error prone so using simpler methods whose limitations are easier to understand is often preferable.  The best way to improve any density estimate is always to add more data!</strong></p>
+</section>
+<section id="span-style-color-orange-cross-validation-span">
+<h2><span style="color:Orange">Cross Validation</span><a class="headerlink" href="#span-style-color-orange-cross-validation-span" title="Permalink to this heading">#</a></h2>
+<p>There is no magic, but you can use the data itself to inform about the quality of the choices of KDE that you use.</p>
+<p>Cross validation divides the data into <span class="math notranslate nohighlight">\(K\)</span> subsets.  The fit is done on <span class="math notranslate nohighlight">\(K-1\)</span> of the subsets and then validated with <span class="math notranslate nohighlight">\(K\)</span> subsets.  This whole procedure is done <span class="math notranslate nohighlight">\(K\)</span> times.  It can be done for a variety of bandwidth parameters and kernels and the best performing one will have the smallest difference between the fit and the validation subsets.</p>
+<ul class="simple">
+<li><p>this can find the optimal solution given a range of bandwidth and kernels to search over</p></li>
+<li><p>for small datasets, <span class="math notranslate nohighlight">\(K\)</span> must also be small and so there is an effect of fluctuations</p></li>
+<li><p>for large datasets, bandwidth ranges, etc this can become very computationally intensive.</p></li>
+<li><p>there is no expectation that the KDE returned by cross validation is some <em>global</em> best fit; it is the best given the range defined by the user</p></li>
+</ul>
+<p>Conceptually this is similar to the bootstrapping procedure from last week.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">optimize_density1d</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">kernels</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># Prepare the fixed binning to use.</span>
+    <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span> <span class="k">if</span> <span class="n">bins</span> <span class="k">else</span> <span class="s1">&#39;fd&#39;</span>
+    <span class="c1"># Plot a conventional histogram.</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.4</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rug_kws</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+
+    <span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;bandwidth&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>  <span class="c1"># Example bandwidth range</span>
+        <span class="c1">#&#39;kernel&#39;: [&#39;gaussian&#39;, &#39;tophat&#39;, &#39;exponential&#39;]</span>
+        <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;gaussian&#39;</span><span class="p">]</span>
+    <span class="p">}</span>
+
+
+    <span class="c1"># Calculate and plot a KDE with bandwidth = binsize/2.</span>
+    <span class="n">x_smooth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+
+    <span class="n">fit</span> <span class="o">=</span> <span class="n">KernelDensity</span><span class="p">()</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">best_bandwidth</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="s1">&#39;bandwidth&#39;</span><span class="p">]</span>
+    <span class="n">best_kernel</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="s1">&#39;kernel&#39;</span><span class="p">]</span>
+    <span class="n">best_kde_model</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">best_estimator_</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;best bandwidth:&quot;</span><span class="p">,</span> <span class="n">best_bandwidth</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;best kernel:&quot;</span><span class="p">,</span> <span class="n">best_kernel</span><span class="p">)</span>
+    <span class="n">fit</span> <span class="o">=</span> <span class="n">neighbors</span><span class="o">.</span><span class="n">KernelDensity</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">best_kernel</span><span class="p">,</span> <span class="n">bandwidth</span><span class="o">=</span><span class="n">best_bandwidth</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">y_smooth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">x_smooth</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_smooth</span><span class="p">,</span> <span class="n">y_smooth</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">best_kernel</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability density&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;large&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optimize_density1d</span><span class="p">(</span><span class="n">blobs1d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2000</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="span-style-color-orange-gaussian-mixture-models-span">
 <h2><span style="color:Orange">Gaussian Mixture Models</span><a class="headerlink" href="#span-style-color-orange-gaussian-mixture-models-span" title="Permalink to this heading">#</a></h2>
@@ -1204,6 +1116,14 @@ G(\vec{x} ; \vec{\mu}, C) = \left(2\pi\right)^{-D/2}\,\left| C\right|^{-1/2}\,
 </div>
 </div>
 <p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Akaike_information_criterion">Akaike information criterion (AIC)</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Bayesian_information_criterion">Bayesian information criterion (BIC)</a> are different measures of the “goodness of fit” of the GMM to the data.  They both reward small residuals while penalizing extra fit parameters, to provide guidance on how many components to use.  However, both methods are ad-hoc and you should prefer the (more expensive) model selection methods we will see later whenever the answer really matters.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(AIC = 2k - 2ln\hat{L}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(BIC = kln(n) - 2ln\hat{L}\)</span></p></li>
+<li><p>where <span class="math notranslate nohighlight">\(\hat{L}\)</span> is the maximum of the likelihood (more coming soon but think of it as how well the data and fit agree), <span class="math notranslate nohighlight">\(k\)</span> is the number of fit parameters and <span class="math notranslate nohighlight">\(n\)</span> is the number of data points.</p></li>
+<li><p>minimizing AIC and BIC indicates a better fit</p></li>
+</ul>
+<p>Both of these get at the idea that adding fit parameters can lead to a closer description of the data but that isn’t necessarily “better”.</p>
+<p><strong>Overfitting</strong> results when a fit follows not just the important features of the data but also the noise.  The danger is that the fit model will not describe a separate dataset that has independent noise or generalize to a larger dataset.  This is a general issue that can occur with any type of fitting (KDE, GMM, least squares, …).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_aic_bic</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">25</span><span class="p">)):</span>
@@ -1291,6 +1211,7 @@ G(\vec{x} ; \vec{\mu}, C) = \left(2\pi\right)^{-D/2}\,\left| C\right|^{-1/2}\,
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-load-and-examine-data-span"><span style="color:Orange">Load and Examine Data</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-from-histograms-to-kernel-density-estimates-span"><span style="color:Orange">From Histograms to Kernel Density Estimates</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-multidimensional-kde-span"><span style="color:Orange">Multidimensional KDE</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-cross-validation-span"><span style="color:Orange">Cross Validation</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-gaussian-mixture-models-span"><span style="color:Orange">Gaussian Mixture Models</span></a></li>
 </ul>
   </nav></div>
