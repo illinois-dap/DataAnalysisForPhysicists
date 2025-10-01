@@ -480,6 +480,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-small-datasets">Fitting small datasets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#template-fitting">Template Fitting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simultaneous-fits">Simultaneous Fits</a></li>
 </ul>
             </nav>
         </div>
@@ -721,6 +722,16 @@ uncertainties correct, but we then lose information about where the points were.
 </div>
 </div>
 </section>
+<section id="simultaneous-fits">
+<h2>Simultaneous Fits<a class="headerlink" href="#simultaneous-fits" title="Permalink to this heading">#</a></h2>
+<p>Finally, there is no restriction that a single observable or dataset has to be fit independently of other observables or datasets.  Very often a global minimum of many things is desired.  Technically these require work to set up but the ideas build upon those outlined here.</p>
+<p>A couple of examples:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://arxiv.org/pdf/2305.01463">this paper</a> from LHCb testing <em>lepton flavor universality</em> fits four different masses from a control data set (see Fig. 1)</p></li>
+<li><p><em>global fits</em> are used in some areas of physics where data from many different experiments and observables is used to contrain something that is not observable directly itself.  <a class="reference external" href="https://arxiv.org/pdf/1912.10053">This</a> is an example of a fit to parton distribution functions.</p></li>
+<li><p>recently global fits have been coupled to ML.  <a class="reference external" href="https://nnpdf.mi.infn.it/">Here</a> is an example of that applied to parton distribution functions.</p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -788,6 +799,7 @@ uncertainties correct, but we then lose information about where the points were.
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-small-datasets">Fitting small datasets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#template-fitting">Template Fitting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simultaneous-fits">Simultaneous Fits</a></li>
 </ul>
   </nav></div>
 
