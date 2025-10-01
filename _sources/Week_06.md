@@ -13,7 +13,7 @@ You will learn about sources of uncertainty
 * {doc}`lectures/Fitting2``
 
 ## *Homework Assignment*
-<!--* {doc}`homework/Homework_06`-->
+* {doc}`homework/Homework_06`
 
 ## *Supplemental Readings*
 * None
