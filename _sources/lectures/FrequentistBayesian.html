@@ -641,7 +641,7 @@ P(\Theta_M\mid D, M) = \frac{P(D\mid \Theta_M, M)\,P(\Theta_M\mid M)}{P(D\mid M)
 <li><p><em><strong><span style="color:violet">Evidence</span></strong></em>: <span class="math notranslate nohighlight">\(P(D\mid M)\)</span> is the probability of the data given the hyperparameters and <em>marginalized over all possible parameter values given the hyperparameters</em>.</p></li>
 </ol>
 <p>In typical inference problems, the posterior (1) is what we really care about and the likelihood (2) is what we know how to calculate. The prior (3) is where we must quantify our subjective “degree of belief” in different possible universes.</p>
-<p>What about the evidence (4)?  Using the earlier rule (5) of probability calculus, we discover that (4) can be calculated from (2) and (3):</p>
+<p>What about the evidence (4)?  Using the earlier rule (5) of probability calculus (near the bottom of <a class="reference external" href="https://www.instagram.com/p/DPCNVz6DGgu/?hl=en&amp;img_index=1">this notebook</a>), we discover that (4) can be calculated from (2) and (3):</p>
 <div class="math notranslate nohighlight">
 \[ \Large
 P(D\mid M) = \int d\Theta_M' P(D\mid \Theta_M', M)\, P(\Theta_M'\mid M) \; .
@@ -728,17 +728,18 @@ P(\text{English}\mid D) &amp;= \frac{P(D\mid \text{English})\, P(\text{English})
         <span class="k">return</span> <span class="mf">0.4</span> <span class="k">if</span> <span class="n">D</span> <span class="o">==</span> <span class="s1">&#39;t-shirt&#39;</span> <span class="k">else</span> <span class="mf">0.6</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="mf">0.1</span> <span class="k">if</span> <span class="n">D</span> <span class="o">==</span> <span class="s1">&#39;t-shirt&#39;</span> <span class="k">else</span> <span class="mf">0.9</span>
-    
+
 <span class="n">learn</span><span class="p">(</span><span class="n">prior</span><span class="p">,</span> <span class="n">likelihood</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="s1">&#39;t-shirt&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Note that the (posterior) output from one learning update can be the (prior) input to the next update. For example, how should we update our knowledge if the person wears an “England” t-shirt the next day also?</p>
+<p>Note that the (posterior) output from one learning update can be the (prior) input to the next update. For example, how should we update our knowledge if the person wears an “England” t-shirt the next day also? (What might we think if the person wears an “England” t-shirt for a third day and we notice it’s always the same shirt…)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">post1</span> <span class="o">=</span> <span class="n">learn</span><span class="p">(</span><span class="n">prior</span><span class="p">,</span> <span class="n">likelihood</span><span class="p">,</span> <span class="s1">&#39;t-shirt&#39;</span><span class="p">)</span>
 <span class="n">post2</span> <span class="o">=</span> <span class="n">learn</span><span class="p">(</span><span class="n">post1</span><span class="p">,</span> <span class="n">likelihood</span><span class="p">,</span> <span class="s1">&#39;t-shirt&#39;</span><span class="p">)</span>
+<span class="c1">#post3 = learn(post2, likelihood, &#39;t-shirt&#39;)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">post2</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -945,7 +946,7 @@ P(\theta\mid a, b) = \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}\, \theta^{a-1} \left
 <li><p>The likelihood values are larger because there are many more possible outcomes (pass or not) with more observations, so any one outcome becomes relatively less likely. (Recall that the likelihood is normalized over data outcomes, not <span class="math notranslate nohighlight">\(\theta\)</span>).</p></li>
 </ul>
 <hr class="docutils" />
-<p>You are hopefully convinced now that your choice of priors is mostly a non-issue, since inference with good data is relatively insensitive to your choice.  However, you still need to make a choice, so here are some practical guidelines:</p>
+<p>You are hopefully convinced now that your choice of priors is mostly a non-issue if you have good data.  However, you still need to make a choice, so here are some practical guidelines:</p>
 <ul class="simple">
 <li><p>A “missing” prior, <span class="math notranslate nohighlight">\(P(\Theta\mid M) = 1\)</span>, is still a prior but not necessarily a “natural” choice or a “safe default”. It is often not even normalizable, although you can finesse this problem with good enough data.</p></li>
 <li><p>The prior on a parameter you care about usually summarizes previous measurements, assuming that you trust them but you are doing a better experiment. In this case, your likelihood measures the information provided by your data alone, and the posterior provides the new “world average”.</p></li>
@@ -953,6 +954,7 @@ P(\theta\mid a, b) = \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}\, \theta^{a-1} \left
 <li><p>If you really have no information on which to base a prior, learn about <a class="reference external" href="https://en.wikipedia.org/wiki/Prior_probability#Uninformative_priors">uninformative priors</a>, but don’t be fooled by their apparent objectivity.</p></li>
 <li><p>If being able to calculate your evidence integral analytically is especially important, look into <a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_prior">conjugate priors</a>, but don’t be surprised if this forces you to adopt an oversimplified model. The binomial example above is one of the rare cases where this works out.</p></li>
 <li><p>Always state your priors (in your code, papers, talks, etc), even when they don’t matter much.</p></li>
+<li><p>In practical situations, sometimes the choice of prior is taken as part of the systematic uncertainty on a measurement.</p></li>
 </ul>
 </section>
 <section id="span-style-color-orange-so-why-isn-t-everyone-a-bayesian-span">
