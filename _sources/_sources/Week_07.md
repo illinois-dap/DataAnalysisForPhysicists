@@ -13,7 +13,7 @@ You will learn about frequentist and Bayesian methods
 * {doc}`lectures/MCMC`
 
 ## *Homework Assignment*
-<!--* {doc}`homework/Homework_07`-->
+* {doc}`homework/Homework_07`
 
 ## *Supplemental Readings*
 * None
