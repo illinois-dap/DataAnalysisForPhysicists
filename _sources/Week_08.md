@@ -13,7 +13,7 @@ You will learn about stochastic processes, Markov Chains and Variational Inferen
 * {doc}`lectures/Variational`
 
 ## *Homework Assignment*
-<!--* {doc}`homework/Homework_08`-->
+* {doc}`homework/Homework_08`
 
 ## *Supplemental Readings*
 * None
