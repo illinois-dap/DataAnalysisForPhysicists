@@ -6,5 +6,4 @@
 * {doc}`projects/Project_01_GalaxyZoo`
 * {doc}`projects/Project_01_HiggsTauTau`
 * {doc}`projects/Project_01_NuclearGeometryQGP`
-* {doc}`projects/Project_01_Weather`
 
