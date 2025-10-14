@@ -11,6 +11,7 @@ You will learn about stochastic processes, Markov Chains and Variational Inferen
 * [Slides](https://docs.google.com/presentation/d/1L4UQPP-3EntdFerMZV4UGhH1MOSXr13ttZwns8kgA6Q/edit?usp=sharing)
 * {doc}`lectures/Markov`
 * {doc}`lectures/Variational`
+* {doc}`projects/Project_01_Weather`
 
 ## *Homework Assignment*
 <!--* {doc}`homework/Homework_08`-->
