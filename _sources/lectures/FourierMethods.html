@@ -703,6 +703,31 @@ The rhs only depends on the difference between the angles so we can define \)</s
 </div>
 <p>Here we get a higher value of <span class="math notranslate nohighlight">\(v_2\)</span>.  We are essentially measuring the RMS of <span class="math notranslate nohighlight">\(v_2\)</span>, <span class="math notranslate nohighlight">\(\sqrt{\langle v_2^2 \rangle}\)</span>.  When all the <span class="math notranslate nohighlight">\(v_2\)</span> values were the same, that quantity is the same as <span class="math notranslate nohighlight">\(v_2\)</span>, but when we add the fluctuating <span class="math notranslate nohighlight">\(v_2\)</span> values, then the RMS value is larger than the average (for a Gaussian the second moment, <span class="math notranslate nohighlight">\(\langle v_2^2 \rangle = \mu^2 + \sigma^2\)</span>).</p>
 <p>The warning here is to keep track of what you are actually measuring.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">timeit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">combinations</span>
+
+<span class="n">foo</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">loop_test</span><span class="p">():</span>
+    <span class="n">combos</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">foo</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">foo</span><span class="p">)):</span>
+            <span class="n">combos</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">foo</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">foo</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">iter_test</span><span class="p">():</span>
+    <span class="n">combos</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">combos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s1">&#39;loop_test()&#39;</span><span class="p">,</span> <span class="n">setup</span><span class="o">=</span><span class="s1">&#39;from __main__ import loop_test&#39;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s1">&#39;iter_test()&#39;</span><span class="p">,</span> <span class="n">setup</span><span class="o">=</span><span class="s1">&#39;from __main__ import iter_test&#39;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p><strong>Fourier Transform</strong></p>
 <p>Here we’re going to go over the discrete Fourier Transform.  It is defined as:
 $<span class="math notranslate nohighlight">\(X_k = \sum_{n=0}^{N-1}x_n e^{-i2\pi k n/N}\)</span><span class="math notranslate nohighlight">\(
