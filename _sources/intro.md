@@ -23,7 +23,7 @@ __Note__: *This schedule will evolve throughout the semester*
 | Oct 06  | {doc}`_sources/Week_07`     | [HW 07](_sources/homework/Homework_07.ipynb) | {doc}`_sources/Project_01` |
 | Oct 13	| {doc}`_sources/Week_08`     | [HW 08](_sources/homework/Homework_08.ipynb) |                       |
 | Oct 20  | {doc}`_sources/Week_09`     | [HW 09](_sources/homework/Homework_09.ipynb) |                            |
-| Oct 27  | {doc}`_sources/Week_10`     | [HW 10](x_sources/homework/Homework_10.ipynb) |                            |
+| Oct 27  | {doc}`_sources/Week_10`     | [HW 10](_sources/homework/Homework_10.ipynb) |                            |
 | Nov 03  | {doc}`_sources/Week_11`     | [HW 11](x_sources/homework/Homework_11.ipynb) | {doc}`x_sources/Project_02`  |
 | Nov 10	| {doc}`_sources/Week_12`     | [HW 12](x_sources/homework/Homework_12.ipynb) |                            |
 | Nov 17	| {doc}`_sources/Week_13`     | [HW 13](x_sources/homework/Homework_13.ipynb) |                            |
