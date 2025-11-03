@@ -7,7 +7,8 @@ You will learn about response, convolution and unfolding
 * Learn about response, convolution and unfolding
 
 ## *Lecture Materials*
-* [Slides](https://docs.google.com/presentation/d/132-j5XibZfUJi-74fDGiW7_EGEuJBNqfIoj0H52Lv7s/edit?usp=sharing)
+* [Slides](https://docs.google.com/presentation/d/1O-GL9o8DBkc_v456olTmpOne851D0SlF74NYw_shSoY/edit?usp=sharing)
+* {doc}`lectures/ConvolutionResponse`
 * {doc}`lectures/ResponseConvolutionUnfolding`
 
 ## *Homework Assignment*
