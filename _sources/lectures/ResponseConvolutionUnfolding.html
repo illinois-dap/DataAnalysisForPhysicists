@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Response, Unfolding &amp; Convolution &#8212; PHYS 398 DAP</title>
+    <title>Unfolding &#8212; PHYS 398 DAP</title>
   
   
   
@@ -254,7 +254,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../Week_10.html"><span style="color: blue;"><b>Fourier methods</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/132-j5XibZfUJi-74fDGiW7_EGEuJBNqfIoj0H52Lv7s/edit?usp=sharing">Slides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ConvolutionResponse.html">Convolution &amp; Response</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Response, Unfolding &amp; Convolution</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Unfolding</a></li>
 
 
 </ul>
@@ -474,7 +474,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Response, Unfolding & Convolution</h1>
+    <h1>Unfolding</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -484,18 +484,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Response, Unfolding &amp; Convolution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Unfolding</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#response">Response</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-the-response">Determining the response</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incorporating-the-response-into-interpretation">Incorporating the Response into Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Unfolding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-a-simple-dataset-and-response">Generating a simple dataset and response</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-detector-effects">Modeling detector effects</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#unfolding">Unfolding</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Unfolding</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#priors">Priors</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainties">Uncertainties</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-set-the-stopping-condition">How to set the stopping condition?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-than-one-dimension">More than one dimension</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolution">Convolution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-types-of-unfolding">Other types of unfolding</a></li>
 </ul>
 </li>
 </ul>
@@ -528,8 +531,8 @@ import scipy as sp
 </div>
 </div>
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="response-unfolding-convolution">
-<h1>Response, Unfolding &amp; Convolution<a class="headerlink" href="#response-unfolding-convolution" title="Permalink to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="unfolding">
+<h1>Unfolding<a class="headerlink" href="#unfolding" title="Permalink to this heading">#</a></h1>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="response">
 <h1>Response<a class="headerlink" href="#response" title="Permalink to this heading">#</a></h1>
@@ -573,69 +576,106 @@ $<span class="math notranslate nohighlight">\(\bf{R^{-1}}\vec{M} = \bf{R^{-1}}\b
 \)</span><span class="math notranslate nohighlight">\(\bf{R^{-1}}\vec{M} =  \vec{T}\)</span>$</p>
 <p>We’ll consider that as a first step, and then discuss <em>unfolding</em> which is a more stable proceedure to get
 <span class="math notranslate nohighlight">\(\vec{T}\)</span> from <span class="math notranslate nohighlight">\(\bf{R}\)</span> and <span class="math notranslate nohighlight">\(\vec{M}\)</span>.</p>
-<p>First we’ll generate samples, <em>num_samples</em>, according to a distribution.  This is what nature made for us.</p>
-<p>We’re going to have <em>four</em> samples here:</p>
-<p>Two are based on reality:</p>
+</section>
+<section id="id1">
+<h2>Unfolding<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>Unfolding is the process of obtaining <span class="math notranslate nohighlight">\(\vec{T}\)</span> from
+<span class="math notranslate nohighlight">\(\vec{R}\)</span> and <span class="math notranslate nohighlight">\(\vec{M}\)</span>.  We’ll first show the issues with the simplest methods and then demonstrate standard unfolding methods.  Finally, we’ll discuss approaches which use machine learning to improve unfolding.</p>
+<p>We will use <a class="reference external" href="https://jrbourbeau.github.io/pyunfold/">pyunfold</a> for the standard unfolding.  This package implements a Bayesian method described in <a class="reference external" href="https://inspirehep.net/literature/374574">this paper</a> which is widely used at the LHC.</p>
+</section>
+<section id="generating-a-simple-dataset-and-response">
+<h2>Generating a simple dataset and response<a class="headerlink" href="#generating-a-simple-dataset-and-response" title="Permalink to this heading">#</a></h2>
+<p>We have two classes of points:</p>
 <ul class="simple">
-<li><p><strong>data_true</strong> this is nature.  It’s what would be measured in a perfect detector.  This is unknown to you.</p></li>
-<li><p><strong>data_reco</strong> this is what we actually measure.  It’s the dataset you have.</p></li>
+<li><p><em>data</em> are those which are from nature</p>
+<ul>
+<li><p><em>data_true</em> (<span class="math notranslate nohighlight">\(\vec{T}\)</span>) is what one is trying to measure</p></li>
+<li><p><em>data_reco</em> (<span class="math notranslate nohighlight">\(\vec{M}\)</span>) is what is measured in the detector</p></li>
 </ul>
-<p>The next two are based on a model:</p>
-<ul class="simple">
-<li><p><strong>MC_true</strong> this is the model for your simulation.  It is based only on your model and not on your detector.</p></li>
-<li><p><strong>MC_reco</strong> this is what your model would give in your detector if it were true.</p></li>
+</li>
+<li><p><em>MC</em> samples are necessary to determine <span class="math notranslate nohighlight">\(\vec{R}\)</span></p>
+<ul>
+<li><p><em>MC_true</em> is a simulated signal</p></li>
+<li><p><em>MC_reco</em> is the MC_true signal ran through your detector model</p></li>
 </ul>
-<p>The goal is to use <em>MC_true</em> and <em>MC_reco</em> to unfold <em>data_reco</em> to <em>data_unfolded</em> that is your best understanding of <em>data_true</em>.</p>
+</li>
+</ul>
+<p>All of this will be generated here but in a real setup the <em>data</em> would be related to the measurement.</p>
+<p>The goal is to know <em>data_true</em> from a measurement of <em>data_reco</em> using information from <em>MC_true</em> and <em>MC_reco</em>.</p>
 <p>All of the above are values themselves, when we put them in histograms, we’ll append “_hist” to the name.</p>
+<p>For both <em>data_true</em> and <em>MC_true</em> I’ve chosen an exponential function (and the same exponential for both of them).  In real life, this would likely be significantly more complicated and it is unlikely that the MC model and the data itself would be drawn from exactly the same underlying distribution.</p>
+<p>The <em>data_true</em> and <em>MC_true</em> samples are statistically independent due to different seeds in the random number generator.</p>
+<p>I’ve also chosen to make 10 times more MC samples than data samples.  If possible it is generally better to have many more MC samples than data samples so that the statistical uncertainties are limited by the data rather than the MC.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="s1">&#39;poster&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;lines.markeredgewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="n">hrange</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">hrange</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">nbins</span> <span class="o">=</span> <span class="mi">51</span>
 <span class="n">num_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e4</span><span class="p">)</span>
-<span class="c1">#true_samples = np.random.normal(loc=0.0, scale=1.0, size=num_samples)</span>
 <span class="n">MC_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_samples</span><span class="p">)</span>
-<span class="n">data_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_samples</span><span class="p">)</span>
+<span class="n">data_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="n">num_samples</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">data_true</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">MC_true</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+
 
 <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">hrange</span><span class="p">,</span> <span class="n">nbins</span><span class="p">)</span>
 <span class="n">num_bins</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-<span class="n">data_true_hist</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">data_true</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
-<span class="n">MC_true_hist</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">MC_true</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
+<span class="n">data_true_hist</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">data_true</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">hrange</span><span class="p">))</span>
+<span class="n">MC_true_hist</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">MC_true</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">hrange</span><span class="p">])</span>
+
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">MC_true_hist</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True distribution&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X bins&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">bins</span><span class="p">[:</span><span class="n">nbins</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">MC_true_hist</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x value&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now let’s mess up the truth.  Instead of a detailed Monte Carlo in this case we will just add noise via a shift in the mean with a Gaussian smearing.  This is what we think our detector actually measures given these truth samples.</p>
+</section>
+<section id="modeling-detector-effects">
+<h2>Modeling detector effects<a class="headerlink" href="#modeling-detector-effects" title="Permalink to this heading">#</a></h2>
+<p>Now let’s mess up the truth to mimic real detector effects.</p>
+<p>Instead of a detailed Monte Carlo in this case we will just add noise via:</p>
+<ul class="simple">
+<li><p>a shift in the mean (<em>noise_shift</em>) with a Gaussian smearing (with width <em>noise_width</em>).</p></li>
+</ul>
+<p>There shouldn’t be too many samples where the <em>random_noise</em> would be a negative number but we’ve added an absolute value just to make sure that all of the measured values remain non-negative.
+This isn’t necessary from an unfolding point of view but it does keep the histograms from having negative x-axis values so it’s just a bit simpler.</p>
+<p>This process gives what we think our detector actually measures given these truth samples.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">noise_width</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">noise_shift</span> <span class="o">=</span> <span class="mf">1.0</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">noise_width</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">noise_shift</span> <span class="o">=</span> <span class="mf">1.1</span>
 <span class="n">random_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">noise_shift</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">noise_width</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_samples</span><span class="p">)</span>
+<span class="n">random_noise</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">random_noise</span><span class="p">)</span> <span class="c1"># here we&#39;re just going to ensure that all elements remain positive</span>
 <span class="n">MC_reco</span> <span class="o">=</span> <span class="n">MC_true</span> <span class="o">*</span> <span class="n">random_noise</span>
 <span class="n">MC_reco_hist</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">MC_reco</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">MC_true_hist</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MC True&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_bins</span><span class="p">),</span> <span class="n">MC_reco_hist</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MC Reco&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X bins&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">bins</span><span class="p">[:</span><span class="n">nbins</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">MC_true_hist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MC True&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">bins</span><span class="p">[:</span><span class="n">nbins</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">MC_reco_hist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MC Reco&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x value&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now, we create the response matrix (<em>response_hist</em>).  This is a 2D histogram that contains the correlation between each point in MC_true and MC_reco.</p>
-<p>The software requires an efficiency histogram.  In our case, we’ll assume perfect efficiency, so it’s just a histogram of ones.</p>
+<p>The MC_reco_hist and MC_true_hist histograms are clearly different but the MC_reco and MC_true should maintain their correlation line by line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">MC_reco</span><span class="p">[:</span><span class="mi">6</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">MC_true</span><span class="p">[:</span><span class="mi">6</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we create the response matrix (<em>response_hist</em>).  This is a 2D histogram that contains the correlation between each element in MC_true and MC_reco.</p>
+<p>Additionally, the pyunfold software requires an efficiency histogram.  In our case, we’ll assume perfect efficiency with no uncertainty on the efficiency, so it’s just a histogram of ones and the efficiency error histogram is just a histogram of zeros.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">MC_reco_err_hist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">MC_reco_hist</span><span class="p">)</span>
@@ -643,13 +683,26 @@ $<span class="math notranslate nohighlight">\(\bf{R^{-1}}\vec{M} = \bf{R^{-1}}\b
 <span class="n">efficiencies</span>
 <span class="n">efficiencies_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">efficiencies</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 <span class="n">efficiencies_err</span>
-<span class="n">response_hist</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram2d</span><span class="p">(</span><span class="n">MC_reco</span><span class="p">,</span> <span class="n">MC_true</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
+<span class="n">response_hist</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram2d</span><span class="p">(</span><span class="n">MC_reco</span><span class="p">,</span> <span class="n">MC_true</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span> <span class="c1">#this is the proper ordering for the axes</span>
 <span class="n">response_hist_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">response_hist</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p>Here we are going to require each <em>column</em> (truth bin) to sum up to the efficiency value (here we’ve just taken all the efficiencies to be unity so all the columns will add up to one).  This is equivalent to saying that every truth value will be measured somewhere.</p>
+<p>We can slice up the response matrix to get a look at where the true values come from for a particular measured value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">slice</span> <span class="o">=</span> <span class="n">response_hist</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">bins</span><span class="p">[:</span><span class="n">nbins</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">slice</span><span class="p">,</span><span class="mi">49</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MC True for MC reco bin 5&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;MC true value&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">column_sums</span> <span class="o">=</span> <span class="n">response_hist</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -663,7 +716,7 @@ $<span class="math notranslate nohighlight">\(\bf{R^{-1}}\vec{M} = \bf{R^{-1}}\b
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
 <span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$P(E_i|C_{\mu})$&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;MC_true&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;MC_reco&#39;</span><span class="p">,</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;MC_true bins&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;MC_reco bins&#39;</span><span class="p">,</span>
        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Normalized response matrix&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -713,8 +766,8 @@ $<span class="math notranslate nohighlight">\(\bf{R^{-1}}\vec{M} =  \vec{T}\)</s
 </div>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="unfolding">
-<h1>Unfolding<a class="headerlink" href="#unfolding" title="Permalink to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="id2">
+<h1>Unfolding<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h1>
 <p>So where do we go from here?  The basic idea is <em>unfolding</em>.  This improves on the matrix inversion by including some additional information.  Usually there is a preference for a smooth final distribution.  This usually makes sense from a physical point of view but there are some clear dangers here.</p>
 <p>We’re going to discuss <em>Iterative Bayesian Unfolding</em>.  This is based on Bayes’ Theorem (go back to the beginning when we discussed the basics of probability).  This method is documented <a class="reference external" href="https://inspirehep.net/literature/374574">here</a>.  This is used extensively at the LHC, neutrino detectors, DM searches…</p>
 <p>Let’s start with Bayes theorem:
@@ -725,7 +778,7 @@ probability of causes is \)</span>P(C_i)$.</p>
 <p>One observes some number of effects <span class="math notranslate nohighlight">\(E\)</span>, <span class="math notranslate nohighlight">\(n(E)\)</span> and one
 wants to know the distribution of causes, <span class="math notranslate nohighlight">\(n(C_i)\)</span> that causes those effects:
 $<span class="math notranslate nohighlight">\(\hat{n}(C_i) = n(E) P(C_i|E) \)</span><span class="math notranslate nohighlight">\(
-Most measurements are complicated and procues a number of effects,
+Most measurements are complicated and procudes a number of effects,
 so for each effect \)</span>j<span class="math notranslate nohighlight">\(, Bayes theorem applies:
 \)</span><span class="math notranslate nohighlight">\(P(C_i|E_j) = \frac{P(E_j|C_i)P_{a}(C_i)}{n(E)}\)</span><span class="math notranslate nohighlight">\(
 \)</span><span class="math notranslate nohighlight">\(P(C_i|E_j) = \frac{P(E_j|C_i)P_{a}(C_i)}{\sum_lP(E_j|C_l)P_a(C_l)}\)</span>$</p>
@@ -733,7 +786,7 @@ so for each effect \)</span>j<span class="math notranslate nohighlight">\(, Baye
 $<span class="math notranslate nohighlight">\(\hat{n}(C_i) = n(E) P(C_i|E) \)</span>$</p>
 <p>Then we iterate.  We calcuate <span class="math notranslate nohighlight">\(\hat{n}(C_i)\)</span> based on the intial guess and then use, those values as the new <span class="math notranslate nohighlight">\(P_a(C_i)\)</span>.  We iterate as many times as necessary until <span class="math notranslate nohighlight">\(\hat{n}(C_i)\)</span> is stable from one iteration to the next (we’ll discuss how to make this qualitative statement quantitative below).</p>
 <p>First, let’s just try this on the MC itself and verify that we can recover MC_true_hist by unfolding MC_reco_hist.</p>
-<p>We have everything we need for that, except a criteria for stopping the iteration.</p>
+<p>We have everything we need for that, except a criteria for stopping the iteration.  This is always something that takes time to establish.  Here we’ll just set an arbitrary value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ts_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0001</span><span class="p">]</span>
@@ -798,9 +851,7 @@ Choosing an appropriate prior affects the time to reach a the stopping condition
 <p>In the example above, the truth distribution falls like an exponential.  There are many cases where one could know that the distribution should be steeply falling like that and that might be a better place to start.  Here we’ll set the prior to an exponential but not with the same slope as the real distribution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-
-<span class="n">alt_prior</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_samples</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">alt_prior</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_samples</span><span class="p">)</span>
 
 <span class="n">alt_prior_hist</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">alt_prior</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">alt_prior_hist</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">alt_prior_hist</span><span class="p">)</span>
@@ -882,7 +933,7 @@ one takes a minimum in:
 $<span class="math notranslate nohighlight">\(\sum_{bins} \left(\sigma^2_{stat} + \sigma^2_{conv}\right)\)</span><span class="math notranslate nohighlight">\(
 where \)</span>\sigma_{stat}<span class="math notranslate nohighlight">\( is statistical uncertainty from a bin and \)</span>\sigma_{conv}<span class="math notranslate nohighlight">\( is the difference between the unfolded results for \)</span>n<span class="math notranslate nohighlight">\( and \)</span>n-1$ iterations.</p>
 <p>In another way of doing it, Pyunfold implements a variety of test statistics to determine the stopping condition.</p>
-<p>One wants to iterate as few times as necessary because over iterating causes large fluctuations/uncertainties.</p>
+<p>One wants to iterate as few times as necessary because over-iterating causes large fluctuations/uncertainties.</p>
 <p>What we’ve done so far is set up a nice example but we have been unfolding our MC_reco sample with a response matrix generated from MC_reco and MC_true.  No where has anything like a real measurement come in.</p>
 <p>Here we’ll go back to the data_true sample we generated above and generate data_reco.  This sample was generated independently from MC_true and so this is the situation that one would have with a
 real measurement scenario.  We will also generate an independent noise sample (but with the same parameters as above).</p>
@@ -950,216 +1001,23 @@ real measurement scenario.  We will also generate an independent noise sample (b
 </div>
 </div>
 </div>
+<p>Here in the red points it’s possible to see the effects of iterating too many times (or setting the stopping condition too tight) because the point to point fluctuations have grown very large.</p>
 </section>
 <section id="more-than-one-dimension">
 <h2>More than one dimension<a class="headerlink" href="#more-than-one-dimension" title="Permalink to this heading">#</a></h2>
+<p>The case above is for a single dimension.  Perhaps that is measuring the energy distribution of measured particles.  There are a lot of situations where unfolding could be in multiple dimensions:</p>
 <ul class="simple">
-<li><p>It’s straightforward to conceptualize a single dimensional unfolding.  The same procedure works in multiple dimensions, though it becomes more difficult to visualize and understand the uncertainty on a multi-dimensional unfolding.</p></li>
+<li><p>consider measuring both the position and energy of a particle.  If the energy measurement is correlated with the position measurement than a two-dimensional unfolding might be warrented.</p></li>
+<li><p>consider the measurement of two correlated particles, the measurement of one could impact the measurement of the other</p></li>
 </ul>
+<p>It’s straightforward to conceptualize a single dimensional unfolding.  The same procedure works in multiple dimensions, though it becomes more difficult to visualize because the unfolding matrix, <span class="math notranslate nohighlight">\(\vec{R}\)</span> is in <span class="math notranslate nohighlight">\(2N\)</span> dimensions.</p>
 </section>
-<section id="convolution">
-<h2>Convolution<a class="headerlink" href="#convolution" title="Permalink to this heading">#</a></h2>
-<p>A convolution is an operation that takes place on two functions, <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span>, producing a third function <span class="math notranslate nohighlight">\(f * g\)</span>:
-$<span class="math notranslate nohighlight">\((f * g)(t) = \int_{-\infty}^{\infty} f(\tau) g(t-\tau) d\tau\)</span>$
-Intuitively, this involves flipping one of the functions and sliding it past the other.  The value of the convlution at a particular point is then the integral of the overlap of the two functions.</p>
-<p><img alt="" src="https://drive.google.com/uc?export=view&amp;id=1olgQ6PWsmguah8NHyilyVK3R9Sl4nt6Q" /> (image from wikipedia)</p>
-<p>There are a few properties of convolutions that are useful to know:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\((f * g) = (g *f)\)</span>, communtativity</p></li>
-<li><p><span class="math notranslate nohighlight">\(f * (g * h) =  (f * g) * h\)</span>, associativity</p></li>
-<li><p><span class="math notranslate nohighlight">\(f * (g + h) = f * g + f * h\)</span>, distributivity</p></li>
-<li><p><span class="math notranslate nohighlight">\( f * \delta = f\)</span></p></li>
-</ul>
-<p>Convolutions show up in lots of places, particularly signal processing, responses, physics, etc.  This is what is going on in kernel density estimation as well (from earlier in the semester).</p>
-<p>Of course there are multiple implementations of convolutions in python (we’ll use the scipy one) but it is easy to lose intuition of what’s going on without working through some simple examples.</p>
-<p>Here’s a simple way to think abou a discrete convolution.  Let’s say that we have <span class="math notranslate nohighlight">\(f = [1 2 3 4]\)</span> and <span class="math notranslate nohighlight">\(g = [1 2]\)</span>.  In order to evaluate the convolution, we flip <span class="math notranslate nohighlight">\(g\)</span> and slide it across <span class="math notranslate nohighlight">\(f\)</span>.  At each step, we
-take the product of the element of <span class="math notranslate nohighlight">\(f\)</span> and the element of <span class="math notranslate nohighlight">\(g\)</span> that are lined up.  Those elements are summed together to create an element of the convolution.
-<img alt="" src="https://drive.google.com/uc?export=view&amp;id=1BBxKcLTPmZh1gWmS68dJUY9_eDZOxOmg" /></p>
-<p>Let’s verify that this is the same as one gets using scipy’s convolution function…</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">signal</span>
-<span class="n">sig</span> <span class="o">=</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
-<span class="n">win</span> <span class="o">=</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
-
-<span class="n">convolution</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">win</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">convolution</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now we can more over to more complicated functions.  Here is a <span class="math notranslate nohighlight">\(\delta\)</span> function convoluted with a Gaussian.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span><span class="mi">100</span><span class="p">))</span>
-<span class="n">win</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span><span class="mi">10</span><span class="p">,)</span>
-<span class="n">filtered</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">win</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax_orig</span><span class="p">,</span> <span class="n">ax_win</span><span class="p">,</span> <span class="n">ax_filt</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ax_orig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span>
-<span class="n">ax_orig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original pulse&#39;</span><span class="p">)</span>
-<span class="n">ax_orig</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-<span class="n">ax_win</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>
-<span class="n">ax_win</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Filter impulse response&#39;</span><span class="p">)</span>
-<span class="n">ax_win</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-<span class="n">ax_filt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span>
-<span class="n">ax_filt</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Filtered signal&#39;</span><span class="p">)</span>
-<span class="n">ax_filt</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Broadening this out to a wider flat distribution…</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span><span class="mi">10</span><span class="p">))</span>
-<span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span><span class="mi">100</span><span class="p">))</span>
-
-<span class="n">win</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span><span class="mi">10</span><span class="p">,)</span>
-
-<span class="n">filtered</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">win</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax_orig</span><span class="p">,</span> <span class="n">ax_win</span><span class="p">,</span> <span class="n">ax_filt</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ax_orig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span>
-<span class="n">ax_orig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original pulse&#39;</span><span class="p">)</span>
-<span class="n">ax_orig</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-<span class="n">ax_win</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>
-<span class="n">ax_win</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Filter impulse response&#39;</span><span class="p">)</span>
-<span class="n">ax_win</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-<span class="n">ax_filt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span>
-<span class="n">ax_filt</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Filtered signal&#39;</span><span class="p">)</span>
-<span class="n">ax_filt</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">win</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span><span class="mi">10</span><span class="p">,)</span>
-
-
-<span class="n">filtered</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">win</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax_orig</span><span class="p">,</span> <span class="n">ax_win</span><span class="p">,</span> <span class="n">ax_filt</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ax_orig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span>
-<span class="n">ax_orig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original pulse&#39;</span><span class="p">)</span>
-<span class="n">ax_orig</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-<span class="n">ax_win</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>
-<span class="n">ax_win</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Filter impulse response&#39;</span><span class="p">)</span>
-<span class="n">ax_win</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-<span class="n">ax_filt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span>
-<span class="n">ax_filt</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Filtered signal&#39;</span><span class="p">)</span>
-<span class="n">ax_filt</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>It’s worth knowing that a Gaussian convoluted with a Gaussian remains a Gaussian.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">mean</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">std_dev</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">sig</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std_dev</span><span class="p">)</span>
-<span class="n">win</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">,)</span>
-
-
-<span class="n">filtered</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">win</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax_orig</span><span class="p">,</span> <span class="n">ax_win</span><span class="p">,</span> <span class="n">ax_filt</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ax_orig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span>
-<span class="n">ax_orig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original pulse&#39;</span><span class="p">)</span>
-<span class="n">ax_orig</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-<span class="n">ax_win</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>
-<span class="n">ax_win</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Filter impulse response&#39;</span><span class="p">)</span>
-<span class="n">ax_win</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-<span class="n">ax_filt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span>
-<span class="n">ax_filt</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Filtered signal&#39;</span><span class="p">)</span>
-<span class="n">ax_filt</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>We saw that convolving something with sharp edges with a Gaussian smooths out the edges, as we expect.  One use for this is in image processing.  Here we’ll create a 2D Gaussian and blur an image.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os.path</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">wget_data</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-    <span class="n">local_path</span><span class="o">=</span><span class="s1">&#39;./&#39;</span>
-    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;wget&quot;</span><span class="p">,</span> <span class="s2">&quot;-nc&quot;</span><span class="p">,</span> <span class="s2">&quot;-P&quot;</span><span class="p">,</span> <span class="n">local_path</span><span class="p">,</span> <span class="n">url</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">locate_data</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">check_exists</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="n">local_path</span><span class="o">=</span><span class="s1">&#39;./&#39;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">local_path</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">check_exists</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">RuxntimeError</span><span class="p">(</span><span class="s1">&#39;No such data file: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">path</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wget_data</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/refs/heads/main/data/belt.png&#39;</span><span class="p">)</span>
-<span class="n">locate_data</span><span class="p">(</span><span class="s1">&#39;belt.png&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;./belt.png&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
-<span class="n">sigma2</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">bump</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span><span class="n">sigma2</span><span class="p">)</span>
-<span class="n">bump</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">bump</span><span class="p">)</span>
-<span class="n">kernel</span> <span class="o">=</span> <span class="n">bump</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">bump</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">bump</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;amplitude&#39;</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower center&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="c1">#print(kernel)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">img3</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">kernel</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
+<section id="other-types-of-unfolding">
+<h2>Other types of unfolding<a class="headerlink" href="#other-types-of-unfolding" title="Permalink to this heading">#</a></h2>
+<p>One drawback of the histogram-based Bayesian approach
+discussed here is the histograms become very large and often sparsely populated in a multi-dimensional unfolding.</p>
+<p>Another drawback of this approach is that unfolding can tell you only about distribution level quantities, nothing is sensitive to the details of a particular event.</p>
+<p>Approaches using unbinned, machine learning approaches have tried to improve upon both of these concerns.  A well-known approach is <a class="reference external" href="https://inspirehep.net/literature/1766424">OmniFold</a> (<a class="reference external" href="https://pypi.org/project/omnifold/">package</a>) which promises: “We introduce OmniFold, an unfolding method that iteratively reweights a simulated dataset, using machine learning to capitalize on all available information. Our approach is unbinned, works for arbitrarily high-dimensional data, and naturally incorporates information from the full phase space.”.  This approach is inspired by issues in high-energy physics but useable in other fields as well.</p>
 </section>
 </section>
 
@@ -1226,18 +1084,21 @@ take the product of the element of <span class="math notranslate nohighlight">\(
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Response, Unfolding &amp; Convolution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Unfolding</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#response">Response</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-the-response">Determining the response</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incorporating-the-response-into-interpretation">Incorporating the Response into Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Unfolding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-a-simple-dataset-and-response">Generating a simple dataset and response</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-detector-effects">Modeling detector effects</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#unfolding">Unfolding</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Unfolding</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#priors">Priors</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainties">Uncertainties</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-set-the-stopping-condition">How to set the stopping condition?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-than-one-dimension">More than one dimension</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolution">Convolution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-types-of-unfolding">Other types of unfolding</a></li>
 </ul>
 </li>
 </ul>
