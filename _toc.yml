@@ -76,6 +76,7 @@ chapters:
   sections:
   - url: https://docs.google.com/presentation/d/132-j5XibZfUJi-74fDGiW7_EGEuJBNqfIoj0H52Lv7s/edit?usp=sharing
     title: Slides
+  - file: _sources/lectures/ConvolutionResponse
   - file: _sources/lectures/ResponseConvolutionUnfolding
   - file: _sources/homework/Homework_10
 - file: _sources/Week_11 # Fourier Methods
