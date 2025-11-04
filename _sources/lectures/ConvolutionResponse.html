@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Response, Unfolding &amp; Convolution &#8212; PHYS 398 DAP</title>
+    <title>Convolution &amp; Response &#8212; PHYS 398 DAP</title>
   
   
   
@@ -253,7 +253,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../Week_10.html"><span style="color: blue;"><b>Fourier methods</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/132-j5XibZfUJi-74fDGiW7_EGEuJBNqfIoj0H52Lv7s/edit?usp=sharing">Slides</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Response, Unfolding &amp; Convolution</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Convolution &amp; Response</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ResponseConvolutionUnfolding.html">Response, Unfolding &amp; Convolution</a></li>
 
 
@@ -474,7 +474,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Response, Unfolding & Convolution</h1>
+    <h1>Convolution & Response</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -519,8 +519,8 @@ import scipy as sp
 </div>
 </div>
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="response-unfolding-convolution">
-<h1>Response, Unfolding &amp; Convolution<a class="headerlink" href="#response-unfolding-convolution" title="Permalink to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="convolution-response">
+<h1>Convolution &amp; Response<a class="headerlink" href="#convolution-response" title="Permalink to this heading">#</a></h1>
 <section id="convolution">
 <h2>Convolution<a class="headerlink" href="#convolution" title="Permalink to this heading">#</a></h2>
 <p>A convolution is an operation that takes place on two functions, <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span>, producing a third function <span class="math notranslate nohighlight">\(f * g\)</span>:
@@ -733,7 +733,7 @@ take the product of the element of <span class="math notranslate nohighlight">\(
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
-<span class="n">sigma2</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># defines the width of the Gaussian...</span>
+<span class="n">sigma2</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># defines the width of the Gaussian...</span>
 <span class="n">bump</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span><span class="n">sigma2</span><span class="p">)</span>
 <span class="n">bump</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">bump</span><span class="p">)</span>
 <span class="n">kernel</span> <span class="o">=</span> <span class="n">bump</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">bump</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span> <span class="c1">#2D</span>
@@ -755,6 +755,7 @@ take the product of the element of <span class="math notranslate nohighlight">\(
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">img3</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">kernel</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img3</span><span class="p">)</span>
 </pre></div>
 </div>
