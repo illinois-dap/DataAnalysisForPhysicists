@@ -574,7 +574,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File ‘./tmp_data/AirPassengers.csv’ already there; not retrieving.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2025-11-07 21:23:05--  https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/data/AirPassengers.csv
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.109.133, 185.199.110.133, 185.199.111.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.109.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1746 (1.7K) [text/plain]
+Saving to: ‘./tmp_data/AirPassengers.csv’
+     0K .                                                     100% 27.7M=0s
+2025-11-07 21:23:05 (27.7 MB/s) - ‘./tmp_data/AirPassengers.csv’ saved [1746/1746]
 </pre></div>
 </div>
 </div>
@@ -642,53 +649,54 @@ Time is an <span style="color:Violet">exogeneous</span> (outside the model) vari
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
-<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
-Requirement already satisfied: gwpy in /usr/local/lib/python3.11/site-packages (3.0.7)
-Requirement already satisfied: astropy&gt;=4.3.0 in /usr/local/lib/python3.11/site-packages (from gwpy) (5.3.2)
-Requirement already satisfied: dqsegdb2 in /usr/local/lib/python3.11/site-packages (from gwpy) (1.2.1)
-Requirement already satisfied: gwdatafind&gt;=1.1.0 in /usr/local/lib/python3.11/site-packages (from gwpy) (1.1.3)
-Requirement already satisfied: gwosc&gt;=0.5.3 in /usr/local/lib/python3.11/site-packages (from gwpy) (0.7.1)
-Requirement already satisfied: h5py&gt;=3.0.0 in /usr/local/lib/python3.11/site-packages (from gwpy) (3.10.0)
-Requirement already satisfied: ligo-segments&gt;=1.0.0 in /usr/local/lib/python3.11/site-packages (from gwpy) (1.4.0)
-Requirement already satisfied: ligotimegps&gt;=1.2.1 in /usr/local/lib/python3.11/site-packages (from gwpy) (2.0.1)
-Requirement already satisfied: matplotlib&gt;=3.3.0 in /usr/local/lib/python3.11/site-packages (from gwpy) (3.7.0)
-Requirement already satisfied: numpy&gt;=1.19 in /usr/local/lib/python3.11/site-packages (from gwpy) (1.23.5)
-Requirement already satisfied: python-dateutil in /usr/local/lib/python3.11/site-packages (from gwpy) (2.8.2)
-Requirement already satisfied: requests in /usr/local/lib/python3.11/site-packages (from gwpy) (2.31.0)
-Requirement already satisfied: scipy&gt;=1.5.0 in /usr/local/lib/python3.11/site-packages (from gwpy) (1.11.2)
-Requirement already satisfied: tqdm&gt;=4.10.0 in /usr/local/lib/python3.11/site-packages (from gwpy) (4.66.1)
-Requirement already satisfied: pyerfa&gt;=2.0 in /usr/local/lib/python3.11/site-packages (from astropy&gt;=4.3.0-&gt;gwpy) (2.0.0.3)
-Requirement already satisfied: PyYAML&gt;=3.13 in /usr/local/lib/python3.11/site-packages (from astropy&gt;=4.3.0-&gt;gwpy) (6.0)
-Requirement already satisfied: packaging&gt;=19.0 in /usr/local/lib/python3.11/site-packages (from astropy&gt;=4.3.0-&gt;gwpy) (23.0)
-Requirement already satisfied: igwn-auth-utils&gt;=0.3.1 in /usr/local/lib/python3.11/site-packages (from gwdatafind&gt;=1.1.0-&gt;gwpy) (1.1.0)
-Requirement already satisfied: six in /usr/local/lib/python3.11/site-packages (from ligo-segments&gt;=1.0.0-&gt;gwpy) (1.16.0)
-Requirement already satisfied: contourpy&gt;=1.0.1 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (1.0.7)
-Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (0.11.0)
-Requirement already satisfied: fonttools&gt;=4.22.0 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (4.38.0)
-Requirement already satisfied: kiwisolver&gt;=1.0.1 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (1.4.4)
-Requirement already satisfied: pillow&gt;=6.2.0 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (9.4.0)
-Requirement already satisfied: pyparsing&gt;=2.3.1 in /usr/local/lib/python3.11/site-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (3.0.9)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /usr/local/lib/python3.11/site-packages (from requests-&gt;gwpy) (3.0.1)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.11/site-packages (from requests-&gt;gwpy) (3.4)
-Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /usr/local/lib/python3.11/site-packages (from requests-&gt;gwpy) (1.26.14)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.11/site-packages (from requests-&gt;gwpy) (2022.12.7)
-Requirement already satisfied: cryptography&gt;=2.3 in /usr/local/lib/python3.11/site-packages (from igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (41.0.5)
-Requirement already satisfied: safe-netrc&gt;=1.0.0 in /usr/local/lib/python3.11/site-packages (from igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (1.0.1)
-Requirement already satisfied: scitokens&gt;=1.7.0 in /usr/local/lib/python3.11/site-packages (from igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (1.8.1)
-Requirement already satisfied: cffi&gt;=1.12 in /usr/local/lib/python3.11/site-packages (from cryptography&gt;=2.3-&gt;igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (1.16.0)
-Requirement already satisfied: PyJWT&gt;=1.6.1 in /usr/local/lib/python3.11/site-packages (from scitokens&gt;=1.7.0-&gt;igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (2.8.0)
-Requirement already satisfied: pycparser in /usr/local/lib/python3.11/site-packages (from cffi&gt;=1.12-&gt;cryptography&gt;=2.3-&gt;igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (2.21)
-<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
-<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
-
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: gwpy in /usr/local/lib/python3.12/dist-packages (3.0.13)
+Requirement already satisfied: astropy&gt;=4.3.0 in /usr/local/lib/python3.12/dist-packages (from gwpy) (7.1.1)
+Requirement already satisfied: dateparser&gt;=1.1.4 in /usr/local/lib/python3.12/dist-packages (from gwpy) (1.2.2)
+Requirement already satisfied: dqsegdb2 in /usr/local/lib/python3.12/dist-packages (from gwpy) (1.3.0)
+Requirement already satisfied: gwdatafind&gt;=1.1.0 in /usr/local/lib/python3.12/dist-packages (from gwpy) (2.1.1)
+Requirement already satisfied: gwosc&gt;=0.5.3 in /usr/local/lib/python3.12/dist-packages (from gwpy) (0.8.1)
+Requirement already satisfied: h5py&gt;=3.0.0 in /usr/local/lib/python3.12/dist-packages (from gwpy) (3.15.1)
+Requirement already satisfied: igwn-segments&gt;=2.0.0 in /usr/local/lib/python3.12/dist-packages (from gwpy) (2.1.0)
+Requirement already satisfied: ligotimegps&gt;=1.2.1 in /usr/local/lib/python3.12/dist-packages (from gwpy) (2.1.0)
+Requirement already satisfied: matplotlib&gt;=3.3.0 in /usr/local/lib/python3.12/dist-packages (from gwpy) (3.10.0)
+Requirement already satisfied: numpy&gt;=1.19.5 in /usr/local/lib/python3.12/dist-packages (from gwpy) (2.0.2)
+Requirement already satisfied: packaging&gt;=24.1 in /usr/local/lib/python3.12/dist-packages (from gwpy) (25.0)
+Requirement already satisfied: python-dateutil in /usr/local/lib/python3.12/dist-packages (from gwpy) (2.9.0.post0)
+Requirement already satisfied: requests&gt;=2.20.0 in /usr/local/lib/python3.12/dist-packages (from gwpy) (2.32.4)
+Requirement already satisfied: scipy&gt;=1.6.0 in /usr/local/lib/python3.12/dist-packages (from gwpy) (1.16.3)
+Requirement already satisfied: tqdm&gt;=4.52.0 in /usr/local/lib/python3.12/dist-packages (from gwpy) (4.67.1)
+Requirement already satisfied: pyerfa&gt;=2.0.1.1 in /usr/local/lib/python3.12/dist-packages (from astropy&gt;=4.3.0-&gt;gwpy) (2.0.1.5)
+Requirement already satisfied: astropy-iers-data&gt;=0.2025.9.29.0.35.48 in /usr/local/lib/python3.12/dist-packages (from astropy&gt;=4.3.0-&gt;gwpy) (0.2025.11.3.0.38.37)
+Requirement already satisfied: PyYAML&gt;=6.0.0 in /usr/local/lib/python3.12/dist-packages (from astropy&gt;=4.3.0-&gt;gwpy) (6.0.3)
+Requirement already satisfied: pytz&gt;=2024.2 in /usr/local/lib/python3.12/dist-packages (from dateparser&gt;=1.1.4-&gt;gwpy) (2025.2)
+Requirement already satisfied: regex&gt;=2024.9.11 in /usr/local/lib/python3.12/dist-packages (from dateparser&gt;=1.1.4-&gt;gwpy) (2024.11.6)
+Requirement already satisfied: tzlocal&gt;=0.2 in /usr/local/lib/python3.12/dist-packages (from dateparser&gt;=1.1.4-&gt;gwpy) (5.3.1)
+Requirement already satisfied: igwn-auth-utils&gt;=0.3.1 in /usr/local/lib/python3.12/dist-packages (from gwdatafind&gt;=1.1.0-&gt;gwpy) (1.4.0)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (1.3.3)
+Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (4.60.1)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (1.4.9)
+Requirement already satisfied: pillow&gt;=8 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (11.3.0)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (3.2.5)
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.12/dist-packages (from python-dateutil-&gt;gwpy) (1.17.0)
+Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /usr/local/lib/python3.12/dist-packages (from requests&gt;=2.20.0-&gt;gwpy) (3.4.4)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.12/dist-packages (from requests&gt;=2.20.0-&gt;gwpy) (3.11)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /usr/local/lib/python3.12/dist-packages (from requests&gt;=2.20.0-&gt;gwpy) (2.5.0)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.12/dist-packages (from requests&gt;=2.20.0-&gt;gwpy) (2025.10.5)
+Requirement already satisfied: click&gt;=6.7 in /usr/local/lib/python3.12/dist-packages (from dqsegdb2-&gt;gwpy) (8.3.0)
+Requirement already satisfied: cryptography&gt;=44.0.1 in /usr/local/lib/python3.12/dist-packages (from igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (46.0.3)
+Requirement already satisfied: safe-netrc&gt;=1.0 in /usr/local/lib/python3.12/dist-packages (from igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (1.0.1)
+Requirement already satisfied: scitokens&gt;=1.8 in /usr/local/lib/python3.12/dist-packages (from igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (1.8.1)
+Requirement already satisfied: cffi&gt;=2.0.0 in /usr/local/lib/python3.12/dist-packages (from cryptography&gt;=44.0.1-&gt;igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (2.0.0)
+Requirement already satisfied: PyJWT&gt;=1.6.1 in /usr/local/lib/python3.12/dist-packages (from scitokens&gt;=1.8-&gt;igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (2.10.1)
+Requirement already satisfied: pycparser in /usr/local/lib/python3.12/dist-packages (from cffi&gt;=2.0.0-&gt;cryptography&gt;=44.0.1-&gt;igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (2.23)
 </pre></div>
 </div>
 </div>
 </div>
 <p>The raw ‘strain’ output of the LIGO detectors is recorded as a <code class="docutils literal notranslate"><span class="pre">TimeSeries</span></code> with contributions from a large number of known and unknown noise sources, as well as possible gravitational wave signals.</p>
-<p>In order to uncover a real signal we need to filter out noises that otherwise hide the signal in the data. We can do this by using the <code class="docutils literal notranslate"><span class="pre">gwpy.signal</span></code> module to design a digital filter to cut out low and high frequency noise, as well as notch out fixed frequencies polluted by known artefacts.</p>
-<p>First we download the raw strain data from the GWOSC public archive:</p>
+<p>In order to uncover a real signal we need to filter out noises that otherwise hide the signal in the data. We can do this by using the <code class="docutils literal notranslate"><span class="pre">gwpy.signal</span></code> module to design a digital filter to cut out low and high frequency noise, as well as notch out fixed frequencies polluted by known artifacts.</p>
+<p>First we download the raw strain data from the <a class="reference external" href="https://gwosc.org/">GWOSC</a> public archive:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">gwpy.timeseries</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeSeries</span>
@@ -760,7 +768,7 @@ Requirement already satisfied: pycparser in /usr/local/lib/python3.11/site-packa
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0099515a20a64250463d9caf45dc7acf03ebfa0956dc44ba67253b3e55de81d3.png" src="../../_images/0099515a20a64250463d9caf45dc7acf03ebfa0956dc44ba67253b3e55de81d3.png" />
+<img alt="../../_images/88eb24a920fd354f5b39955ffe8e5c60f6c41f9d8bf6fd596c19d751cfabdead.png" src="../../_images/88eb24a920fd354f5b39955ffe8e5c60f6c41f9d8bf6fd596c19d751cfabdead.png" />
 </div>
 </div>
 <p>We see now a spike around 16 seconds into the data, so let’s zoom into that time (and prettify):</p>
@@ -777,7 +785,7 @@ Requirement already satisfied: pycparser in /usr/local/lib/python3.11/site-packa
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9529029b723842e504d244f0035b5952d791b90d5fdda6cb19f5686211cba064.png" src="../../_images/9529029b723842e504d244f0035b5952d791b90d5fdda6cb19f5686211cba064.png" />
+<img alt="../../_images/2e286919ceeaad845eee7a033f0e5efab528bb6695c950a7f5eeca65d453e52a.png" src="../../_images/2e286919ceeaad845eee7a033f0e5efab528bb6695c950a7f5eeca65d453e52a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -860,7 +868,7 @@ f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos(nx) + b_n \sin(nx)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">signal</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">signal</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
          <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$f(x)=\frac</span><span class="si">{1}{2}</span><span class="s1"> + \sum_{n=1,3,5\ldots}^{\infty}a_n \cos(nx)$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;$-1$&#39;</span><span class="p">,</span> <span class="s1">&#39;$0$&#39;</span><span class="p">,</span> <span class="s1">&#39;$1$&#39;</span><span class="p">,</span> <span class="s1">&#39;$2$&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">pi</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;$-3\pi$&#39;</span><span class="p">,</span> <span class="s1">&#39;$-2\pi$&#39;</span><span class="p">,</span> <span class="s1">&#39;$-\pi$&#39;</span><span class="p">,</span> <span class="s1">&#39;$0$&#39;</span><span class="p">,</span> <span class="s1">&#39;$\pi$&#39;</span><span class="p">,</span> <span class="s1">&#39;$2\pi$&#39;</span><span class="p">,</span> <span class="s1">&#39;$3\pi$&#39;</span><span class="p">])</span>
@@ -922,7 +930,7 @@ a_n =\frac{2}{n\pi}\sin \left(n \omega_0 \frac{\pi}{2} \right)
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">an</span><span class="p">,</span> <span class="s1">&#39;bo&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;$-1$&#39;</span><span class="p">,</span> <span class="s1">&#39;$0$&#39;</span><span class="p">,</span> <span class="s1">&#39;$1$&#39;</span><span class="p">,</span> <span class="s1">&#39;$2$&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)),</span>
-          <span class="p">[</span><span class="s1">&#39;$0$&#39;</span><span class="p">,</span> <span class="s1">&#39;$\omega_0$&#39;</span><span class="p">,</span> <span class="s1">&#39;$2\omega_0$&#39;</span><span class="p">,</span> <span class="s1">&#39;$3\omega_0$&#39;</span><span class="p">,</span> <span class="s1">&#39;$4\omega_0$&#39;</span><span class="p">,</span> 
+          <span class="p">[</span><span class="s1">&#39;$0$&#39;</span><span class="p">,</span> <span class="s1">&#39;$\omega_0$&#39;</span><span class="p">,</span> <span class="s1">&#39;$2\omega_0$&#39;</span><span class="p">,</span> <span class="s1">&#39;$3\omega_0$&#39;</span><span class="p">,</span> <span class="s1">&#39;$4\omega_0$&#39;</span><span class="p">,</span>
            <span class="s1">&#39;$5\omega_0$&#39;</span><span class="p">,</span> <span class="s1">&#39;$6\omega_0$&#39;</span><span class="p">,</span> <span class="s1">&#39;$7\omega_0$&#39;</span><span class="p">,</span> <span class="s1">&#39;$8\omega_0$&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
@@ -1114,7 +1122,7 @@ f_{Nyq} = 2\cdot f_{natural} \rightarrow f_s \geq f_{Nyq}
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">*</span><span class="n">ylim</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-    
+
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1128,7 +1136,7 @@ f_{Nyq} = 2\cdot f_{natural} \rightarrow f_s \geq f_{Nyq}
 <p><span style="color:Violet">Autocorrelation</span>, sometimes known as serial correlation in the discrete time case, is the correlation of a signal with a delayed copy of itself as a function of delay. Informally, it is the similarity between observations of a random variable as a function of the time lag between them.</p>
 <p>The <span style="color:Violet">Autocorrelation Function</span> (ACF) between times <span class="math notranslate nohighlight">\(t_1\)</span> and <span class="math notranslate nohighlight">\(t_2\)</span> is given by
 $<span class="math notranslate nohighlight">\( \Large
-\text{ACF}(t_1, t_2) = E[X_{t_1}, \bar{X_{t_2}}] 
+\text{ACF}(t_1, t_2) = E[X_{t_1}, \bar{X_{t_2}}]
 \)</span><span class="math notranslate nohighlight">\(
 where where \)</span>E$ is the expectation value operator and the bar represents complex conjugation.</p>
 <p>The analysis of autocorrelation is a mathematical tool for finding repeating patterns, such as the presence of a periodic signal obscured by noise, or identifying the missing fundamental frequency in a signal implied by its harmonic frequencies. It is often used in signal processing for analyzing functions or series of values, such as time domain signals.</p>
@@ -1144,7 +1152,7 @@ where where \)</span>E$ is the expectation value operator and the bar represents
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">ylabel</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-    
+
 
 <span class="n">plot_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Number of Passengers&#39;</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Number of US Airline passengers from 1949 to 1960&#39;</span><span class="p">)</span>
 </pre></div>
@@ -1261,7 +1269,7 @@ Requirement already satisfied: six in /usr/local/lib/python3.11/site-packages (f
     <span class="n">lag_plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Number of Passengers&#39;</span><span class="p">],</span> <span class="n">lag</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;firebrick&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Lag &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
 
-<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Lag Plots of Air Passengers&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>    
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Lag Plots of Air Passengers&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1646,7 +1654,7 @@ CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">ARMAmodel</span><span class="o">.</span><span class="n">get_forecast</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
-<span class="n">y_pred_df</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span> 
+<span class="n">y_pred_df</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span>
 <span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ARMAmodel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">end</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">index</span>
 <span class="n">y_pred_out</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]</span>
@@ -1708,7 +1716,7 @@ CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH
 <span class="n">ARIMAmodel</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">get_forecast</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
-<span class="n">y_pred_df</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span> 
+<span class="n">y_pred_df</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span>
 <span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">end</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">index</span>
 <span class="n">y_pred_out</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]</span>
@@ -1759,7 +1767,7 @@ CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH
 <span class="n">ARIMAmodel</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">get_forecast</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
-<span class="n">y_pred_df</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span> 
+<span class="n">y_pred_df</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span>
 <span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">end</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">index</span>
 <span class="n">y_pred_out</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]</span>
@@ -1814,7 +1822,7 @@ CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH
 <span class="n">ARIMAmodel</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">get_forecast</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
-<span class="n">y_pred_df</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span> 
+<span class="n">y_pred_df</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span>
 <span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ARIMAmodel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">end</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">y_pred_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">index</span>
 <span class="n">y_pred_out</span> <span class="o">=</span> <span class="n">y_pred_df</span><span class="p">[</span><span class="s2">&quot;Predictions&quot;</span><span class="p">]</span>
