@@ -573,18 +573,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2025-11-07 21:23:05--  https://raw.githubusercontent.com/illinois-dap/DataAnalysisForPhysicists/main/data/AirPassengers.csv
-Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.109.133, 185.199.110.133, 185.199.111.133, ...
-Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.109.133|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 1746 (1.7K) [text/plain]
-Saving to: ‘./tmp_data/AirPassengers.csv’
-     0K .                                                     100% 27.7M=0s
-2025-11-07 21:23:05 (27.7 MB/s) - ‘./tmp_data/AirPassengers.csv’ saved [1746/1746]
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="span-style-color-orange-load-data-span">
@@ -627,17 +615,6 @@ Time is an <span style="color:Violet">exogeneous</span> (outside the model) vari
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-        <iframe
-            width="1000"
-            height="275"
-            src="https://upload.wikimedia.org/wikipedia/commons/4/4c/2004_Indonesia_Tsunami_edit.gif"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div></div>
 </div>
 <p>What you are doing is a combination of <span style="color:Violet">event finding</span> and <span style="color:Violet">change point detection</span>.</p>
 <p><em><strong><span style="color:Violet">EXAMPLE</span></strong></em>: Filtering a TimeSeries to detect gravitational waves</p>
@@ -645,51 +622,6 @@ Time is an <span style="color:Violet">exogeneous</span> (outside the model) vari
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>gwpy
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: gwpy in /usr/local/lib/python3.12/dist-packages (3.0.13)
-Requirement already satisfied: astropy&gt;=4.3.0 in /usr/local/lib/python3.12/dist-packages (from gwpy) (7.1.1)
-Requirement already satisfied: dateparser&gt;=1.1.4 in /usr/local/lib/python3.12/dist-packages (from gwpy) (1.2.2)
-Requirement already satisfied: dqsegdb2 in /usr/local/lib/python3.12/dist-packages (from gwpy) (1.3.0)
-Requirement already satisfied: gwdatafind&gt;=1.1.0 in /usr/local/lib/python3.12/dist-packages (from gwpy) (2.1.1)
-Requirement already satisfied: gwosc&gt;=0.5.3 in /usr/local/lib/python3.12/dist-packages (from gwpy) (0.8.1)
-Requirement already satisfied: h5py&gt;=3.0.0 in /usr/local/lib/python3.12/dist-packages (from gwpy) (3.15.1)
-Requirement already satisfied: igwn-segments&gt;=2.0.0 in /usr/local/lib/python3.12/dist-packages (from gwpy) (2.1.0)
-Requirement already satisfied: ligotimegps&gt;=1.2.1 in /usr/local/lib/python3.12/dist-packages (from gwpy) (2.1.0)
-Requirement already satisfied: matplotlib&gt;=3.3.0 in /usr/local/lib/python3.12/dist-packages (from gwpy) (3.10.0)
-Requirement already satisfied: numpy&gt;=1.19.5 in /usr/local/lib/python3.12/dist-packages (from gwpy) (2.0.2)
-Requirement already satisfied: packaging&gt;=24.1 in /usr/local/lib/python3.12/dist-packages (from gwpy) (25.0)
-Requirement already satisfied: python-dateutil in /usr/local/lib/python3.12/dist-packages (from gwpy) (2.9.0.post0)
-Requirement already satisfied: requests&gt;=2.20.0 in /usr/local/lib/python3.12/dist-packages (from gwpy) (2.32.4)
-Requirement already satisfied: scipy&gt;=1.6.0 in /usr/local/lib/python3.12/dist-packages (from gwpy) (1.16.3)
-Requirement already satisfied: tqdm&gt;=4.52.0 in /usr/local/lib/python3.12/dist-packages (from gwpy) (4.67.1)
-Requirement already satisfied: pyerfa&gt;=2.0.1.1 in /usr/local/lib/python3.12/dist-packages (from astropy&gt;=4.3.0-&gt;gwpy) (2.0.1.5)
-Requirement already satisfied: astropy-iers-data&gt;=0.2025.9.29.0.35.48 in /usr/local/lib/python3.12/dist-packages (from astropy&gt;=4.3.0-&gt;gwpy) (0.2025.11.3.0.38.37)
-Requirement already satisfied: PyYAML&gt;=6.0.0 in /usr/local/lib/python3.12/dist-packages (from astropy&gt;=4.3.0-&gt;gwpy) (6.0.3)
-Requirement already satisfied: pytz&gt;=2024.2 in /usr/local/lib/python3.12/dist-packages (from dateparser&gt;=1.1.4-&gt;gwpy) (2025.2)
-Requirement already satisfied: regex&gt;=2024.9.11 in /usr/local/lib/python3.12/dist-packages (from dateparser&gt;=1.1.4-&gt;gwpy) (2024.11.6)
-Requirement already satisfied: tzlocal&gt;=0.2 in /usr/local/lib/python3.12/dist-packages (from dateparser&gt;=1.1.4-&gt;gwpy) (5.3.1)
-Requirement already satisfied: igwn-auth-utils&gt;=0.3.1 in /usr/local/lib/python3.12/dist-packages (from gwdatafind&gt;=1.1.0-&gt;gwpy) (1.4.0)
-Requirement already satisfied: contourpy&gt;=1.0.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (1.3.3)
-Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (0.12.1)
-Requirement already satisfied: fonttools&gt;=4.22.0 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (4.60.1)
-Requirement already satisfied: kiwisolver&gt;=1.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (1.4.9)
-Requirement already satisfied: pillow&gt;=8 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (11.3.0)
-Requirement already satisfied: pyparsing&gt;=2.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib&gt;=3.3.0-&gt;gwpy) (3.2.5)
-Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.12/dist-packages (from python-dateutil-&gt;gwpy) (1.17.0)
-Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /usr/local/lib/python3.12/dist-packages (from requests&gt;=2.20.0-&gt;gwpy) (3.4.4)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.12/dist-packages (from requests&gt;=2.20.0-&gt;gwpy) (3.11)
-Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /usr/local/lib/python3.12/dist-packages (from requests&gt;=2.20.0-&gt;gwpy) (2.5.0)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.12/dist-packages (from requests&gt;=2.20.0-&gt;gwpy) (2025.10.5)
-Requirement already satisfied: click&gt;=6.7 in /usr/local/lib/python3.12/dist-packages (from dqsegdb2-&gt;gwpy) (8.3.0)
-Requirement already satisfied: cryptography&gt;=44.0.1 in /usr/local/lib/python3.12/dist-packages (from igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (46.0.3)
-Requirement already satisfied: safe-netrc&gt;=1.0 in /usr/local/lib/python3.12/dist-packages (from igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (1.0.1)
-Requirement already satisfied: scitokens&gt;=1.8 in /usr/local/lib/python3.12/dist-packages (from igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (1.8.1)
-Requirement already satisfied: cffi&gt;=2.0.0 in /usr/local/lib/python3.12/dist-packages (from cryptography&gt;=44.0.1-&gt;igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (2.0.0)
-Requirement already satisfied: PyJWT&gt;=1.6.1 in /usr/local/lib/python3.12/dist-packages (from scitokens&gt;=1.8-&gt;igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (2.10.1)
-Requirement already satisfied: pycparser in /usr/local/lib/python3.12/dist-packages (from cffi&gt;=2.0.0-&gt;cryptography&gt;=44.0.1-&gt;igwn-auth-utils&gt;=0.3.1-&gt;gwdatafind&gt;=1.1.0-&gt;gwpy) (2.23)
 </pre></div>
 </div>
 </div>
@@ -767,9 +699,6 @@ Requirement already satisfied: pycparser in /usr/local/lib/python3.12/dist-packa
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/88eb24a920fd354f5b39955ffe8e5c60f6c41f9d8bf6fd596c19d751cfabdead.png" src="../../_images/88eb24a920fd354f5b39955ffe8e5c60f6c41f9d8bf6fd596c19d751cfabdead.png" />
-</div>
 </div>
 <p>We see now a spike around 16 seconds into the data, so let’s zoom into that time (and prettify):</p>
 <div class="cell docutils container">
@@ -783,9 +712,6 @@ Requirement already satisfied: pycparser in /usr/local/lib/python3.12/dist-packa
 <span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/2e286919ceeaad845eee7a033f0e5efab528bb6695c950a7f5eeca65d453e52a.png" src="../../_images/2e286919ceeaad845eee7a033f0e5efab528bb6695c950a7f5eeca65d453e52a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -824,9 +750,6 @@ Requirement already satisfied: pycparser in /usr/local/lib/python3.12/dist-packa
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/85c00deaea9bfc74dc79e99b263c347126d7edf6cf48ad761b9c7a41775d893c.png" src="../../_images/85c00deaea9bfc74dc79e99b263c347126d7edf6cf48ad761b9c7a41775d893c.png" />
-</div>
 </div>
 <p>The above filtering is (almost) the same as what was applied to LIGO data to produce Figure 1 in <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.116.061102">Abbott et al. (2016)</a> (the joint LSC-Virgo publication announcing this detection).</p>
 </section>
@@ -843,7 +766,7 @@ Requirement already satisfied: pycparser in /usr/local/lib/python3.12/dist-packa
 </section>
 <section id="span-style-color-orange-fourier-series-and-fourier-transform-span">
 <h2><span style="color:Orange">Fourier Series and Fourier Transform</span><a class="headerlink" href="#span-style-color-orange-fourier-series-and-fourier-transform-span" title="Permalink to this heading">#</a></h2>
-<p>Plotting data in the Fourier domain gives us an idea of the frequency content of the data. You have studied Fourier methods in the previous lecture. Here we give a brief summary given its particular relevance to time series analysis</p>
+<p>Plotting data in the Fourier domain gives us an idea of the frequency content of the data. You have studied Fourier methods in previous lectures. Here we give a brief summary given its particular relevance to time series analysis</p>
 <section id="span-style-color-lightblue-fourier-series-span">
 <h3><span style="color:LightBlue">Fourier Series</span><a class="headerlink" href="#span-style-color-lightblue-fourier-series-span" title="Permalink to this heading">#</a></h3>
 <p>We can approximate a periodic function of period P to arbitrary accuracy by adding sine and cosine terms. This process is known as a Fourier Series, computed as</p>
@@ -883,8 +806,6 @@ f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos(nx) + b_n \sin(nx)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/dff7e0f1a86b046cce602124551709198ec1f42b01ace476b3b9a1c1d9c09393.svg" src="../../_images/dff7e0f1a86b046cce602124551709198ec1f42b01ace476b3b9a1c1d9c09393.svg" /></div>
 </div>
 <p>We now show how to calculate the <span class="math notranslate nohighlight">\(a_n\)</span>. Let’s change our Fourier Series Equation</p>
 <div class="math notranslate nohighlight">
@@ -897,7 +818,7 @@ f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos(n \omega_0 x) + b_n \sin(n \
 \omega_0 =\frac{2\pi}{T}
 \]</div>
 <p>and <span class="math notranslate nohighlight">\(T\)</span> is the fundamental period (for the square wave above, <span class="math notranslate nohighlight">\(T=2\pi\)</span>)</p>
-<p>The equation for <span class="math notranslate nohighlight">\(a_n\)</span> is</p>
+<p>The equation for <span class="math notranslate nohighlight">\(a_n\)</span> is (this is Fourier’s Trick as was discussed <a class="reference external" href="https://docs.google.com/presentation/d/1QLxU8KuXaq9cbeT6S3DmhqggGbqa5v9L0qkizoL-IRk/edit?usp=sharing">here</a>):</p>
 <div class="math notranslate nohighlight">
 \[ \Large
 a_n = \frac{2}{T}\int_{-T/2}^{T/2} f(x)\cos(n \omega_0 x)dx
@@ -939,8 +860,6 @@ a_n =\frac{2}{n\pi}\sin \left(n \omega_0 \frac{\pi}{2} \right)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/c1862bf3e90caa49ab9355b7e461efe78cebf85c66053334db31a117851c36e9.svg" src="../../_images/c1862bf3e90caa49ab9355b7e461efe78cebf85c66053334db31a117851c36e9.svg" /></div>
 </div>
 </section>
 <section id="span-style-color-lightblue-fourier-transform-span">
@@ -960,7 +879,7 @@ a_n =\frac{2}{n\pi}\sin \left(n \omega_0 \frac{\pi}{2} \right)
 <li><p>the signal is continious and uniformly sampled</p></li>
 <li><p>the shape you are modeling is simple and can be decomposed into a few Fourier terms.</p></li>
 </ol>
-<p>Unfortunately, these are not the usual conditions we have in scientific data such as in gravity wave detection, but these will guide our illustration of the concepts.</p>
+<p>Unfortunately, these are not the usual conditions we have in scientific data such as in gravity wave detection (we did not to a Fourier transform for the LIGO data above), but these will guide our illustration of the concepts.</p>
 <p>The Fourier Series becomes the Fourier Transform when
 $<span class="math notranslate nohighlight">\( \Large
 T \rightarrow \infty, \qquad \omega_0 \rightarrow 0
@@ -1042,33 +961,33 @@ F(k) = B \text{sinc}(kB/2)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.fft</span><span class="w"> </span><span class="kn">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">fftfreq</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">blackman</span>
+<span class="c1">#from scipy.signal import blackman</span>
 
 <span class="c1"># Number of sample points</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">800</span>
 <span class="c1"># sample spacing</span>
 <span class="n">T</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">800.0</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">N</span><span class="o">*</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">50.0</span> <span class="o">*</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">80.0</span> <span class="o">*</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">50.0</span> <span class="o">*</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>  <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">80.0</span> <span class="o">*</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
 <span class="n">yf</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
 <span class="n">xf</span> <span class="o">=</span> <span class="n">fftfreq</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">)[:</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">xf</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">],</span> <span class="mf">2.0</span><span class="o">/</span><span class="n">N</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yf</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">]),</span> <span class="s1">&#39;-b&#39;</span><span class="p">)</span>
+<span class="c1">#plt.plot(xf[1:N//2], 2.0/N * np.abs(yf[1:N//2]), &#39;-b&#39;)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;frequency&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/10f1e86c7b8621bf3e9edb1205998a22e9e3106c0c041f0c052c3821a659df0b.svg" src="../../_images/10f1e86c7b8621bf3e9edb1205998a22e9e3106c0c041f0c052c3821a659df0b.svg" /></div>
 </div>
 </section>
 </section>
 <section id="span-style-color-orange-nyquist-sampling-span">
 <h2><span style="color:Orange">Nyquist Sampling</span><a class="headerlink" href="#span-style-color-orange-nyquist-sampling-span" title="Permalink to this heading">#</a></h2>
-<p>Nyquist: “In order to recover all Fourier components of a periodic waveform, it is necessary to use a sampling rate fs at least twice the highest waveform frequency”</p>
+<p>Nyquist: “In order to recover all Fourier components of a periodic waveform, it is necessary to use a sampling rate at least twice the highest waveform frequency”</p>
 <p>The above statement requires the user to sample a signal at twice the highest natural frequency of the expected system, or mathematically:</p>
 <div class="math notranslate nohighlight">
 \[ \Large
@@ -1127,8 +1046,6 @@ f_{Nyq} = 2\cdot f_{natural} \rightarrow f_s \geq f_{Nyq}
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/3945cd9f93ae648bd5f8350bbe308e10a00657ff5a03ec0bcca3662cc3849ae0.svg" src="../../_images/3945cd9f93ae648bd5f8350bbe308e10a00657ff5a03ec0bcca3662cc3849ae0.svg" /></div>
 </div>
 </section>
 <section id="span-style-color-orange-auto-correlation-span">
@@ -1153,13 +1070,11 @@ where where \)</span>E$ is the expectation value operator and the bar represents
     <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">ylabel</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-
-<span class="n">plot_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Number of Passengers&#39;</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Number of US Airline passengers from 1949 to 1960&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="n">plot_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Number of Passengers&#39;</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Number of US Airline passengers per month from 1949 to 1960&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/ee81279a148f5eb7d92c680eb7ba0f77c9f56158bf366f1c5cac066554a19bf6.svg" src="../../_images/ee81279a148f5eb7d92c680eb7ba0f77c9f56158bf366f1c5cac066554a19bf6.svg" /></div>
 </div>
 <p>Since all the values are positive, we can show this on both sides of the Y axis to emphasize the growth.</p>
 <div class="cell docutils container">
@@ -1177,8 +1092,6 @@ where where \)</span>E$ is the expectation value operator and the bar represents
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/6e041d96ad4dfb8ed6925ad7290be24776861ca8afa11fb1e9f0c7267bbf95ee.svg" src="../../_images/6e041d96ad4dfb8ed6925ad7290be24776861ca8afa11fb1e9f0c7267bbf95ee.svg" /></div>
 </div>
 <p>It can be seen that its a monthly time series and follows a certain repetitive pattern every year. So, we could plot each year as a separate line in the same plot, which would let us compare the year wise patterns side-by-side.</p>
 <p>The common way to test for seasonality of a time series is to plot the series and check for repeatable patterns in fixed time intervals. So, the types of seasonality is determined by the clock or the calendar.</p>
@@ -1201,8 +1114,6 @@ where where \)</span>E$ is the expectation value operator and the bar represents
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/a3e3eb9cae4b069cbf510d268b3bfa8440af3fefa2a000d5c48170c25add7cbe.svg" src="../../_images/a3e3eb9cae4b069cbf510d268b3bfa8440af3fefa2a000d5c48170c25add7cbe.svg" /></div>
 </div>
 <section id="span-style-color-lightblue-autocorrelation-and-partial-autocorrelation-functions-span">
 <h3><span style="color:LightBlue">Autocorrelation and Partial Autocorrelation Functions</span><a class="headerlink" href="#span-style-color-lightblue-autocorrelation-and-partial-autocorrelation-functions-span" title="Permalink to this heading">#</a></h3>
@@ -1213,25 +1124,6 @@ where where \)</span>E$ is the expectation value operator and the bar represents
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>statsmodels
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
-<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
-Requirement already satisfied: statsmodels in /usr/local/lib/python3.11/site-packages (0.14.0)
-Requirement already satisfied: numpy&gt;=1.18 in /usr/local/lib/python3.11/site-packages (from statsmodels) (1.23.5)
-Requirement already satisfied: scipy!=1.9.2,&gt;=1.4 in /usr/local/lib/python3.11/site-packages (from statsmodels) (1.11.2)
-Requirement already satisfied: pandas&gt;=1.0 in /usr/local/lib/python3.11/site-packages (from statsmodels) (2.0.3)
-Requirement already satisfied: patsy&gt;=0.5.2 in /usr/local/lib/python3.11/site-packages (from statsmodels) (0.5.3)
-Requirement already satisfied: packaging&gt;=21.3 in /usr/local/lib/python3.11/site-packages (from statsmodels) (23.0)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=1.0-&gt;statsmodels) (2.8.2)
-Requirement already satisfied: pytz&gt;=2020.1 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=1.0-&gt;statsmodels) (2023.3)
-Requirement already satisfied: tzdata&gt;=2022.1 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=1.0-&gt;statsmodels) (2023.3)
-Requirement already satisfied: six in /usr/local/lib/python3.11/site-packages (from patsy&gt;=0.5.2-&gt;statsmodels) (1.16.0)
-<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
-<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
-
 </pre></div>
 </div>
 </div>
@@ -1248,8 +1140,6 @@ Requirement already satisfied: six in /usr/local/lib/python3.11/site-packages (f
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/314158be1a992272f073259a144f5a6f238fd21a6e1e805de76f3ff49f59ec75.svg" src="../../_images/314158be1a992272f073259a144f5a6f238fd21a6e1e805de76f3ff49f59ec75.svg" /><img alt="../../_images/f2b28058fada8284f5fe9dd3df9aa44a8386f8f6f5e29378b3b8e4f075f11ab0.svg" src="../../_images/f2b28058fada8284f5fe9dd3df9aa44a8386f8f6f5e29378b3b8e4f075f11ab0.svg" /></div>
 </div>
 <p>The <span class="math notranslate nohighlight">\(y\)</span>-axis in the ACF plot is the amount of correlation at each lag <span class="math notranslate nohighlight">\(k\)</span>. The shaded red region is a confidence interval - if the height of the bars is outside this region, it means the correlation is statistically significant. When a clear trend exists in a time series, the autocorrelation tends to be high at small lags like 1 or 2. When seasonality exists, the autocorrelation goes up periodically at larger lags.</p>
 <p>The only difference autocorrelation and partial autocorrelation is the way that the method accounts for the effect that intervening lags have. For example, at lag 3, partial autocorrelation removes the effect lags 1 and 2 have on computing the correlation.</p>
@@ -1264,8 +1154,8 @@ Requirement already satisfied: six in /usr/local/lib/python3.11/site-packages (f
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;ytick.left&#39;</span> <span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;axes.titlepad&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">})</span>
 
 <span class="c1"># Plot</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()[:</span><span class="mi">4</span><span class="p">]):</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()[:</span><span class="mi">12</span><span class="p">]):</span>
     <span class="n">lag_plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Number of Passengers&#39;</span><span class="p">],</span> <span class="n">lag</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;firebrick&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Lag &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
 
@@ -1274,8 +1164,6 @@ Requirement already satisfied: six in /usr/local/lib/python3.11/site-packages (f
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/fb82815467c57805b3747846fe9fe2660629521f402fd59367e6f30d5eb4a936.svg" src="../../_images/fb82815467c57805b3747846fe9fe2660629521f402fd59367e6f30d5eb4a936.svg" /></div>
 </div>
 </section>
 <section id="span-style-color-lightblue-cross-correlation-span">
@@ -1290,17 +1178,6 @@ Requirement already satisfied: six in /usr/local/lib/python3.11/site-packages (f
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-        <iframe
-            width="1000"
-            height="275"
-            src="https://upload.wikimedia.org/wikipedia/commons/7/71/Cross_correlation_animation.gif"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div></div>
 </div>
 </section>
 <section id="span-style-color-lightblue-autoregressive-processes-span">
@@ -1381,62 +1258,10 @@ where \)</span>d$ is an adjustment for the trend.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
-<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
-Requirement already satisfied: pandas-datareader in /usr/local/lib/python3.11/site-packages (0.10.0)
-Requirement already satisfied: lxml in /usr/local/lib/python3.11/site-packages (from pandas-datareader) (4.9.3)
-Requirement already satisfied: pandas&gt;=0.23 in /usr/local/lib/python3.11/site-packages (from pandas-datareader) (2.0.3)
-Requirement already satisfied: requests&gt;=2.19.0 in /usr/local/lib/python3.11/site-packages (from pandas-datareader) (2.31.0)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=0.23-&gt;pandas-datareader) (2.8.2)
-Requirement already satisfied: pytz&gt;=2020.1 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=0.23-&gt;pandas-datareader) (2023.3)
-Requirement already satisfied: tzdata&gt;=2022.1 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=0.23-&gt;pandas-datareader) (2023.3)
-Requirement already satisfied: numpy&gt;=1.21.0 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=0.23-&gt;pandas-datareader) (1.23.5)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /usr/local/lib/python3.11/site-packages (from requests&gt;=2.19.0-&gt;pandas-datareader) (3.0.1)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.11/site-packages (from requests&gt;=2.19.0-&gt;pandas-datareader) (3.4)
-Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /usr/local/lib/python3.11/site-packages (from requests&gt;=2.19.0-&gt;pandas-datareader) (1.26.14)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.11/site-packages (from requests&gt;=2.19.0-&gt;pandas-datareader) (2022.12.7)
-Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.11/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=0.23-&gt;pandas-datareader) (1.16.0)
-<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
-<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
-
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>yfinance
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
-<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
-Requirement already satisfied: yfinance in /usr/local/lib/python3.11/site-packages (0.2.31)
-Requirement already satisfied: pandas&gt;=1.3.0 in /usr/local/lib/python3.11/site-packages (from yfinance) (2.0.3)
-Requirement already satisfied: numpy&gt;=1.16.5 in /usr/local/lib/python3.11/site-packages (from yfinance) (1.23.5)
-Requirement already satisfied: requests&gt;=2.31 in /usr/local/lib/python3.11/site-packages (from yfinance) (2.31.0)
-Requirement already satisfied: multitasking&gt;=0.0.7 in /usr/local/lib/python3.11/site-packages (from yfinance) (0.0.11)
-Requirement already satisfied: lxml&gt;=4.9.1 in /usr/local/lib/python3.11/site-packages (from yfinance) (4.9.3)
-Requirement already satisfied: appdirs&gt;=1.4.4 in /usr/local/lib/python3.11/site-packages (from yfinance) (1.4.4)
-Requirement already satisfied: pytz&gt;=2022.5 in /usr/local/lib/python3.11/site-packages (from yfinance) (2023.3)
-Requirement already satisfied: frozendict&gt;=2.3.4 in /usr/local/lib/python3.11/site-packages (from yfinance) (2.3.8)
-Requirement already satisfied: peewee&gt;=3.16.2 in /usr/local/lib/python3.11/site-packages (from yfinance) (3.17.0)
-Requirement already satisfied: beautifulsoup4&gt;=4.11.1 in /usr/local/lib/python3.11/site-packages (from yfinance) (4.12.2)
-Requirement already satisfied: html5lib&gt;=1.1 in /usr/local/lib/python3.11/site-packages (from yfinance) (1.1)
-Requirement already satisfied: soupsieve&gt;1.2 in /usr/local/lib/python3.11/site-packages (from beautifulsoup4&gt;=4.11.1-&gt;yfinance) (2.5)
-Requirement already satisfied: six&gt;=1.9 in /usr/local/lib/python3.11/site-packages (from html5lib&gt;=1.1-&gt;yfinance) (1.16.0)
-Requirement already satisfied: webencodings in /usr/local/lib/python3.11/site-packages (from html5lib&gt;=1.1-&gt;yfinance) (0.5.1)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=1.3.0-&gt;yfinance) (2.8.2)
-Requirement already satisfied: tzdata&gt;=2022.1 in /usr/local/lib/python3.11/site-packages (from pandas&gt;=1.3.0-&gt;yfinance) (2023.3)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /usr/local/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (3.0.1)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (3.4)
-Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /usr/local/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (1.26.14)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.11/site-packages (from requests&gt;=2.31-&gt;yfinance) (2022.12.7)
-<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
-<span class=" -Color -Color-Yellow">WARNING: Skipping /usr/local/lib/python3.11/site-packages/six-1.16.0-py3.11.egg-info due to invalid metadata entry &#39;name&#39;</span>
-
 </pre></div>
 </div>
 </div>
@@ -1473,23 +1298,11 @@ Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.1
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pandas_datareader</span><span class="w"> </span><span class="kn">import</span> <span class="n">data</span> <span class="k">as</span> <span class="n">pdr</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">yfinance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">yfin</span>
-<span class="n">yfin</span><span class="o">.</span><span class="n">pdr_override</span><span class="p">()</span>
+<span class="c1">#yfin.pdr_override()</span>
 
 <span class="n">btc</span> <span class="o">=</span> <span class="n">pdr</span><span class="o">.</span><span class="n">get_data_yahoo</span><span class="p">(</span><span class="s2">&quot;BTC-USD&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s2">&quot;2018-01-01&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;2020-12-02&quot;</span><span class="p">)[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">btc</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%%**********************]  1 of 1 completed
-Date
-2018-01-01    13657.200195
-2018-01-02    14982.099609
-2018-01-03    15201.000000
-2018-01-04    15599.200195
-2018-01-05    17429.500000
-Name: Close, dtype: float64
 </pre></div>
 </div>
 </div>
