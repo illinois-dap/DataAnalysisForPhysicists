@@ -632,9 +632,14 @@ $<span class="math notranslate nohighlight">\( \Large
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The value calculated by monte carlo integration is 2.0485802989063675.
+</pre></div>
+</div>
+</div>
 </div>
 <p>The value obtained is very close to the actual answer of the integral which is 2.0.</p>
-<p>Now if we want to visualize the integration using a histogram, we can do so by using the matplotlib library. Again we import the modules, define the limits of integration and write the sin function for calculating the sin value for a particular value of x. Next, we take an array that has variables representing every beam of the histogram. Then we iterate through N values and repeat the same process of creating a zeros array, filling it with random x values, creating an integral variable adding up all the function values, and getting the answer N times, each answer representing a beam of the histogram.</p>
+<p>Now if we want to visualize the integration using a histogram, we can do so by using the matplotlib library. Again we import the modules, define the limits of integration and write the sin function for calculating the sin value for a particular value of x. Next, we take an array that has variables representing every bin of the histogram. Then we iterate through N values and repeat the same process of creating a zeros array, filling it with random x values, creating an integral variable adding up all the function values, and getting the answer N times, each answer representing a bin of the histogram.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># limits of integration</span>
@@ -690,6 +695,18 @@ $<span class="math notranslate nohighlight">\( \Large
 <span class="c1"># sets the label of the x-axis of the plot</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Areas&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># shows the plot</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean of values:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">plt_vals</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;variance of values:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">plt_vals</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;standard dev. of values:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">plt_vals</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/402af3ff2b8279edb4d731c10d525ec6e375dd27593f4b608dd873c88bc25ea2.png" src="../../_images/402af3ff2b8279edb4d731c10d525ec6e375dd27593f4b608dd873c88bc25ea2.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean of values: 1.9999473910652965
+variance of values: 0.0009188921649641422
+standard dev. of values: 0.030313234155466523
 </pre></div>
 </div>
 </div>
@@ -734,6 +751,11 @@ $<span class="math notranslate nohighlight">\( \Large
 
 <span class="c1"># prints the solution</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value calculated by monte carlo integration is </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ans</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The value calculated by monte carlo integration is 0.3298862810386129.
 </pre></div>
 </div>
 </div>
@@ -799,6 +821,9 @@ $<span class="math notranslate nohighlight">\( \Large
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5bfc93623eae3d26620e7f488a91b76a98747ca9c2d022c3dfc5e881c04f216a.png" src="../../_images/5bfc93623eae3d26620e7f488a91b76a98747ca9c2d022c3dfc5e881c04f216a.png" />
+</div>
 </div>
 <hr class="docutils" />
 <section id="span-style-color-lightblue-multidimensional-monte-carlo-integration-and-variance-scaling-span">
@@ -849,6 +874,9 @@ f(x) = x \cos 7x + \sin 13x, \ \ \ 0 \le x \le 1
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/480bcf4a29aea221037b09a7cf08035c3635f9306262c62bffd01d79c587c7d5.png" src="../../_images/480bcf4a29aea221037b09a7cf08035c3635f9306262c62bffd01d79c587c7d5.png" />
+</div>
 </div>
 <section id="span-style-color-tan-single-monte-carlo-estimate-span">
 <h4><span style="color:Tan">Single Monte Carlo estimate</span><a class="headerlink" href="#span-style-color-tan-single-monte-carlo-estimate-span" title="Permalink to this heading">#</a></h4>
@@ -858,6 +886,11 @@ f(x) = x \cos 7x + \sin 13x, \ \ \ 0 \le x \le 1
 <span class="n">x</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 <span class="n">y</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.015360253803206578
 </pre></div>
 </div>
 </div>
@@ -871,9 +904,24 @@ f(x) = x \cos 7x + \sin 13x, \ \ \ 0 \le x \le 1
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">reps</span> <span class="o">=</span> <span class="mi">1000</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">reps</span><span class="p">)))</span>
-<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="n">reps</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;input:&quot;</span><span class="p">,</span><span class="nb">input</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;input shape&quot;</span><span class="p">,</span><span class="nb">input</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#cumsum like this returns the sum over rows from that &amp; previous rows in the array</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y shape:&quot;</span><span class="p">,</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="n">upper</span><span class="p">,</span> <span class="n">lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">97.5</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>input: [[0.30164315 0.0661625  0.04822206 ... 0.4176316  0.34726022 0.48230351]
+ [0.92165343 0.26978259 0.03479995 ... 0.01109372 0.4819727  0.05703475]
+ [0.45159834 0.50180236 0.30372076 ... 0.91056549 0.6813393  0.13822086]
+ [0.16343706 0.9252276  0.02538198 ... 0.81945888 0.73165032 0.93240206]
+ [0.90115956 0.50940493 0.00827059 ... 0.35076757 0.65972166 0.2783756 ]]
+input shape (100, 1000)
+y shape: (100, 1000)
 </pre></div>
 </div>
 </div>
@@ -886,6 +934,9 @@ f(x) = x \cos 7x + \sin 13x, \ \ \ 0 \le x \le 1
 <span class="k">pass</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ba9f98aa85d1eb79a84fc1856086042f3c8ca04c23df862fbf881cc946dd473d.png" src="../../_images/ba9f98aa85d1eb79a84fc1856086042f3c8ca04c23df862fbf881cc946dd473d.png" />
 </div>
 </div>
 </section>
@@ -923,6 +974,11 @@ f(x) = \frac{1}{\pi (1 + x^2)}, \ \ -\infty \lt x \lt \infty
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.10241638234956674
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -931,6 +987,11 @@ f(x) = \frac{1}{\pi (1 + x^2)}, \ \ -\infty \lt x \lt \infty
 <span class="n">x</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">cauchy</span><span class="p">()</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="n">h_mc</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
 <span class="n">h_mc</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">h_mc</span> <span class="o">-</span> <span class="n">h_true</span><span class="p">)</span><span class="o">/</span><span class="n">h_true</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.08), np.float64(0.21887496741542117))
 </pre></div>
 </div>
 </div>
@@ -958,7 +1019,13 @@ $<span class="math notranslate nohighlight">\( \Large
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.1026729035174522), np.float64(0.0025046888202896016))
+</pre></div>
 </div>
+</div>
+</div>
+<p>Here the deviation from the truth is reduced by a factor of ~100.  Of course, this requires an analytic function that you can change the variables on.</p>
 </section>
 </section>
 <section id="span-style-color-lightblue-monte-carlo-swindles-span">
@@ -997,6 +1064,11 @@ reduced compared to when the samples are independent.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.02025493910239406
+</pre></div>
+</div>
+</div>
 </div>
 <p>Using just vanilla Monte Carlo:</p>
 <div class="cell docutils container">
@@ -1009,6 +1081,11 @@ reduced compared to when the samples are independent.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.013165106557791814), 0.3500298129143352)
+</pre></div>
+</div>
+</div>
 </div>
 <p>Using antithetic variables for the first half of <span class="math notranslate nohighlight">\(u\)</span> supplemented with <span class="math notranslate nohighlight">\(1-u\)</span>:</p>
 <div class="cell docutils container">
@@ -1017,6 +1094,11 @@ reduced compared to when the samples are independent.</p>
 <span class="n">x</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">y</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">sol</span><span class="p">)</span><span class="o">/</span><span class="n">sol</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.014379940898756948), 0.2900526224214965)
 </pre></div>
 </div>
 </div>
@@ -1065,6 +1147,9 @@ h(x) = p ~(x - a)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/82ef1dd6e373027c23625d7ebc68011f75af92429428373a755925d3469890c6.png" src="../../_images/82ef1dd6e373027c23625d7ebc68011f75af92429428373a755925d3469890c6.png" />
+</div>
 </div>
 </section>
 <section id="span-style-color-tan-expected-answer-span">
@@ -1076,11 +1161,21 @@ h(x) = p ~(x - a)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;%.10f&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h_true</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">h_true</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(2.866515719235352e-07)
 </pre></div>
 </div>
 </div>
@@ -1098,6 +1193,11 @@ h(x) = p ~(x - a)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.0), np.float64(1.0))
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="span-style-color-tan-using-importance-sampling-span">
@@ -1112,8 +1212,12 @@ h(x) = p ~(x - a)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(2.904933940278452e-07), np.float64(0.013402410733455904))
+</pre></div>
 </div>
-<hr class="docutils" />
+</div>
+</div>
 </section>
 </section>
 <hr class="docutils" />
@@ -1159,6 +1263,37 @@ C \int\limits_{-1}^{1} ~dx_0 ~ \int\limits_{0}^{1} ~dx_1 ~ \int\limits_{0}^{1} ~
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting vegas
+  Downloading vegas-6.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.9 kB)
+Requirement already satisfied: numpy&gt;=1.24 in /usr/local/lib/python3.12/dist-packages (from vegas) (2.0.2)
+Collecting gvar&gt;=13.1.5 (from vegas)
+  Downloading gvar-13.1.7-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.0 kB)
+Requirement already satisfied: scipy&gt;=1.11 in /usr/local/lib/python3.12/dist-packages (from gvar&gt;=13.1.5-&gt;vegas) (1.16.3)
+Downloading vegas-6.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">4.0/4.0 MB</span> <span class=" -Color -Color-Red">28.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading gvar-13.1.7-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (7.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">7.5/7.5 MB</span> <span class=" -Color -Color-Red">64.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hInstalling collected packages: gvar, vegas
+Successfully installed gvar-13.1.7 vegas-6.3
+itn   integral        wgt average     chi2/dof        Q
+-------------------------------------------------------
+  1   1.015(26)       1.015(26)           0.00     1.00
+  2   1.034(19)       1.028(15)           0.38     0.54
+  3   1.021(15)       1.024(10)           0.25     0.78
+  4   1.031(13)       1.0269(80)          0.22     0.88
+  5   1.014(11)       1.0222(64)          0.40     0.81
+  6   0.986(12)       1.0143(57)          1.72     0.13
+  7   1.020(11)       1.0155(50)          1.47     0.18
+  8   1.010(12)       1.0146(46)          1.29     0.25
+  9   0.994(13)       1.0122(43)          1.42     0.18
+ 10   0.988(13)       1.0098(41)          1.61     0.11
+
+result = 1.0098(41)    Q = 0.11
+</pre></div>
+</div>
+<img alt="../../_images/fec52d92d1abc32c6ef4e7a0db1a48d50bcdadbc088994b9f70802f2b0dd4bad.png" src="../../_images/fec52d92d1abc32c6ef4e7a0db1a48d50bcdadbc088994b9f70802f2b0dd4bad.png" />
+</div>
 </div>
 </section>
 <section id="span-style-color-lightblue-quasi-random-numbers-span">
@@ -1171,12 +1306,53 @@ C \int\limits_{-1}^{1} ~dx_0 ~ \int\limits_{0}^{1} ~dx_1 ~ \int\limits_{0}^{1} ~
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting ghalton
+  Using cached ghalton-0.6.2.tar.gz (124 kB)
+  Preparing metadata (setup.py) ... ?25l?25hdone
+Building wheels for collected packages: ghalton
+  <span class=" -Color -Color-Bold -Color-Bold-Red">error</span>: <span class=" -Color -Color-Bold">subprocess-exited-with-error</span>
+  
+  <span class=" -Color -Color-Red">×</span> <span class=" -Color -Color-Green">python setup.py bdist_wheel</span> did not run successfully.
+  <span class=" -Color -Color-Red">│</span> exit code: <span class=" -Color -Color-Bold -Color-Bold-Cyan">1</span>
+  <span class=" -Color -Color-Red">╰─&gt;</span> See above for output.
+  
+  <span class=" -Color -Color-Bold -Color-Bold-Magenta">note</span>: This error originates from a subprocess, and is likely not a problem with pip.
+  Building wheel for ghalton (setup.py) ... ?25lerror
+<span class=" -Color -Color-Red">  ERROR: Failed building wheel for ghalton</span>
+?25h  Running setup.py clean for ghalton
+Failed to build ghalton
+<span class=" -Color -Color-Red">ERROR: ERROR: Failed to build installable wheels for some pyproject.toml based projects (ghalton)</span>
+
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ghalton</span>
 
 <span class="n">gen</span> <span class="o">=</span> <span class="n">ghalton</span><span class="o">.</span><span class="n">Halton</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">/tmp/ipython-input-1805920637.py</span> in <span class="ni">&lt;cell line: 0&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">ghalton</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">gen</span> <span class="o">=</span> <span class="n">ghalton</span><span class="o">.</span><span class="n">Halton</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;ghalton&#39;
+
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NOTE</span>: If your import is failing due to a missing package, you can
+<span class="n">manually</span> <span class="n">install</span> <span class="n">dependencies</span> <span class="n">using</span> <span class="n">either</span> <span class="o">!</span>pip<span class="w"> </span>or<span class="w"> </span>!apt.
+
+<span class="n">To</span> <span class="n">view</span> <span class="n">examples</span> <span class="n">of</span> <span class="n">installing</span> <span class="n">some</span> <span class="n">common</span> <span class="n">dependencies</span><span class="p">,</span> <span class="n">click</span> <span class="n">the</span>
+<span class="s2">&quot;Open Examples&quot;</span> <span class="n">button</span> <span class="n">below</span><span class="o">.</span>
+<span class="gt">---------------------------------------------------------------------------</span>
 </pre></div>
 </div>
 </div>
@@ -1300,6 +1476,9 @@ This also means that each row has to sum up to one.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7a5281bc7bf95f0417538cf4d794464e40b4a935988c4596e4d9af3581183e77.png" src="../../_images/7a5281bc7bf95f0417538cf4d794464e40b4a935988c4596e4d9af3581183e77.png" />
+</div>
 </div>
 <hr class="docutils" />
 <p>Next we provide a brief review on how to use Markov Chain Monte Carlo (MCMC) to compute expectation values, and contrast with Monte Carlo integration. In statistics, we study the properties of random variables <span class="math notranslate nohighlight">\(x\)</span> and their probability distributions <span class="math notranslate nohighlight">\(P(x)\)</span>.  We often care about computing expectation values of functions of the random variable such as
@@ -1356,6 +1535,9 @@ $<span class="math notranslate nohighlight">\( \Large
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d40dea4867d3f73a0a9595ea1eaa21e7a0095deca801a2b0e4ed2b9770034645.png" src="../../_images/d40dea4867d3f73a0a9595ea1eaa21e7a0095deca801a2b0e4ed2b9770034645.png" />
+</div>
 </div>
 <p>To determine the energy of the <span class="math notranslate nohighlight">\(i^{th}\)</span> atom in the system above, we start with the energy of the atom in a magnetic field</p>
 <div class="math notranslate nohighlight">
@@ -1384,6 +1566,9 @@ $<span class="math notranslate nohighlight">\( \Large
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/36d626ae5b831bd3cb50f3dafbf78a4c7c326081a7498acc8f6fefe647e5e520.png" src="../../_images/36d626ae5b831bd3cb50f3dafbf78a4c7c326081a7498acc8f6fefe647e5e520.png" />
 </div>
 </div>
 <p>To include the energy from each site interacting with the <span class="math notranslate nohighlight">\(i\)</span>th atom, we can update the above expression:</p>
@@ -1492,6 +1677,9 @@ p_{i,\pm} = \frac{e^{\mp \epsilon_i/k_BT}}{\sum_i e^{\epsilon_i /k_B T}}
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a6db8a7e314fc3cbb9ad6f7ae1b74e4cef41dd760d1eb7ba3156a6d423193cdc.png" src="../../_images/a6db8a7e314fc3cbb9ad6f7ae1b74e4cef41dd760d1eb7ba3156a6d423193cdc.png" />
+</div>
 </div>
 <p>Next, we are going to create a temperature variable. In the equations above, the inverse temperature is represented by <span class="math notranslate nohighlight">\(1/k_B T\)</span>, where <span class="math notranslate nohighlight">\(k_B\)</span> is the Boltzmann constant. If <span class="math notranslate nohighlight">\(T = \inf\)</span>, then the inverse temperature will zero, and if <span class="math notranslate nohighlight">\(T=0\)</span> then the inverse temperature will be <span class="math notranslate nohighlight">\(∞\)</span>.  Accordingly, we can define:</p>
 <div class="math notranslate nohighlight">
@@ -1553,6 +1741,9 @@ p_{i,\pm} = \frac{e^{\mp \epsilon_i/k_BT}}{\sum_i e^{\epsilon_i /k_B T}}
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/eb92ce50429b64ce82b81b70d13dfa14c2c78aa74777233a7290fe9c23827ce4.png" src="../../_images/eb92ce50429b64ce82b81b70d13dfa14c2c78aa74777233a7290fe9c23827ce4.png" />
+</div>
 </div>
 <p>Above, we implemented a Monte Carlo Markov Chain (MCMC) to update the atom’s spin state. The state transition was considered based on sampling from both the Boltzmann distribution and the uniform distribution. The MCMC simulation allowed us to implement the Hamiltonian model for how we think the sytem should behave.</p>
 <p><em><strong><span style="color:Violet">EXAMPLE</span></strong></em>: Temperature Experiment</p>
@@ -1610,6 +1801,11 @@ p_{i,\pm} = \frac{e^{\mp \epsilon_i/k_BT}}{\sum_i e^{\epsilon_i /k_B T}}
     <span class="c1"># After the system is stable, calculate the net magnetism by summing over</span>
     <span class="c1"># all of the spin values and averaging them</span>
     <span class="n">M</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">lattice</span><span class="p">)))</span><span class="o">/</span><span class="p">(</span><span class="n">sqrt_N</span><span class="o">*</span><span class="n">sqrt_N</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 14%|█▎        | 137/1000 [00:37&lt;03:37,  3.96it/s]
 </pre></div>
 </div>
 </div>
