@@ -9,6 +9,7 @@ You will learn about Monte Carlo and sampling methods
 ## *Lecture Materials*
 * [Slides](https://docs.google.com/presentation/d/1dzBzUDiL8J8xmn-9igHU7n4dmCu_rigLaptJKCHzH88/edit?usp=sharing)
 * {doc}`lectures/MonteCarloSamplingMethods`
+* [Slides Wednesday (B. Hooberman)](https://drive.google.com/file/d/1jSlCz5FVPHSJ05DjwMmdwH6zz2pu4gGi/view?usp=sharing)
 
 ## *Homework Assignment*
 * {doc}`homework/Homework_13`
