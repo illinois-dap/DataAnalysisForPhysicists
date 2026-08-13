@@ -63,8 +63,7 @@ You can find more detail in the [Calendar](#calendar) section on the specific to
 
 There are several online tools you will need to use as part of this course. 
 
-### Campuswire
-We will use [Campuswire](https://campuswire.com) as a class forum, a way to message the course staff and each other.  We will allow three missed lectures to be dropped over the course of the semester without impacting your grade.
+We will allow three grades lectures to be dropped over the course of the semester without impacting your grade.
 ### Google Colab
 Using [Google Colab](https://colab.research.google.com), you will be able to program your code in a Jupyter notebook and submit it for us to grade. Please sign in to your Illinois account.  
 ### Gradescope
@@ -88,9 +87,13 @@ For projects you will put together a Jupyter notebook that demonstrates your pro
 
 Each project notebook must be submitted via Gradescope for grading.
 
+The final project is worth 15% of the overall course grade.  One third of that (so 5% of the course grade),
+will be based on a one-on-one discussion of the project with the
+instructor.
+
 ## <span style="color:Red">Grading</span>
-* Class attendence and participation: 5%
-* Homework: 70%
+* Class attendence and participation: 10%
+* Homework: 65%
 * Projects: 25% (mid-semester project 10% and final project 15%)
 
 Letter grades will be assigned as follows:
@@ -108,6 +111,11 @@ Letter grades will be assigned as follows:
 * D   &nbsp; &nbsp; [63.0 - 66.9]
 * D-  &nbsp; [60.0 - 62.9]
 * F   &nbsp; &nbsp; [00.0 - 59.9]
+
+The attendance/participation portion of the grade will be assessed through written, in-class answers to questions
+based on the material from previous lectures.  3% will be given for turning in an answer and 7% will be based on
+the quality of the answer.  The lowest three lecture scores from the semester will be dropped.
+
 
 ## <span style="color:Red">Policies</span>
 
