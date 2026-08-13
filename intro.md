@@ -1,7 +1,7 @@
 
 # <span style="color:Blue">__Data Analysis for Physics__</span>
 
-<font size="6"> __Physics 398 DAP__ &nbsp; *Fall 2026* </font>
+<font size="6"> __Physics 360 DAP__ &nbsp; *Fall 2026* </font>
 * *Instructors:* 
   * Professor [Anne Sickles](http://heavyions.physics.illinois.edu)
 * *Class Meetings*: 
