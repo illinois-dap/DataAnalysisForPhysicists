@@ -53,11 +53,11 @@ You can find more detail in the [Calendar](#calendar) section on the specific to
 ### Instructors
 * Professor [Anne Sickles](http://heavyions.physics.illinois.edu)
   * email: sickles@illinois.edu
-  * Office Hour: Monday 4pm, Loomis 403
+  * Office Hour: Monday 2pm, Loomis 403
 
-* Grader Tai Yang 
-    *email: ty39@illinois.edu
-    *Office Hour: Tuesday 4pm, ESB 3117
+* Grader Will Huie
+    *email: whuie2@illinois.edu
+    *Office Hour: TBD
 
 ## <span style="color:Red">Online Tools</span>
 
@@ -114,7 +114,8 @@ Letter grades will be assigned as follows:
 
 The attendance/participation portion of the grade will be assessed through written, in-class answers to questions
 based on the material from previous lectures.  3% will be given for turning in an answer and 7% will be based on
-the quality of the answer.  The lowest three lecture scores from the semester will be dropped.
+the quality of the answer.  The questions will be based on the previous lectures and/or turned in homework assignments.
+  The lowest three lecture scores from the semester will be dropped.
 
 
 ## <span style="color:Red">Policies</span>
