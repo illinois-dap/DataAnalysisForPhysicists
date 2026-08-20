@@ -115,7 +115,7 @@ Letter grades will be assigned as follows:
 The attendance/participation portion of the grade will be assessed through written, in-class answers to questions
 based on the material from previous lectures.  3% will be given for turning in an answer and 7% will be based on
 the quality of the answer.  The questions will be based on the previous lectures and/or turned in homework assignments.
-  The lowest three lecture scores from the semester will be dropped.
+  The lowest three lecture scores from the semester will be dropped.  Please bring a pencil or pen to class.
 
 
 ## <span style="color:Red">Policies</span>
