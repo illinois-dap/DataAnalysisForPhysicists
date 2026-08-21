@@ -57,7 +57,7 @@ You can find more detail in the [Calendar](#calendar) section on the specific to
 
 * Grader Will Huie
     *email: whuie2@illinois.edu
-    *Office Hour: TBD
+    *Office Hour: Tuesday 1pm Loomis 279 
 
 ## <span style="color:Red">Online Tools</span>
 
