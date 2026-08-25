@@ -11,7 +11,7 @@ You will start with an overview of the course and then an introduction to statis
 
 ## *Lecture Materials*
 * [Monday Slides](https://docs.google.com/presentation/d/1CSDKidoxLfYptxGAvwylUHDPGKtbmM0FO2TcDxu6C04/edit?usp=sharing)
-* [Wednesday Slides](https://docs.google.com/presentation/d/173FqJhdcw_IhAUuY3Gxb7p0D4vj2leWdjv6N40dpRgI/edit?usp=sharing)
+* [Wednesday Slides](https://docs.google.com/presentation/d/1HN2Zj_bCcrhj_LJYEIhD41ti0qlJG073lHyJRe6GOT8/edit?usp=sharing)
 * {doc}`lectures/JupyterNumpy`
 * {doc}`lectures/Pandas`
 * {doc}`lectures/Visualization`
