@@ -15,7 +15,7 @@ __Note__: *This schedule will evolve throughout the semester*
 | Week          | Topic                 | Homework                               | Projects                   |
 |---------------|-----------------------|----------------------------------------|----------------------------|
 | Aug 24	| {doc}`_sources/Week_01`     | [HW 01](_sources/homework/Homework_01.ipynb) |                            |
-| Aug 31  | {doc}`_sources/Week_02`     | [HW 02]() |                            |
+| Aug 31  | {doc}`_sources/Week_02`     | [HW 02](_sources/homework/Homework_02.ipynb) |                            |
 | Sep 07	| {doc}`_sources/Week_03`     | [HW 03]() |                            |
 | Sep 14	| {doc}`_sources/Week_04`     | [HW 04]() |                            |
 | Sep 21	| {doc}`_sources/Week_05`     | [HW 05]() |                            |
