@@ -7,8 +7,7 @@ You will learn about the theory of estimators
 * Learn about the theory of estimators
 
 ## *Lecture Materials*
-* [Slides (Monday)](https://docs.google.com/presentation/d/1jIluU5tR56bl8Xp6QFVSw-8-Sw3DkpVq7qe5kp6bX30/edit?usp=sharing)
-* [Slides (Wednesday)](https://docs.google.com/presentation/d/1HfPqVE238vnOdODssWy5sDmVKxIfu2pzahTRDfChXP4/edit?usp=sharing)
+* [Slides (Wednesday)](https://docs.google.com/presentation/d/1_01b-8FXIitUHBtQjzHsglLCM7-FBaBNZCMVL6NQ7Ig/edit?usp=sharing)
 * {doc}`lectures/Statistics`
 * {doc}`lectures/Statistics2`
 
