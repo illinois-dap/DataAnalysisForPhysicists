@@ -559,16 +559,18 @@ is 26 <span class="math notranslate nohighlight">\(\pm\)</span> 2 decays / secon
 <ul class="simple">
 <li><p>increasing the number of counts in a sample is what decreases the uncertainty, often that just means running the experiment for a longer amount of time.</p></li>
 <li><p>the reason that is the case is because the relative width (uncertainty) is <em>only</em> a function of the total number of counts that you have, not the absolute rate.</p></li>
-<li><p>doubling the number of counts decreases the uncertainty by <span class="math notranslate nohighlight">\(1/\sqrt{2} = 0.707\)</span>.  In the beginning doubling is easy and eventually it becomes hard…</p></li>
+<li><p>doubling the number of counts decreases the uncertainty by <span class="math notranslate nohighlight">\(1/\sqrt{2} = 0.707\)</span>.  <strong>In the beginning doubling is easy and eventually it becomes hard…</strong></p></li>
 </ul>
 <p><strong>Uncertainty Evaluation by Sampling</strong></p>
-<p>The analytic formulas for uncertainty evaluation are extremely useful but in many cases, using the data itself to evaluate the uncertainties is useful.  These techniques go by names like <em>subsampling</em> and <em>bootstrapping</em> and they are useful for datasets that involve complicated calculations (making direct propagation difficult) or the analytic techniques don’t work for some reason.</p>
+<p>The analytic formulas for uncertainty evaluation are extremely useful but in many cases the formulas derived in the slides aren’t adequate and using the data itself to evaluate the uncertainties is extremely useful.  These techniques go by names like <em>subsampling</em> and <em>bootstrapping</em> and they are useful for datasets that involve complicated calculations (making direct propagation difficult) or the analytic techniques don’t work for some reason.</p>
 <p>This seems like a scam, but it works as we’ll see below.  Basically this replaces the analytic calculations we worked through with computing power (to generate the bootstraps as well see below).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">uniform</span>
 <span class="n">dist</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># let&#39;s just start with a Gaussian</span>
+<span class="c1">#dist = uniform()</span>
 <span class="c1">#making 100 random values</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -586,6 +588,7 @@ is 26 <span class="math notranslate nohighlight">\(\pm\)</span> 2 decays / secon
 </div>
 </div>
 <p>The deviation of the sample mean from the expected value checks out with our estimate.</p>
+<p>Now we’re going to introduce scipy’s <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html">bootstrap</a>.  We’re going to take the numpy array <em>data</em> above and make a tuple from that.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">bootstrap</span>
@@ -600,14 +603,17 @@ is 26 <span class="math notranslate nohighlight">\(\pm\)</span> 2 decays / secon
 <ul class="simple">
 <li><p>Be aware of what the default value is for any code that you use.  That’s an often silent way to get results you do not understand.</p></li>
 </ul>
+<p><strong>Number of bootstraps</strong></p>
+<p>For each boostrap, the software pulls the same number of random values according to the original distribution.  The sampling occurs <em>with replacement</em>.  That means that every value drawn in a bootstrap is drawn from the static original distribution.  There is no depletion of a given value because it has been drawn in previous samples (so bootstrapping is <strong>not</strong> like pulling socks from a drawer).</p>
+<p>This resampled distribution will have 100 entries (in this case) just like the original distribution but it will not be identical to the original distribution (just like drawing 100 random numbers according to a Gaussian distribution isn’t exactly a Gaussian distribution).  The mean of this resampled distribution is evaluated.  The standard deviation of the distribution of means of the resampled distribution is the uncertainty on the mean.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">bootstrap</span><span class="p">(</span><span class="n">data_tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">,</span> <span class="n">n_resamples</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">confidence_level</span><span class="o">=</span><span class="mf">0.68</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">bootstrap</span><span class="p">(</span><span class="n">data_tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">,</span> <span class="n">n_resamples</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">confidence_level</span><span class="o">=</span><span class="mf">0.68</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">bootstrap_distribution</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
 <span class="c1">#res.bootstrap_distribution is an nd array with a size of n_resamples</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Bootstrap Distribution&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;statistic value&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;standard deviation of the bootstrap&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;frequency&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
@@ -623,11 +629,10 @@ is 26 <span class="math notranslate nohighlight">\(\pm\)</span> 2 decays / secon
 </div>
 </div>
 </div>
-<p>This is the distribution of the standard deviation value of the resampled distributions.  There is one entry in this histogram for each <em>n_resample</em>.  For each resample, the software pulls the same number of random values according to the original distribution.  This resampled distribution will have 100 entries (in this case) just like the original distribution but it will not be identical to the original distribution (just like drawing 100 random numbers according to a Gaussian distribution isn’t exactly a Gaussian distribution).  The mean of this resampled distribution is evaluated.  The standard deviation of the distribution of means of the resampled distribution is the uncertainty on the mean.</p>
 <p>Chosing <em>n_resample</em> depends on computational limits on the high end and math on the low end.  Obviously a generating only a few resamplings is not going to be useful or provide an accurate representation of the uncertainty (note the default value of <em>n_resample</em> is 9999 so beware with large datasets).  Typical values range from 100-1000 but depend on a lot of factors.</p>
 <p>In the example above, we are only calculating the standard deviation of a distribution and so perhaps the bootstrap is overkill.</p>
 <p>Let’s try something a little more complicated….</p>
-<p>Here we’ll take the data from before and square each element (it’s simpler to go back to the original numpy array and square the elements there then handle the type conversation to what the bootstrapping wants).</p>
+<p>Here we’ll take the data from before and square each element (it’s simpler to go back to the original numpy array and square the elements there then handle the type conversation to what the bootstrapping code wants).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data2</span> <span class="o">=</span> <span class="n">data</span><span class="o">**</span><span class="mi">2</span>
@@ -655,9 +660,9 @@ is 26 <span class="math notranslate nohighlight">\(\pm\)</span> 2 decays / secon
 </div>
 </div>
 <p>Bootstrapping is a part of a collection of techniques used in sampling.  They are all modern because they rely on having computational power.</p>
-<p>One of the earliest forms of resampling is <a class="reference external" href="https://en.wikipedia.org/wiki/Jackknife_resampling">jackknife</a>.  Here the <em>N</em> points are divided into <em>N</em> samples of size <em>N-1</em> to understand the variation and look for biases.
-Another one of these techniques is <em>subsampling</em>.  There the dataset is randomly divided into <em>M</em> samples of the same size.  For each sample the mean is evaluated.  The uncertainty on the mean can then be evaluated using standard techniques for evaluating the uncertainty on the mean (discussed in the slides).</p>
-<p>The bootstrap is used <em>heavily</em> in modern physics because it is so straightforward even for complicated quantities.  <a class="reference external" href="http://cds.cern.ch/record/2759945">Here</a> is a document describing the use of this technique in ATLAS.</p>
+<p>One of the earliest forms of resampling is <a class="reference external" href="https://en.wikipedia.org/wiki/Jackknife_resampling">jackknife</a>.  Here the <em>N</em> points are divided into <em>N</em> samples of size <em>N-1</em> to give the variance and look for biases in the dataset.  In constrast the bootstrap gives the full distribution so it can be used to estimate the mean or other values from the distribution.</p>
+<p>Another one of these techniques is <strong>subsampling</strong>.  There the dataset is randomly divided into <em>M</em> samples of the same size.  For each sample the mean is evaluated.  The uncertainty on the mean can then be evaluated using standard techniques for evaluating the uncertainty on the mean (discussed in the slides).  In some cases subsampling will provide better results than bootstrapping.</p>
+<p>The bootstrap and other sampling methods are used <em>heavily</em> in modern physics because it is so straightforward even for complicated quantities.  <a class="reference external" href="http://cds.cern.ch/record/2759945">Here</a> is a document describing the use of this technique in ATLAS.</p>
 </section>
 
     <script type="text/x-thebe-config">
