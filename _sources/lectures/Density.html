@@ -505,7 +505,7 @@ document.write(`
 <h1>Estimating Probability Density from Data<a class="headerlink" href="#estimating-probability-density-from-data" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -531,6 +531,36 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>astroML
 <span class="kn">import</span><span class="w"> </span><span class="nn">astroML.density_estimation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting astroML
+  Downloading astroML-1.0.2.post1-py3-none-any.whl.metadata (7.4 kB)
+Requirement already satisfied: scikit-learn&gt;=0.18 in /usr/local/lib/python3.13/dist-packages (from astroML) (1.6.1)
+Requirement already satisfied: numpy&gt;=1.13 in /usr/local/lib/python3.13/dist-packages (from astroML) (2.1.3)
+Requirement already satisfied: scipy&gt;=0.18 in /usr/local/lib/python3.13/dist-packages (from astroML) (1.16.3)
+Requirement already satisfied: matplotlib&gt;=3.0 in /usr/local/lib/python3.13/dist-packages (from astroML) (3.10.0)
+Requirement already satisfied: astropy&gt;=3.0 in /usr/local/lib/python3.13/dist-packages (from astroML) (7.2.2)
+Requirement already satisfied: astropy-iers-data&gt;=0.2026.6.22.1.23.34 in /usr/local/lib/python3.13/dist-packages (from astropy&gt;=3.0-&gt;astroML) (0.2026.9.14.0.56.43)
+Requirement already satisfied: packaging&gt;=22.0.0 in /usr/local/lib/python3.13/dist-packages (from astropy&gt;=3.0-&gt;astroML) (26.3)
+Requirement already satisfied: pyerfa&gt;=2.0.1.1 in /usr/local/lib/python3.13/dist-packages (from astropy&gt;=3.0-&gt;astroML) (2.0.1.5)
+Requirement already satisfied: PyYAML&gt;=6.0.0 in /usr/local/lib/python3.13/dist-packages (from astropy&gt;=3.0-&gt;astroML) (6.0.3)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /usr/local/lib/python3.13/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (1.4.0)
+Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.13/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /usr/local/lib/python3.13/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (4.65.0)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in /usr/local/lib/python3.13/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (1.5.1)
+Requirement already satisfied: pillow&gt;=8 in /usr/local/lib/python3.13/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (11.3.0)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /usr/local/lib/python3.13/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (3.3.2)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /usr/local/lib/python3.13/dist-packages (from matplotlib&gt;=3.0-&gt;astroML) (2.9.0.post0)
+Requirement already satisfied: joblib&gt;=1.2.0 in /usr/local/lib/python3.13/dist-packages (from scikit-learn&gt;=0.18-&gt;astroML) (1.6.0)
+Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /usr/local/lib/python3.13/dist-packages (from scikit-learn&gt;=0.18-&gt;astroML) (3.7.0)
+Requirement already satisfied: cloudpickle&gt;=3.0 in /usr/local/lib/python3.13/dist-packages (from joblib&gt;=1.2.0-&gt;scikit-learn&gt;=0.18-&gt;astroML) (3.1.2)
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.13/dist-packages (from python-dateutil&gt;=2.7-&gt;matplotlib&gt;=3.0-&gt;astroML) (1.17.0)
+Downloading astroML-1.0.2.post1-py3-none-any.whl (134 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">134.3/134.3 kB</span> <span class=" -Color -Color-Red">953.8 kB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hInstalling collected packages: astroML
+Successfully installed astroML-1.0.2.post1
 </pre></div>
 </div>
 </div>
@@ -721,8 +751,16 @@ document.write(`
 <p>The purpose of the kernel is to spread each sample to fill in the gaps due to finite data. In other words, we are approximating what we would expect to measure with an infinite dataset. With this picture, the bandwidth should be related to the mean gap size, which should ~halve when the sample size is doubled.</p>
 <p>Just knowing that the probability density has changed does not provide any guidance on how to change the bandwidth. However, we might also know <em>how</em> it has changed by looking at the data.  For example, if the data appears much smoother, then increasing the bandwidth would be justified. Conversely, data with sharp edges or narrow peaks would benefit from a smaller bandwidth to preserve those features.</p>
 <p>What if you had access to the output of the KDE without having access to the underlying data?  Could you judge if the bandwidth is appropriate?</p>
-<p>For further reading about histograms and KDE for 1D data, see <a class="reference external" href="https://mglerner.github.io/posts/histograms-and-kernel-density-estimation-kde-2.html">this blog post</a>.  For a more detailed discussion of KDE in physics see <a class="reference external" href="https://arxiv.org/abs/hep-ex/0011057">this</a>.</p>
-<p><a class="reference external" href="https://arxiv.org/pdf/1906.04317.pdf">Here</a> (Fig. 13) is an example of using KDE in a real measurement using the <a class="reference external" href="https://en.wikipedia.org/wiki/IceCube_Neutrino_Observatory">IceCube Neutrino Observatory</a>.  Here in order to get the uncertainty they modify the width of the kernel by <span class="math notranslate nohighlight">\(\pm\)</span>90% to get the uncertainty (Sec. IVA).  It’s not the biggest uncertainty in the measurement so they aren’t very sensitive to that number (what if it was the biggest uncertainty?).</p>
+<p><strong>Adaptive KDEs</strong></p>
+<p>For a more detailed discussion of KDE in physics see <a class="reference external" href="https://arxiv.org/abs/hep-ex/0011057">this</a>.  This discusses <em>adaptive KDEs</em>.  Rather than having a single
+bandwidth parameter, as above, these vary the bandwidth
+parameter according to the density and width of the data.  The bandwidth at some value <span class="math notranslate nohighlight">\(x_i\)</span> is inversely proportional to the value of the PDF at <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
+<p><a class="reference external" href="https://arxiv.org/pdf/1906.04317.pdf">Here</a> (Fig. 13) is an example of using an adaptive KDE in a real measurement using the <a class="reference external" href="https://en.wikipedia.org/wiki/IceCube_Neutrino_Observatory">IceCube Neutrino Observatory</a>.  Here in order to get the uncertainty they modify the width of the kernel by <span class="math notranslate nohighlight">\(\pm\)</span>90% to get the uncertainty (Sec. IVA).  It’s not the biggest uncertainty in the measurement so they aren’t very sensitive to that number (what if it was the biggest uncertainty?).</p>
+<p>sklearn as we were using above only supports
+fixed bandwidth KDEs.  awkde and AdaptiveKDE are implementations of this.</p>
+<p>Everything we have done assumes the KDE is defined over all values of <span class="math notranslate nohighlight">\(x\)</span>.  If that is not the case (for example if the PDF is supposed to describe a NN output that is defined only over the range from 0 to 1, then you have to consider the boundary.  For some kernel choices, this will not be a problem (e.g. the tophat).  For the Gaussian, the tails of the KDE will very likely extend into the unallowed range.  In that case you’ll need to specifically treat the boundary (there is some discussion <a class="reference external" href="https://arxiv.org/abs/hep-ex/0011057">here</a>
+and other places.</p>
+<p>For further reading about histograms and KDE for 1D data, see <a class="reference external" href="https://mglerner.github.io/posts/histograms-and-kernel-density-estimation-kde-2.html">this blog post</a>.</p>
 </section>
 <section id="span-style-color-orange-multidimensional-kde-span">
 <h2><span style="color:Orange">Multidimensional KDE</span><a class="headerlink" href="#span-style-color-orange-multidimensional-kde-span" title="Permalink to this heading">#</a></h2>
