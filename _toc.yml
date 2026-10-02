@@ -60,7 +60,6 @@ chapters:
   - file: _sources/projects/Project_01_GalaxyZoo
   - file: _sources/projects/Project_01_NuclearGeometryQGP
   - file: _sources/projects/Project_01_Tornadoes
-  - file: _sources/projects/Project_01_Weather
 - file: _sources/Week_08 # Stochastic Processes, Markov Chains & Variational Inference
   sections:
   - url: https://docs.google.com/presentation/d/1L4UQPP-3EntdFerMZV4UGhH1MOSXr13ttZwns8kgA6Q/edit?usp=sharing
