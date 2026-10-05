@@ -648,7 +648,7 @@ P(\Theta_M\mid D, M) = \frac{P(D\mid \Theta_M, M)\,P(\Theta_M\mid M)}{P(D\mid M)
 <li><p><em><strong><span style="color:violet">Evidence</span></strong></em>: <span class="math notranslate nohighlight">\(P(D\mid M)\)</span> is the probability of the data given the hyperparameters and <em>marginalized over all possible parameter values given the hyperparameters</em>.</p></li>
 </ol>
 <p>In typical inference problems, the posterior (1) is what we really care about and the likelihood (2) is what we know how to calculate. The prior (3) is where we must quantify our subjective “degree of belief” in different possible universes.</p>
-<p>What about the evidence (4)?  Using the earlier rule (5) of probability calculus (near the bottom of <a class="reference external" href="https://www.instagram.com/p/DPCNVz6DGgu/?hl=en&amp;img_index=1">this notebook</a>), we discover that (4) can be calculated from (2) and (3):</p>
+<p>What about the evidence (4)?  Using the earlier rule (5) of probability calculus, we discover that (4) can be calculated from (2) and (3):</p>
 <div class="math notranslate nohighlight">
 \[ \Large
 P(D\mid M) = \int d\Theta_M' P(D\mid \Theta_M', M)\, P(\Theta_M'\mid M) \; .
