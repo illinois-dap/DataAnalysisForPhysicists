@@ -7,7 +7,7 @@ You will learn about hypothesis testing
 * Learn about Confidence Intervals and Hypothesis testing
 
 ## *Lecture Materials*
-* [Slides](https://docs.google.com/presentation/d/1j82yCTrctslrjFAPirTx4uihFUmM8ammw2qPwThIPPY/edit?usp=sharing}
+* [Slides](https://docs.google.com/presentation/d/1KEiaPA47U7OZEnUaOx0Kf7vREcpXgqlb6SBUP6idVz0/edit?usp=sharing)
 * {doc}`lectures/ConfidenceIntervals`
 
 ## *Homework Assignment*
