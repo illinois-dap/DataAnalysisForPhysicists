@@ -501,7 +501,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neyman-pearson-lemma">Neyman-Pearson Lemma</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">An example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-example">Gaussian Example</a></li>
 </ul>
 </li>
 </ul>
@@ -876,35 +876,28 @@ $<span class="math notranslate nohighlight">\(\frac{L(H_0)}{L(H_1)} &gt; c\)</sp
 construct the best possible test for a given value of <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
 </section>
 </section>
-<section id="an-example">
-<h2>An example<a class="headerlink" href="#an-example" title="Permalink to this heading">#</a></h2>
+<section id="gaussian-example">
+<h2>Gaussian Example<a class="headerlink" href="#gaussian-example" title="Permalink to this heading">#</a></h2>
 <p>Let’s say you want to distinguish between two hypotheses,
 <span class="math notranslate nohighlight">\(H_0\)</span> and <span class="math notranslate nohighlight">\(H_1\)</span>.  In both cases, the pdf can be described as Gaussians with parameters <span class="math notranslate nohighlight">\(\mu_0\)</span>, <span class="math notranslate nohighlight">\(\sigma_0\)</span> for <span class="math notranslate nohighlight">\(H_0\)</span> and <span class="math notranslate nohighlight">\(\mu_1\)</span> and <span class="math notranslate nohighlight">\(\sigma_1\)</span> for <span class="math notranslate nohighlight">\(H_1\)</span>.  You have <span class="math notranslate nohighlight">\(n\)</span> measurements to distingush between the hypothesis.</p>
 <p>If <span class="math notranslate nohighlight">\(n = 1\)</span>, then we just have something very similar to the plot above.  You decide on the significance of the test, <span class="math notranslate nohighlight">\(\alpha\)</span> that you want and <span class="math notranslate nohighlight">\(t_{cut}\)</span> is determined.</p>
-<p>Now let’s say <span class="math notranslate nohighlight">\(n = 16\)</span>.  You want one answer with a significance <span class="math notranslate nohighlight">\(\alpha\)</span>.  Do your data prefer <span class="math notranslate nohighlight">\(H_0\)</span> or
-<span class="math notranslate nohighlight">\(H_1\)</span>.  You have 16 data points and it’s very possible that, of those, some are on both sides of the <span class="math notranslate nohighlight">\(t_{cut}\)</span> value determined in the <span class="math notranslate nohighlight">\(n=1\)</span> case.</p>
+<p>Now let’s say <span class="math notranslate nohighlight">\(n &gt; 1\)</span>.  You want one answer with a significance <span class="math notranslate nohighlight">\(\alpha\)</span>.  Do your data prefer <span class="math notranslate nohighlight">\(H_0\)</span> or
+<span class="math notranslate nohighlight">\(H_1\)</span>.  You have N data points and it’s very possible that, of those, some are on both sides of the <span class="math notranslate nohighlight">\(t_{cut}\)</span> value determined in the <span class="math notranslate nohighlight">\(n=1\)</span> case.</p>
 <p>We know that we need to find the ratio of the likelihoods to get the best possible test. How does that work in practice?</p>
 <p>Let’s call the individual data values <span class="math notranslate nohighlight">\(X_1, X_2, ...X_{16}\)</span>.  Let’s say these values have a mean <span class="math notranslate nohighlight">\(\mu\)</span> and variance 16.</p>
-<p>What’s the best critical region, that is, find the most powerful test with a significance level of <span class="math notranslate nohighlight">\(\alpha=0.05\)</span> to test the simple null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span> where <span class="math notranslate nohighlight">\(\mu =\mu_0 = 10\)</span> against the simple alternative hypothesis <span class="math notranslate nohighlight">\(H_1\)</span> where <span class="math notranslate nohighlight">\(\mu = \mu_1= 15\)</span>?</p>
+<p>What’s the best critical region, that is, find the most powerful test with a significance level of <span class="math notranslate nohighlight">\(\alpha=0.05\)</span> to test the simple null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span> where <span class="math notranslate nohighlight">\(\mu =\mu_0\)</span> against the simple alternative hypothesis <span class="math notranslate nohighlight">\(H_1\)</span> where <span class="math notranslate nohighlight">\(\mu = \mu_1\)</span>?</p>
 <p>Since <span class="math notranslate nohighlight">\(H_0\)</span> and <span class="math notranslate nohighlight">\(H_1\)</span> are Gaussians, we know the pdfs.  The normalization factors in front of the Gaussians drop out and we are left with:
 $<span class="math notranslate nohighlight">\(t = \frac{exp(-\frac{1}{2{\sigma}^2}\sum_{i=1}^{N}(X_i-\mu_0)^2)}{exp(-\frac{1}{2{\sigma}^2}\sum_{i=1}^{N}(X_i-\mu_1)^2)}\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(t = \frac{exp(-\frac{1}{32}\sum_{i=1}^{16}(X_i-10)^2)}{exp(-\frac{1}{32}\sum_{i=1}^{16}(X_i-15)^2)}\)</span><span class="math notranslate nohighlight">\(
-(the likelihood of the probability of all 16 measurements is a product of the 16 individual probabilities).
+(the likelihood of the probability of all n measurements is a product of the n individual probabilities).
 We want this ratio to be less than some value \)</span>k$ (which we don’t yet know).</p>
-<p>Simplifying the math…
-$<span class="math notranslate nohighlight">\(exp(-\frac{1}{32}(\sum_{i=1}^{16}(X_i-10)^2 - \sum_{i=1}^{16}(X_i-15)^2)) &lt; k\)</span><span class="math notranslate nohighlight">\(
-and then expanding each sum:
-\)</span><span class="math notranslate nohighlight">\(\sum_{i=1}^{16}(X_i-M)^2 = \sum_{i=1}^{16} X_i^2 - 2 \dot M \sum_{i=1}^{16} X_i + 16 M^2\)</span><span class="math notranslate nohighlight">\(
-leaves
-\)</span><span class="math notranslate nohighlight">\(exp(-\frac{1}{32}(-20\sum_{i=1}^{16}X_i +1600 +30 \sum_{i=1}^{16}X_i - 3600)) &lt; k\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(exp(-\frac{1}{32}(10\sum_{i=1}^{16}X_i -2000  )) &lt; k\)</span><span class="math notranslate nohighlight">\(
-finally:
-\)</span><span class="math notranslate nohighlight">\(-10\sum_{i=1}^{16}X_i + 2000 &lt; 32\ln k\)</span><span class="math notranslate nohighlight">\(
-Also \)</span><span class="math notranslate nohighlight">\(\mu = \sum_{i=1}^{16}X_i/16\)</span><span class="math notranslate nohighlight">\(
-so now,
-\)</span><span class="math notranslate nohighlight">\(\mu \ge -160(32\ln  k - 2000)\)</span>$</p>
-<p>So now we just have to integrate the null hypothesis to find the value of <span class="math notranslate nohighlight">\(k\)</span>.  Let’s say we want <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>.  We want the 95% point on the cdf of a Gaussian centered at 10 with a width of <span class="math notranslate nohighlight">\(\sigma / \sqrt{16} = 1\)</span> (the variance and the sample size are both 16).</p>
-<p>The value of the cut on <span class="math notranslate nohighlight">\(\mu\)</span> is then <span class="math notranslate nohighlight">\(\kappa = 10 + 1.65 = 11.65\)</span>.  Note that this value depends on the mean and variances of the null hypothesis and the number of samples in your measurement.</p>
+<p>Simplifying the math by taking a log:
+$<span class="math notranslate nohighlight">\(\sigma^2 \ln t
+=\frac{N}{2}(\mu_0^2 - \mu_1^2) +
+(\mu_1 - \mu_0)\sum_{i=1}^{N} X_i
+\)</span>$</p>
+<p>What’s great about this is that this is that it can be shown that <span class="math notranslate nohighlight">\(t\)</span> is actually a momotonic function of
+$<span class="math notranslate nohighlight">\( z = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{N}}\)</span><span class="math notranslate nohighlight">\(
+This is Gaussian distributed in this case and we can directly see that \)</span>z<span class="math notranslate nohighlight">\( depends on \)</span>n$; our additional measurements improve the descriminating power as they should.</p>
 </section>
 </section>
 
@@ -986,7 +979,7 @@ so now,
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neyman-pearson-lemma">Neyman-Pearson Lemma</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">An example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-example">Gaussian Example</a></li>
 </ul>
 </li>
 </ul>
