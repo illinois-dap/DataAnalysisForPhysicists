@@ -99,6 +99,7 @@ chapters:
     - file: _sources/projects/Project_02_ExoticParticles
     - file: _sources/projects/Project_02_GalaxyZoo
     - file: _sources/projects/Project_02_NuclearGeometryQGP
+    - file: _sources/projects/Project_02_SpinGlass
 - file: _sources/Week_13 # Montel Carlo Sampling Methods
   sections:
   - url: https://docs.google.com/presentation/d/1dzBzUDiL8J8xmn-9igHU7n4dmCu_rigLaptJKCHzH88/edit?usp=sharing
