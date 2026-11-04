@@ -1,0 +1,882 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Simulated Annealing and application on Spin Glass Systems &#8212; PHYS 398 DAP</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_sources/projects/Project_02_SpinGlass';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Monte Carlo and Sampling Methods" href="../Week_13.html" />
+    <link rel="prev" title="Nuclear Geometry and Characterization of the Quark Gluon Plasma" href="Project_02_NuclearGeometryQGP.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="PHYS 398 DAP - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="PHYS 398 DAP - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    <span style="color:Blue">Data Analysis for Physics</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_01.html"><span style="color: blue;"><b>Course Introduction</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1vq4b3zxrhEMJbfeCH52hufBbXvTwhufEXdSs8mWY2ec/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/JupyterNumpy.html">Jupyter Notebooks and Numerical Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/Pandas.html">Handling Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_01.html">Homework 01: Numerical python and data handling</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_02.html"><span style="color: blue;"><b>Probability Theory</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1fxUZ9nOM9RtQYOGHNl7qQPq2yX_YYokqfyaQvOMRIHY/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/ProbabilityTheory.html">Probability Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/ProbabilityTheory2.html"><span style="color:Orange">Bayes’ Rule</span></a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../lectures/Visualization.html">Visualizing Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_02.html">Homework 02: Probability Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_03.html"><span style="color: blue;"><b>Important Probability Distributions</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/162LeNpOREjgB2dSaUUs369-KLCTafVjscWL6jGIEQ94/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/ProbabilityDistributions.html">Important Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/CentralLimitTheorem.html">Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_03.html">Homework 03: Important Probability Distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_04.html"><span style="color: blue;"><b>Theory of Estimators</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1rIkCqC0TgwbDADqCD4WVhQYjTC18wLsXKzFgemI5p30/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/Statistics.html">Statistics</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../lectures/Statistics2.html"><span style="color:LightGreen">Uncertainties on the Mean</span></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_05.html"><span style="color: blue;"><b>Estimating Probability Density from Data</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1y7zT3bz7simKqefCd54S9kba3tNw0pO7-0FajWPP27Y/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/Density.html">Estimating Probability Density from Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_05.html">Homework 05: Kernel Density Estimation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_06.html"><span style="color: blue;"><b>Statistics and Sources of Uncertainty</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/12TS8EaTSQPM-6EQGT8PUVKfycVTMA2Tf0HwmhBz-uXY/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/UncertaintiesandFitting.html">Fitting</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../lectures/Fitting2.html">Fitting, part 2</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_07.html"><span style="color: blue;"><b>Frequentist and Bayesian Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1i9vv4J9iaAeiDIbI7y46tcSdteM9js9uiNpy5j2mF0E/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/FrequentistBayesian.html">Frequentist and Bayesian Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/MCMC.html">Markov Chain Monte Carlo in Practice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_07.html">Homework 07: Bayesian Statistics and MCMC</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Project_01.html"><span style="color: blue;"><b>Project 01</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Project_01_HiggsTauTau.html">Higgs Boson Decaying to Tau Leptons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Project_01_ExoticParticles.html">Searching for Exotic Particles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Project_01_GalaxyZoo.html">Galaxy Zoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Project_01_NuclearGeometryQGP.html">Nuclear Geometry and Characterization of the Quark Gluon Plasma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Project_01_Tornadoes.html">Tornadoes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Project_01_Networking.html">Networking</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_08.html"><span style="color: blue;"><b>Stochastic Processes, Markov Chains &amp; Variational Inference</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1L4UQPP-3EntdFerMZV4UGhH1MOSXr13ttZwns8kgA6Q/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/Markov.html">Stochastic Processes and Markov-Chain Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/Variational.html">Variational Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_08.html">Homework 08: Markov Chains</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_09.html"><span style="color: blue;"><b>Confidence Intervals and Hypothesis Testing</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1j82yCTrctslrjFAPirTx4uihFUmM8ammw2qPwThIPPY/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/ConfidenceIntervals.html">Confidence from Data</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_09.html">Problem 1</a></li>
+
+
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_10.html"><span style="color: blue;"><b>Fourier methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/132-j5XibZfUJi-74fDGiW7_EGEuJBNqfIoj0H52Lv7s/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/ConvolutionResponse.html">Convolution &amp; Response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/ResponseConvolutionUnfolding.html">Unfolding</a></li>
+
+
+
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_11.html"><span style="color: blue;"><b>Response, Convolution and Unfolding</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1QbUPr2X_PZhAqpmmaUbotf66ijRqWDMDhFSeREr3GY4/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/FourierMethods.html">Fourier Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_11.html">Unfolding</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_12.html"><span style="color: blue;"><b>Time Series</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1YfS8VFVGFZOIyf3ktE4a752tTy7XCAgWBATPeIt3Q9s/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/TimeSeries.html">Time Series Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_12.html">Homework 12: Time Series Analysis of Projectile Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Project_02.html"><span style="color: blue;"><b>Project 02</b></span></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Project_02_HiggsTauTau.html"><em><strong><span style="color:Yellow">Higgs Boson Decaying to Tau Leptons</span></strong></em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Project_02_ExoticParticles.html"><em><strong><span style="color:Yellow">Searching for Exotic Particles</span></strong></em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Project_02_GalaxyZoo.html"><em><strong><span style="color:Yellow">Galaxy Zoo</span></strong></em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Project_02_NuclearGeometryQGP.html">Nuclear Geometry and Characterization of the Quark Gluon Plasma</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Simulated Annealing and application on Spin Glass Systems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_13.html"><span style="color: blue;"><b>Monte Carlo and Sampling Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1dzBzUDiL8J8xmn-9igHU7n4dmCu_rigLaptJKCHzH88/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/MonteCarloSamplingMethods.html">Monte Carlo and Sampling Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../homework/Homework_13.html">Assignment 13: Monte Carlo Integration and Sampling Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_14.html"><span style="color: blue;"><b>Bias and Blind Analysis</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1M-kEhd9YPDOOkuDhTRS9oHY9yUnq9xLuu0Gl4I-5yeo/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/BiasBlindAnalysis.html">Bias and Blind Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Week_15.html"><span style="color: blue;"><b>Machine Learning Methods</b></span></a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.google.com/presentation/d/1YTYGG6R_LapMASxfeEXcyFiyXYy1e73vxpjJ0E9VyvE/edit?usp=sharing">Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lectures/MachineLearningMethodsInference.html">Deep Learning</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/illinois-dap/DataAnalysisForPhysicists/blob/main/_sources/projects/Project_02_SpinGlass.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/illinois-dap/DataAnalysisForPhysicists" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/_sources/projects/Project_02_SpinGlass.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Simulated Annealing and application on Spin Glass Systems</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-overview-span"><span style="color:Orange">Overview</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-questions-span"><span style="color:Orange">Questions</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-question-01-span"><span style="color:LightGreen">Question 01</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-question-02-span"><span style="color:LightGreen">Question 02</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-question-03-span"><span style="color:LightGreen">Question 03</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-question-04-span"><span style="color:LightGreen">Question 04</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-question-05-span"><span style="color:LightGreen">Question 05</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-question-06-span"><span style="color:LightGreen">Question 06</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-references-span"><span style="color:Orange">References</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-acknowledgements-span"><span style="color:Orange">Acknowledgements</span></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="simulated-annealing-and-application-on-spin-glass-systems">
+<h1>Simulated Annealing and application on Spin Glass Systems<a class="headerlink" href="#simulated-annealing-and-application-on-spin-glass-systems" title="Permalink to this heading">#</a></h1>
+<p><img alt="simulated-annealing-path.jpg" src="data:image/jpeg;base64,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" /></p>
+<p>Image: A spikey and rough energy landscape with many local minima. A red arrow shows the trajectory of motion towards a global minima with simulated annealing. Image credit: <a class="reference external" href="https://victoryepes.blogs.upv.es/tag/simulated-annealing/">https://victoryepes.blogs.upv.es/tag/simulated-annealing/</a></p>
+<section id="span-style-color-orange-overview-span">
+<h2><span style="color:Orange">Overview</span><a class="headerlink" href="#span-style-color-orange-overview-span" title="Permalink to this heading">#</a></h2>
+<p>Simulated annealing is a common tool in both condensed matter and machine learning. The basic idea is to heat* up a system and cool it down incrementally to find the ground energy state. In this project you will learn about how simulated annealing can be used to solve a wide varriety of problems in physics and machine learning. You will also implement a simple simulated annealing code to find the ground state of an arbitrary spin glass (ising model) with periodic boundary conditions.</p>
+<p>*In non-physical situations such as machine learning the word “heat” here is used loosely.</p>
+<p>Suggested Resources:</p>
+<p><a class="reference external" href="https://gorayni.github.io/blog/2014/05/22/simulated-annealing.html">https://gorayni.github.io/blog/2014/05/22/simulated-annealing.html</a></p>
+</section>
+<section id="span-style-color-orange-questions-span">
+<h2><span style="color:Orange">Questions</span><a class="headerlink" href="#span-style-color-orange-questions-span" title="Permalink to this heading">#</a></h2>
+<section id="span-style-color-lightgreen-question-01-span">
+<h3><span style="color:LightGreen">Question 01</span><a class="headerlink" href="#span-style-color-lightgreen-question-01-span" title="Permalink to this heading">#</a></h3>
+<p>Describe what simulated annealing is. What are the basic steps of a simulated annealing algorithm? What is the importance of setting the temperature and cooling schedule?</p>
+</section>
+<section id="span-style-color-lightgreen-question-02-span">
+<h3><span style="color:LightGreen">Question 02</span><a class="headerlink" href="#span-style-color-lightgreen-question-02-span" title="Permalink to this heading">#</a></h3>
+<p>Breifly summarize how is it used to solve the traveling salesman problem in this paper: <a class="reference external" href="https://www.researchgate.net/publication/6026283_Optimization_by_Simulated_Annealing">https://www.researchgate.net/publication/6026283_Optimization_by_Simulated_Annealing</a>. The traveling salesman problem is considered NP-complete. What does NP-complete mean?</p>
+</section>
+<section id="span-style-color-lightgreen-question-03-span">
+<h3><span style="color:LightGreen">Question 03</span><a class="headerlink" href="#span-style-color-lightgreen-question-03-span" title="Permalink to this heading">#</a></h3>
+<p>How can simulated annealing help solve problems in machine learning? What are some other areas simulated annealing has been useful in?</p>
+</section>
+<section id="span-style-color-lightgreen-question-04-span">
+<h3><span style="color:LightGreen">Question 04</span><a class="headerlink" href="#span-style-color-lightgreen-question-04-span" title="Permalink to this heading">#</a></h3>
+<p>We will now focus on the topic of spin glasses and implement a simulated annealing code. The parts in this problems will walk you through the implementation. Let us first consider a triangular latice. Each point on the lattice contains one spin that can either be pointed up or down. For a more general model see the <a class="reference external" href="https://en.wikipedia.org/wiki/Potts_model">Potts Model</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">FancyArrowPatch</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us first define some simulation parameters. We will simulate an LXL box of spins arranged in a triangular lattice made up of equalateral triangles. The spins <span class="math notranslate nohighlight">\(S_i\)</span> can have a value of <span class="math notranslate nohighlight">\(+1\)</span> for up or <span class="math notranslate nohighlight">\(-1\)</span> for down*. Each spin has 6 nearest neighbors. We will only consider nearest neighbor interactions according to the Ising model Hamiltonian:</p>
+<div class="math notranslate nohighlight">
+\[H = \sum_{ij}J_{ij} S_i S_j \]</div>
+<p>In general the coupling strength <span class="math notranslate nohighlight">\(J_{ij}\)</span> can be various values but for simplicity, lets set it to a constant <span class="math notranslate nohighlight">\(J_{ij}=J=1\)</span></p>
+<p><span class="math notranslate nohighlight">\(tmax\)</span> is the number of timesteps we will execute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulation parameters</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># lattice size (LxL)</span>
+<span class="n">tmax</span> <span class="o">=</span> <span class="mi">10000</span> <span class="c1"># maximum timesteps</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">))</span>  <span class="c1"># initial spin configuration</span>
+<span class="n">J</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># coupling strength</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">80</span> <span class="c1">#initial temperature</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, let’s generate lattice coordinates</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate x, y coordinates for a triangular lattice</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_lattice_coordinates</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates (x, y) coordinates for a triangular lattice.&quot;&quot;&quot;</span>
+    <span class="n">x_offset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>  <span class="c1"># Horizontal offset for hexagonal tiling</span>
+    <span class="n">y_offset</span> <span class="o">=</span> <span class="mi">1</span>               <span class="c1"># Vertical offset</span>
+    <span class="n">coordinates</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">x_offset</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Even rows</span>
+                <span class="n">x</span> <span class="o">-=</span> <span class="n">x_offset</span> <span class="o">/</span> <span class="mi">2</span>  <span class="c1"># Shift even rows left</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">j</span> <span class="o">*</span> <span class="n">y_offset</span>
+            <span class="n">coordinates</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, for a specific spin <span class="math notranslate nohighlight">\(s_{ij}\)</span> lets retrieve its six neighbors. In order to plot our lattice in a square shaped frame, we had to introduce shifts on even numbered rows. We take this into account for indexing neighbors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to get nearest neighbors for a triangular lattice</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_neighbors</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the nearest neighbors of a spin in a triangular lattice.&quot;&quot;&quot;</span>
+    <span class="c1"># Even rows neighbors</span>
+    <span class="k">if</span> <span class="n">j</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="p">[((</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span>       <span class="c1"># left</span>
+                      <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span>       <span class="c1"># right</span>
+                      <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span><span class="p">),</span>       <span class="c1"># lower right</span>
+                      <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span><span class="p">),</span>       <span class="c1"># upper right</span>
+                      <span class="p">((</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span><span class="p">),</span>  <span class="c1"># upper left</span>
+                      <span class="p">((</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span><span class="p">)]</span>  <span class="c1"># lower left</span>
+    <span class="c1"># Odd rows neighbors</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="p">[((</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span>       <span class="c1"># left</span>
+                      <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span>       <span class="c1"># right</span>
+                      <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span><span class="p">),</span>       <span class="c1"># lower left</span>
+                      <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span><span class="p">),</span>       <span class="c1"># upper left</span>
+                      <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span><span class="p">),</span>  <span class="c1"># upper right</span>
+                      <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span><span class="p">)]</span>  <span class="c1"># lower right</span>
+    <span class="k">return</span> <span class="n">neighbors</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will now plot the initial spin state!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to plot triangular lattice with arrows and neighbor connections</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_triangular_lattice</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
+    <span class="n">coordinates</span> <span class="o">=</span> <span class="n">generate_lattice_coordinates</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>  <span class="c1"># Get lattice coordinates</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+    <span class="c1"># Plot lattice lines and spins</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">coordinates</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+
+            <span class="c1"># Draw lines between neighbors to form the triangular lattice</span>
+            <span class="n">neighbors</span> <span class="o">=</span> <span class="n">get_neighbors</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">ni</span><span class="p">,</span> <span class="n">nj</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">:</span>
+                    <span class="n">x_n</span><span class="p">,</span> <span class="n">y_n</span> <span class="o">=</span> <span class="n">coordinates</span><span class="p">[</span><span class="n">ni</span><span class="p">,</span> <span class="n">nj</span><span class="p">]</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">x_n</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">y_n</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">1.2</span><span class="p">):</span> <span class="c1">#avoids plotting lines connecting periodic boundary for clarity</span>
+                      <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">x_n</span><span class="p">],</span> <span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">y_n</span><span class="p">],</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># blue lattice lines</span>
+
+            <span class="c1"># Draw up/down arrows for spin configuration</span>
+            <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>  <span class="c1"># up arrow</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>  <span class="c1"># down arrow</span>
+
+    <span class="c1"># Set equal scaling and hide axes for clarity</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Triangular Lattice with Spin Configuration&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plot_triangular_lattice</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/103ae47fcb98f93582ceb6f26874656fa73af783355a7ffe1041246bc00b2b93.png" src="../../_images/103ae47fcb98f93582ceb6f26874656fa73af783355a7ffe1041246bc00b2b93.png" />
+</div>
+</div>
+<p>Now we set the initial temperature and cooling schedule. The schedule should be an array of temperatures to cool to at each time step. Here’s a good choice of schedule.</p>
+<div class="math notranslate nohighlight">
+\[T(t) = \frac{T_0}{log(t+1)}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">timesteps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">tmax</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#YOUR CODE HERE</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we are finally ready to implement the Hamiltonian</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the Hamiltonian for the triangular lattice (nearest neighbor interactions)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">H</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">J</span><span class="p">):</span>
+<span class="c1">## YOUR CODE HERE</span>
+  <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+  <span class="k">return</span> <span class="n">total_energy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Earlier in class, we studied the Metropolis Algorithm. A time step in simulated annealing is quite similar. Except whether or not we accept the new state (in our case the spin configuration) with energy higher than in the previous step depends on temperature. Lets define a propegation function. The propegation will pick a random spin and flip it. It will also calculate Eold and Enew with the H function you already defined.</p>
+<p>Now all you need to do is decide on a criterion to accept or reject the new state. If Enew &lt; Eold, accept the new state.
+If Eold &gt; Enew, accept the new state if <span class="math notranslate nohighlight">\(e^{\frac{E_{new}-E_{old}}{T}}\)</span> is greater than or equal to a random number between 0 and 1.</p>
+<p>Otherwise, keep the old state.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function for timestep propagation</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">prop</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">temp</span><span class="p">):</span>
+    <span class="c1">#YOUR CODE HERE</span>
+    <span class="k">return</span> <span class="n">s</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we will fold over the schedule by calling prop(s,temp) however many times. I reccomend saving intermediate states so you can plot the energy over time steps later.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#start folding!</span>
+<span class="n">ss</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="c1"># this is so you can save intermediate states as you change s directly. use ss.append(s) after each timestep.</span>
+<span class="n">H_values</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1">#YOUR CODE HERE</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now plot your final state as well as the energy over time (or equivalently temperature)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#YOUR CODE HERE</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="span-style-color-lightgreen-question-05-span">
+<h3><span style="color:LightGreen">Question 05</span><a class="headerlink" href="#span-style-color-lightgreen-question-05-span" title="Permalink to this heading">#</a></h3>
+<p>What do you expect as the final state for J=1? What type of magnet does this represent? What type of magnet do you get for J = -1? (We will implement this in Q6)</p>
+<p>Your answer here</p>
+</section>
+<section id="span-style-color-lightgreen-question-06-span">
+<h3><span style="color:LightGreen">Question 06</span><a class="headerlink" href="#span-style-color-lightgreen-question-06-span" title="Permalink to this heading">#</a></h3>
+<p>Now repeat the steps in question 4 except with J=-1. This is an example of frustration. In general there can be a <a class="reference external" href="https://https://en.wikipedia.org/wiki/File:Frustrated_magnetism.webm">number of degenerate ground states in a quantum spin system</a>. Do you see why simulated annealing becomes relevant to find the ground state in this case? How does frustration in spin glasses lead to “scale free behavior*”, ie if you zoom out at an arbitrary scale and “<a class="reference external" href="https://https://en.wikipedia.org/wiki/Coarse-grained_modeling">coarse-grain</a>” you recover the same exact observations as if you were looking at the original lattice.</p>
+<p>*behavior is only truely scale free for an infinite system. Of course real systems are never infinite and this becomes a recurring subtlty in the field of condensed matter, critcial phenomona, and anywhere statistical mechanics or statistical field theory is used.</p>
+<p>Your answer here</p>
+<p>Congrats! You are now equipt with the tools to find the ground state of an arbitrary spin glass in any type of geometry (or lack there of, for in general glasses do not fit on nice lattices)</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="span-style-color-orange-references-span">
+<h2><span style="color:Orange">References</span><a class="headerlink" href="#span-style-color-orange-references-span" title="Permalink to this heading">#</a></h2>
+<p>I still need to update refs</p>
+<p><a class="reference external" href="https://victoryepes.blogs.upv.es/tag/simulated-annealing/">https://victoryepes.blogs.upv.es/tag/simulated-annealing/</a></p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Spin_glass">https://en.wikipedia.org/wiki/Spin_glass</a></p>
+</section>
+<hr class="docutils" />
+<section id="span-style-color-orange-acknowledgements-span">
+<h2><span style="color:Orange">Acknowledgements</span><a class="headerlink" href="#span-style-color-orange-acknowledgements-span" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Initial version: Mayisha Zeb Nakib</p></li>
+<li><p>Based on Mathematica Notebook by Porter Howland</p></li>
+</ul>
+<p>© Copyright 2023</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./_sources/projects"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Project_02_NuclearGeometryQGP.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Nuclear Geometry and Characterization of the Quark Gluon Plasma</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Week_13.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span style="color: blue;"><b>Monte Carlo and Sampling Methods</b></span></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-overview-span"><span style="color:Orange">Overview</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-questions-span"><span style="color:Orange">Questions</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-question-01-span"><span style="color:LightGreen">Question 01</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-question-02-span"><span style="color:LightGreen">Question 02</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-question-03-span"><span style="color:LightGreen">Question 03</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-question-04-span"><span style="color:LightGreen">Question 04</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-question-05-span"><span style="color:LightGreen">Question 05</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-lightgreen-question-06-span"><span style="color:LightGreen">Question 06</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-references-span"><span style="color:Orange">References</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-color-orange-acknowledgements-span"><span style="color:Orange">Acknowledgements</span></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mark Neubauer
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
