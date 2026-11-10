@@ -582,6 +582,11 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File ‘./tmp_data/AirPassengers.csv’ already there; not retrieving.
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="span-style-color-orange-load-data-span">
@@ -624,6 +629,17 @@ Time is an <span style="color:Violet">exogeneous</span> (outside the model) vari
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="1000"
+            height="275"
+            src="https://upload.wikimedia.org/wikipedia/commons/4/4c/2004_Indonesia_Tsunami_edit.gif"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
 </div>
 <p>What you are doing is a combination of <span style="color:Violet">event finding</span> and <span style="color:Violet">change point detection</span>.</p>
 <p><em><strong><span style="color:Violet">EXAMPLE</span></strong></em>: Filtering a TimeSeries to detect gravitational waves</p>
@@ -646,17 +662,111 @@ Time is an <span style="color:Violet">exogeneous</span> (outside the model) vari
 </div>
 </div>
 </div>
-<p>Next we can design a zero-pole-gain (ZPK) filter to remove the extranious noise.</p>
-<p>First we import the <code class="docutils literal notranslate"><span class="pre">gwpy.signal.filter_design</span></code> module and create a bandpass() filter to remove both low and high frequency content</p>
+<p>What have we got here (it’s not a dataframe)?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">gwpy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">filter_design</span>
-<span class="n">bp</span> <span class="o">=</span> <span class="n">filter_design</span><span class="o">.</span><span class="n">bandpass</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="n">hdata</span><span class="o">.</span><span class="n">sample_rate</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">hdata</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now we want to combine the bandpass with a series of <code class="docutils literal notranslate"><span class="pre">notch()</span></code> filters, so we create those for the first three harmonics of the 60 Hz AC mains power:</p>
+<p>The actual values of the data from LIGO are above, but you need the metadata to do anything with it.  This contains the values themselves, and information about how the time series is constructed and when the data is from.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">hdata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When is the data from?  Apparently it’s in gps seconds…
+(honestly the documentation for gwpy is pretty terrible and gemini helped a lot with getting this to work)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">astropy.time</span><span class="w"> </span><span class="kn">import</span> <span class="n">Time</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">hdata</span><span class="o">.</span><span class="n">t0</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;gps&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">iso</span><span class="p">)</span>               <span class="c1"># e.g., &#39;2015-09-14 09:50:45.000&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First, we’re just going to look at the raw (unfiltered) data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">gwpy.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">Plot</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">Plot</span><span class="p">(</span><span class="n">hdata</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">separate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gwpy:ligo-hanford&#39;</span><span class="p">)</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">axes</span>
+<span class="c1">#ax1.set_title(&#39;LIGO-Hanford strain data around GW150914&#39;)</span>
+<span class="c1">#ax1.text(1.0, 1.01, &#39;Unfiltered data&#39;, transform=ax1.transAxes, ha=&#39;right&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we can design filters zero-pole-gain (ZPK) filter to remove the extranious noise.  We’re going to design the filters as we discussed in the discussion of Fourier theory and then use the software to convert it to ZPK form.  This provides numerical stability.</p>
+<p>First we import the <code class="docutils literal notranslate"><span class="pre">gwpy.signal.filter_design</span></code> module and create a bandpass() filter to remove both low and high frequency content.</p>
+<p>How do we know where to set the filter?  Well according to <a class="reference external" href="https://https://arxiv.org/pdf/2304.07477">this LIGO paper</a>:</p>
+<blockquote>
+<div><p>Earthquakes and wind shake the instrument in 0.03–0.1 Hz band, ocean
+currents in the Gulf of Mexico are the main source of increased microseismic motion in
+0.1–0.3 Hz band and human activities such as logging, construction work and vehicles
+can cause increased ground motion in 1–6 Hz anthropogenic band.</p>
+</div></blockquote>
+<p>The sensitive band is between about 10Hz-4kHz.  We’re going to cut somewhat tighter (between 50-250Hz) in our example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">gwpy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">filter_design</span>
+<span class="n">bp</span> <span class="o">=</span> <span class="n">filter_design</span><span class="o">.</span><span class="n">bandpass</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="n">hdata</span><span class="o">.</span><span class="n">sample_rate</span><span class="p">)</span>
+<span class="n">hfiltbp</span> <span class="o">=</span> <span class="n">hdata</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">bp</span><span class="p">,</span> <span class="n">filtfilt</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, let’s plot the filtered data (hfiltbp).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">Plot</span><span class="p">(</span><span class="n">hdata</span><span class="p">,</span> <span class="n">hfiltbp</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">separate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gwpy:ligo-hanford&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">axes</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;LIGO-Hanford strain data around GW150914&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">,</span> <span class="s1">&#39;Unfiltered data&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude [strain]&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=-</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;50-250\,Hz bandpass&#39;</span><span class="p">,</span>
+         <span class="n">transform</span><span class="o">=</span><span class="n">ax2</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>What’s the stuff at the beginning and end?</p>
+<p>The filter_design methods return infinite impulse response filters by default, which, when applied, corrupt a small amount of data at the beginning and the end of our original <code class="docutils literal notranslate"><span class="pre">TimeSeries</span></code>. We can discard those data using the <code class="docutils literal notranslate"><span class="pre">crop()</span></code> method (for consistency we apply this to both data series).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hfiltbp</span> <span class="o">=</span> <span class="n">hfiltbp</span><span class="o">.</span><span class="n">crop</span><span class="p">(</span><span class="o">*</span><span class="n">hfiltbp</span><span class="o">.</span><span class="n">span</span><span class="o">.</span><span class="n">contract</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s plot that again….</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">Plot</span><span class="p">(</span><span class="n">hdata</span><span class="p">,</span> <span class="n">hfiltbp</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">separate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gwpy:ligo-hanford&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">axes</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;LIGO-Hanford strain data around GW150914&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">,</span> <span class="s1">&#39;Unfiltered data&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude [strain]&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=-</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;50-250\,Hz bandpass&#39;</span><span class="p">,</span>
+         <span class="n">transform</span><span class="o">=</span><span class="n">ax2</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, this is promising.  There is clearly a feature around 16.5 seconds that stands out.</p>
+<p>What’s the next thing to filter.  Well, a lot of noise is connected to 60Hz (where the power main is). Now we want to combine the bandpass with a series of <code class="docutils literal notranslate"><span class="pre">notch()</span></code> filters, so we create those for the first three harmonics of the 60 Hz AC mains power:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">notches</span> <span class="o">=</span> <span class="p">[</span><span class="n">filter_design</span><span class="o">.</span><span class="n">notch</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">hdata</span><span class="o">.</span><span class="n">sample_rate</span><span class="p">)</span> <span class="k">for</span>
@@ -682,16 +792,15 @@ Time is an <span style="color:Violet">exogeneous</span> (outside the model) vari
 </div>
 </div>
 <p>Note: The filter_design methods return digital filters by default, so we apply them using TimeSeries.filter. If we had analogue filters (perhaps by passing <code class="docutils literal notranslate"><span class="pre">analog=True</span></code> to the filter design method), the easiest application would be <code class="docutils literal notranslate"><span class="pre">TimeSeries.zpk</span></code></p>
-<p>The filter_design methods return infinite impulse response filters by default, which, when applied, corrupt a small amount of data at the beginning and the end of our original <code class="docutils literal notranslate"><span class="pre">TimeSeries</span></code>. We can discard those data using the <code class="docutils literal notranslate"><span class="pre">crop()</span></code> method (for consistency we apply this to both data series):</p>
+<p>Cropping again…</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hdata</span> <span class="o">=</span> <span class="n">hdata</span><span class="o">.</span><span class="n">crop</span><span class="p">(</span><span class="o">*</span><span class="n">hdata</span><span class="o">.</span><span class="n">span</span><span class="o">.</span><span class="n">contract</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">hfilt</span> <span class="o">=</span> <span class="n">hfilt</span><span class="o">.</span><span class="n">crop</span><span class="p">(</span><span class="o">*</span><span class="n">hfilt</span><span class="o">.</span><span class="n">span</span><span class="o">.</span><span class="n">contract</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hfilt</span> <span class="o">=</span> <span class="n">hfilt</span><span class="o">.</span><span class="n">crop</span><span class="p">(</span><span class="o">*</span><span class="n">hfilt</span><span class="o">.</span><span class="n">span</span><span class="o">.</span><span class="n">contract</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Finally, we can <code class="docutils literal notranslate"><span class="pre">plot()</span></code> the original and filtered data, adding some code to prettify the figure:</p>
+<p>Finally, we can <code class="docutils literal notranslate"><span class="pre">plot()</span></code> the original and combined filtered data.  We see that the notch filtered provided additional enhancement of the spike at 16.5 seconds.  Also note that the y-axis scale is now down by a factor of 1000 compared to the unfiltered data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">gwpy.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">Plot</span>
@@ -709,7 +818,7 @@ Time is an <span style="color:Violet">exogeneous</span> (outside the model) vari
 </div>
 </div>
 </div>
-<p>We see now a spike around 16 seconds into the data, so let’s zoom into that time (and prettify):</p>
+<p>So now, let’s zoom in on time….</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">hfilt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;gwpy:ligo-hanford&#39;</span><span class="p">)</span>
@@ -723,6 +832,9 @@ Time is an <span style="color:Violet">exogeneous</span> (outside the model) vari
 </div>
 </div>
 </div>
+<p>So here we see that the spike has structure when we zoom in on the time axis.</p>
+<p>LIGO works by having two detectors in order to provide location information for the signals.  We’ve looked at the Hanford data, let’s see if they saw anything at the Livingston location about 2300 miles away.</p>
+<p>We’ll get the data and apply the same filter as we did before.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ldata</span> <span class="o">=</span> <span class="n">TimeSeries</span><span class="o">.</span><span class="n">fetch_open_data</span><span class="p">(</span><span class="s1">&#39;L1&#39;</span><span class="p">,</span> <span class="mi">1126259446</span><span class="p">,</span> <span class="mi">1126259478</span><span class="p">)</span>
@@ -1084,6 +1196,16 @@ where where \)</span>E$ is the expectation value operator and the bar represents
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      Date  Number of Passengers
+0  1949-01                   112
+1  1949-02                   118
+2  1949-03                   132
+3  1949-04                   129
+4  1949-05                   121
+</pre></div>
+</div>
+<img alt="../../_images/aed72172ce7cdebe42ce84479b2e4911bc0168a689f24d0ec1400b69cfcb7bee.svg" src="../../_images/aed72172ce7cdebe42ce84479b2e4911bc0168a689f24d0ec1400b69cfcb7bee.svg" /></div>
 </div>
 <p>Since all the values are positive, we can show this on both sides of the Y axis to emphasize the growth.</p>
 <div class="cell docutils container">
